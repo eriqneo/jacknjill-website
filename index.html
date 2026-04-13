@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack & Jill School | A Prestigious Academic Institution</title>
+    <meta name="description"
+        content="Excellence isn't a destination—it's a lifelong journey. From first steps into our classrooms to bold strides into the world, we ignite a passion for learning that burns eternally.">
+    <link rel="stylesheet" href="./style.css">
+    <!-- Font Awesome for prestigious icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- INTRO SCREEN -->
+    <div id="intro-screen">
+        <div class="intro-container">
+            <h1 id="typewriter-text"></h1><span class="cursor">|</span>
+        </div>
+    </div>
+
+    <!-- LAYER 1: CONTACT BAR -->
+    <div class="top-contact-bar">
+        <div class="container tcb-inner">
+            <div class="tcb-left">
+                <a href="tel:+254703305656" class="tcb-link">
+                    <svg class="tcb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                    (254) 703305656
+                </a>
+                <span class="tcb-sep"></span>
+                <a href="mailto:info@jacknjillschool.sc.ke" class="tcb-link">
+                    <svg class="tcb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    info@jacknjillschool.sc.ke
+                </a>
+            </div>
+            <div class="tcb-right">
+                <a href="#" class="tcb-social" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="tcb-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="tcb-social" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="tcb-social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- LAYER 2: LOGO + WORDMARK | APPLY NOW + VIRTUAL TOUR — single horizontal bar -->
+    <div class="floating-left">
+        <a href="index.html" class="fl-identity" style="text-decoration:none;">
+            <video class="site-logo" src="assets/logo.mp4" autoplay loop muted playsinline></video>
+            <div class="school-wordmark">
+                <span class="wordmark-jack">Jack &amp;</span>
+                <span class="wordmark-jill">JILL</span>
+                <span class="wordmark-school">School</span>
+            </div>
+        </a>
+        <div class="fl-divider"></div>
+        <div class="floating-ctas">
+            <a class="btn-apply" href="academics.html">
+                <span class="diamond"></span>
+                APPLY NOW
+            </a>
+            <button class="btn-tour"><span class="pulse-dot"></span> VIRTUAL TOUR</button>
+        </div>
+    </div>
+
+    <!-- LAYER 3: HAMBURGER BUTTON -->
+    <button id="hamburger-trigger" class="btn-hamburger" aria-label="Open Navigation Menu">
+        <div class="bars-wrap">
+            <span class="h-bar"></span>
+            <span class="h-bar"></span>
+            <span class="h-bar"></span>
+        </div>
+        <span class="menu-label">MENU</span>
+    </button>
+
+    <!-- Explosive Institutional Menu Overlay -->
+    <div id="institutional-overlay" class="institutional-mega-menu">
+        <div class="overlay-inner-nav">
+            <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span>
+            </div>
+            <div class="overlay-top-bar">
+                <div class="overlay-top-header">
+                    <a href="index.html" class="school-label-top" style="text-decoration: none; color: inherit;">Jack
+                        &amp; Jill School</a>
+                    <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                </div>
+
+                <div class="quick-links-row">
+                    <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
+                    <a href="information.html#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
+                    <a href="index.html#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
+                    <a href="gallery.html" class="ql-item">GALLERY</a><span class="v-sep">|</span>
+                    <a href="#" id="search-trigger" class="ql-item search-ql">
+                        <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="width:14px;height:14px;margin-right:6px;">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        SEARCH
+                    </a>
+                </div>
+            </div>
+
+            <!-- Premium Global Search UI -->
+            <div id="search-panel" class="search-panel">
+                <div class="search-panel-inner">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..."
+                        autocomplete="off">
+                    <button id="search-close" class="search-close" aria-label="Close search">✕</button>
+                </div>
+                <div class="search-suggestions">
+                    <a href="academics.html#apply" class="sq-pill">Admissions</a>
+                    <a href="about.html#values" class="sq-pill">Core Values</a>
+                    <a href="information.html#events" class="sq-pill">School Calendar</a>
+                    <a href="governance.html#teachers" class="sq-pill">Staff Directory</a>
+                    <a href="academics.html#fees" class="sq-pill">Fee Structure</a>
+                    <a href="gallery.html" class="sq-pill">Student Gallery</a>
+                </div>
+            </div>
+
+            <div class="main-overlay-columns">
+                <!-- Left: Main Vertically Stacked Links -->
+                <nav class="mega-main-nav">
+                    <ul class="mega-link-list">
+                        <li class="mega-item" data-menu="about"><a href="about.html" class="nav-main-link">ABOUT</a>
+                        </li>
+                        <li class="mega-item" data-menu="governance"><a href="governance.html"
+                                class="nav-main-link">GOVERNANCE</a></li>
+                        <li class="mega-item"><a href="partners.html" class="nav-main-link">OUR PARTNERS</a></li>
+                        <li class="mega-item"><a href="alumni.html" class="nav-main-link">THE ALUMNI</a></li>
+                        <li class="mega-item" data-menu="academics"><a href="academics.html"
+                                class="nav-main-link">ACADEMICS</a></li>
+                        <li class="mega-item" data-menu="info"><a href="information.html"
+                                class="nav-main-link">INFORMATION CENTRE</a></li>
+                        <li class="mega-item"><a href="contact.html" class="nav-main-link">CONTACT</a></li>
+                        <li class="mega-item"><a href="gallery.html" class="nav-main-link">GALLERY</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Right: Content/Submenu Panel (Desktop Only) -->
+                <div class="mega-submenu-panel">
+                    <div id="submenu-dynamic-content" class="submenu-inner">
+                        <div class="submenu-placeholder">Hover over a category to explore...</div>
+
+                        <div id="submenu-about" class="sub-list" style="display:none;">
+                            <a href="about.html#about-us">About Us <span class="sub-arrow">→</span></a>
+                            <a href="about.html#history">Our History <span class="sub-arrow">→</span></a>
+                            <a href="about.html#vision">Vision, Mission &amp; Motto <span class="sub-arrow">→</span></a>
+                            <a href="about.html#values">Core Values <span class="sub-arrow">→</span></a>
+                        </div>
+                        <div id="submenu-governance" class="sub-list" style="display:none;">
+                            <a href="governance.html#director">Director <span class="sub-arrow">→</span></a>
+                            <a href="governance.html#head-teacher">Head Teacher <span class="sub-arrow">→</span></a>
+                            <a href="governance.html#deputy">Deputy Head Teacher <span class="sub-arrow">→</span></a>
+                            <a href="governance.html#teachers">Our Teachers <span class="sub-arrow">→</span></a>
+                        </div>
+                        <div id="submenu-academics" class="sub-list" style="display:none;">
+                            <a href="academics.html#apply">Apply for Admission <span class="sub-arrow">→</span></a>
+                            <a href="academics.html#online">Online Application <span class="sub-arrow">→</span></a>
+                            <a href="academics.html#fees">How To Pay <span class="sub-arrow">→</span></a>
+                            <a href="academics.html#jobs">Jobs <span class="sub-arrow">→</span></a>
+                        </div>
+                        <div id="submenu-info" class="sub-list" style="display:none;">
+                            <a href="information.html#transport">Transport Services <span class="sub-arrow">→</span></a>
+                            <a href="information.html#boarding">Boarding Facilities <span class="sub-arrow">→</span></a>
+                            <a href="information.html#activities">Beyond Curriculum <span class="sub-arrow">→</span></a>
+                            <a href="information.html#events">Events <span class="sub-arrow">→</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <main>
+        <!-- Cinematic Institutional Hero -->
+        <section id="hero-cinematic" class="hero-full">
+            <!-- Ken Burns BG in overflow-hidden wrapper -->
+            <div class="hero-bg-pan"></div>
+            <!-- Overlays & Geometry -->
+            <div class="hero-overlay"></div>
+            <div class="hero-diagonal-accent"></div>
+
+            <!-- Hero Content -->
+            <div class="hero-content-left">
+                <p class="hero-eyebrow">Est. Since 1985 · Kitale, Kenya</p>
+                <h1 class="hero-header">
+                    <span class="h1-line line-1">Where</span>
+                    <span class="h1-line line-2 hero-italic">Excellence Begins</span>
+                    <span class="h1-line line-3">And Never Ends</span>
+                </h1>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="hero-scroll-indicator">
+                <span class="indicator-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+
+            <!-- Signature Card Carousel — bridges hero into news -->
+            <div class="signature-carousel-container">
+                <div class="signature-carousel-track">
+                <!-- Original 8 Cards -->
+                <a href="about.html" class="sig-card"><img src="assets/carousel/Aboutus.jpg" alt="About Us">
+                    <div class="sig-card-title">ABOUT US</div>
+                </a>
+                <a href="academics.html" class="sig-card"><img src="assets/carousel/academics.jpeg" alt="Academics">
+                    <div class="sig-card-title">ACADEMICS</div>
+                </a>
+                <a href="governance.html" class="sig-card"><img src="assets/carousel/governance.jpg" alt="Governance">
+                    <div class="sig-card-title">GOVERNANCE</div>
+                </a>
+                <a href="partners.html" class="sig-card"><img src="assets/carousel/partners.jpg" alt="Our Partners">
+                    <div class="sig-card-title">OUR PARTNERS</div>
+                </a>
+                <a href="alumni.html" class="sig-card"><img src="assets/carousel/Alumni.jpg" alt="The Alumni">
+                    <div class="sig-card-title">THE ALUMNI</div>
+                </a>
+
+                <a href="gallery.html" class="sig-card sig-card-active">
+                    <img src="assets/carousel/gallery.jpg" alt="Gallery">
+                    <div class="sig-active-content">
+                        <span class="active-title">GALLERY</span>
+                        <span class="active-btn">LEARN MORE →</span>
+                    </div>
+                </a>
+
+                <a href="information.html" class="sig-card"><img src="assets/carousel/infocentre.jpg" alt="Information Centre">
+                    <div class="sig-card-title">INFO CENTRE</div>
+                </a>
+                <a href="contact.html" class="sig-card"><img src="assets/carousel/contacts.png" alt="Contact">
+                    <div class="sig-card-title">CONTACT</div>
+                </a>
+
+                <!-- Duplicated 8 Cards for Infinite Loop -->
+                <a href="about.html" class="sig-card"><img src="assets/carousel/Aboutus.jpg" alt="About Us">
+                    <div class="sig-card-title">ABOUT US</div>
+                </a>
+                <a href="academics.html" class="sig-card"><img src="assets/carousel/academics.jpeg" alt="Academics">
+                    <div class="sig-card-title">ACADEMICS</div>
+                </a>
+                <a href="governance.html" class="sig-card"><img src="assets/carousel/governance.jpg" alt="Governance">
+                    <div class="sig-card-title">GOVERNANCE</div>
+                </a>
+                <a href="partners.html" class="sig-card"><img src="assets/carousel/partners.jpg" alt="Our Partners">
+                    <div class="sig-card-title">OUR PARTNERS</div>
+                </a>
+                <a href="alumni.html" class="sig-card"><img src="assets/carousel/Alumni.jpg" alt="The Alumni">
+                    <div class="sig-card-title">THE ALUMNI</div>
+                </a>
+
+                <a href="gallery.html" class="sig-card sig-card-active">
+                    <img src="assets/carousel/gallery.jpg" alt="Gallery">
+                    <div class="sig-active-content">
+                        <span class="active-title">GALLERY</span>
+                        <span class="active-btn">LEARN MORE →</span>
+                    </div>
+                </a>
+
+                <a href="information.html" class="sig-card"><img src="assets/carousel/infocentre.jpg" alt="Information Centre">
+                    <div class="sig-card-title">INFO CENTRE</div>
+                </a>
+                <a href="contact.html" class="sig-card"><img src="assets/carousel/contacts.png" alt="Contact">
+                    <div class="sig-card-title">CONTACT</div>
+                </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === LATEST NEWS (Curved Section) === -->
+        <section class="latest-news-curved">
+            <div class="news-curved-bg"></div>
+            <div class="container news-curved-content">
+
+                <div class="news-curved-left">
+                    <div class="megaphone-bg">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 19 2 12 11 5 11 19"></polygon>
+                            <path d="M22 12A10 10 0 0 0 12 2v20a10 10 0 0 0 10-10z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="massive-news-title">LATEST<br>NEWS</h2>
+                </div>
+
+                <div class="news-curved-right">
+                    <div class="news-top-label">
+                        <p>NEWS & ANNOUNCEMENTS</p>
+                        <div class="news-top-line"></div>
+                    </div>
+
+                    <div class="curved-news-grid" id="news-track">
+                        <a href="#" class="c-news-card">
+                            <div class="c-news-header">
+                                <h3>Midori Visits Jack & Jill</h3>
+                                <span class="c-news-date">Mar 5 2026</span>
+                            </div>
+                            <p>We were thrilled to welcome renowned violinist Midori to school earlier this week for an
+                                inspiring visit with our Music Department!</p>
+                            <span class="c-news-readmore">Read More</span>
+                        </a>
+
+                        <a href="#" class="c-news-card">
+                            <div class="c-news-header">
+                                <h3>Esther '10 Performs in Kitale</h3>
+                                <span class="c-news-date">Mar 2 2026</span>
+                            </div>
+                            <p>Last weekend's piano recital by Music Department alumna Esther '10 at the Kitale
+                                Congregational Church was the perfect opportunity for a mini-reunion.</p>
+                            <span class="c-news-readmore">Read More</span>
+                        </a>
+
+                        <a href="#" class="c-news-card">
+                            <div class="c-news-header">
+                                <h3>Science Fair Winners Announced</h3>
+                                <span class="c-news-date">Feb 28 2026</span>
+                            </div>
+                            <p>Congratulations to all the participants in this year's annual science fair! The level of
+                                innovation was truly remarkable.</p>
+                            <span class="c-news-readmore">Read More</span>
+                        </a>
+
+                        <a href="#" class="c-news-card">
+                            <div class="c-news-header">
+                                <h3>Regional Sports Day Triumph</h3>
+                                <span class="c-news-date">Feb 15 2026</span>
+                            </div>
+                            <p>Our athletics team brought home the gold cup during the regional track and field
+                                championships. A historic win!</p>
+                            <span class="c-news-readmore">Read More</span>
+                        </a>
+                    </div>
+
+                    <div class="news-nav-buttons">
+                        <button class="n-btn" id="news-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="n-btn" id="news-next"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The huge convex curve SVG at the bottom -->
+            <div class="news-curve-bottom">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                    <path d="M0,0 C480,140 960,140 1440,0 L1440,120 L0,120 Z" fill="#FDFBF7"></path>
+                </svg>
+            </div>
+        </section>
+
+
+        <!-- ===  THE JACK & JILL EXPERIENCE  === -->
+        <section class="jj-experience-section">
+            <div class="container" style="max-width: 1400px; padding: 0 20px;">
+                <div class="jj-exp-label-wrap" style="text-align: center; margin-bottom: 80px;">
+                    <p class="jj-exp-label" style="color: var(--jj-navy); font-weight: 700; margin-bottom: 16px;">The
+                        Jack &amp; Jill Experience</p>
+                    <div class="jj-exp-underline" style="margin: 0 auto; height: 4px;"></div>
+                </div>
+
+                <div class="jj-exp-layout">
+                    <!-- Left Descriptor Side -->
+                    <div class="jj-exp-left reveal">
+                        <h2 class="jj-exp-headline">THE<br>WORLD<br>IS YOURS</h2>
+                        <p class="jj-exp-body">Explore some of the traits that make education and character flow more
+                            fluidly at Jack &amp; Jill School.</p>
+
+                        <div class="jj-exp-nav">
+                            <button class="jj-exp-btn" id="exp-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="jj-exp-btn" id="exp-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Right Carousel Side -->
+                    <div class="jj-exp-right">
+                        <div class="jj-exp-track-container">
+                            <div class="jj-exp-track" id="exp-track">
+
+                                <!-- Card 1: Navy / Mission -->
+                                <a href="./about.html#mission" class="jj-card jj-card--navy jj-card--offset exp-anim">
+                                    <div class="jj-card__top">
+                                        <div class="jj-card__title-block">
+                                            <span class="jj-card__the">THE</span>
+                                            <span class="jj-card__word">MISSION</span>
+                                        </div>
+                                        <div class="jj-card__icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                                <path d="M6 12v5c3.53 3.14 9.47 3.14 13 0v-5" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="jj-card__explore">EXPLORE</span>
+                                    <div class="jj-card__img-wrap">
+                                        <img src="assets/carousel/Aboutus.jpg" alt="Mission" loading="lazy">
+                                    </div>
+                                </a>
+
+                                <!-- Card 2: Gold / Community -->
+                                <a href="./about.html#community" class="jj-card jj-card--gold exp-anim">
+                                    <div class="jj-card__top">
+                                        <div class="jj-card__title-block">
+                                            <span class="jj-card__the">THE</span>
+                                            <span class="jj-card__word">COMMUNITY</span>
+                                        </div>
+                                        <div class="jj-card__icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                                <circle cx="9" cy="7" r="4" />
+                                                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="jj-card__explore">EXPLORE</span>
+                                    <div class="jj-card__img-wrap">
+                                        <img src="assets/carousel/partners.jpg" alt="Community"
+                                            loading="lazy">
+                                    </div>
+                                </a>
+
+                                <!-- Card 3: Burgundy / Academics -->
+                                <a href="./academics.html" class="jj-card jj-card--burgundy exp-anim">
+                                    <div class="jj-card__top">
+                                        <div class="jj-card__title-block">
+                                            <span class="jj-card__the">THE</span>
+                                            <span class="jj-card__word">ACADEMICS</span>
+                                        </div>
+                                        <div class="jj-card__icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                                <path
+                                                    d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="jj-card__explore">EXPLORE</span>
+                                    <div class="jj-card__img-wrap">
+                                        <img src="assets/carousel/academics.jpeg" alt="Academics"
+                                            loading="lazy">
+                                    </div>
+                                </a>
+
+                                <!-- Card 4: Navy / School Life -->
+                                <a href="./information.html" class="jj-card jj-card--navy exp-anim"
+                                    style="margin-right: 40px;">
+                                    <div class="jj-card__top">
+                                        <div class="jj-card__title-block">
+                                            <span class="jj-card__the">SCHOOL</span>
+                                            <span class="jj-card__word">LIFE</span>
+                                        </div>
+                                        <div class="jj-card__icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                                                aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <path
+                                                    d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span class="jj-card__explore">EXPLORE</span>
+                                    <div class="jj-card__img-wrap">
+                                        <img src="assets/carousel/gallery.jpg" alt="School Life"
+                                            loading="lazy">
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="background: var(--jj-parchment); padding: 40px 0;">
+            <div class="sec-divider"></div>
+        </div>
+
+
+        <!-- === SECTION 2: THE JACK & JILL DIFFERENCE === -->
+        <section class="unified-diff-section">
+            <div class="diff-header reveal">
+                <p class="label">WHY JACK & JILL</p>
+                <h2 class="title">The Difference We Make</h2>
+                <div class="sec-divider"
+                    style="background: linear-gradient(to right, #F9A602 50%, #9B111E 50%); height: 3px; width: 60px;">
+                </div>
+            </div>
+            <div class="unified-diff-grid">
+                <div class="ud-card reveal">
+                    <div class="ud-card-top">500+</div>
+                    <h3 class="ud-card-title">Alumni Network</h3>
+                    <p class="ud-card-desc">Graduates thriving across Kenya and the world</p>
+                </div>
+                <div class="ud-card reveal" style="transition-delay: 0.1s;">
+                    <div class="ud-card-top">98%</div>
+                    <h3 class="ud-card-title">University Placement</h3>
+                    <p class="ud-card-desc">Of our candidates placed in top universities</p>
+                </div>
+                <div class="ud-card reveal" style="transition-delay: 0.2s;">
+                    <div class="ud-card-top">35+</div>
+                    <h3 class="ud-card-title">Years of Excellence</h3>
+                    <p class="ud-card-desc">Decades of shaping Kenya's brightest minds</p>
+                </div>
+                <div class="ud-card reveal" style="transition-delay: 0.3s;">
+                    <div class="ud-card-top">15:1</div>
+                    <h3 class="ud-card-title">Student-Teacher Ratio</h3>
+                    <p class="ud-card-desc">Personal attention that makes the difference</p>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <div style="background: var(--jj-parchment); padding: 40px 0;">
+            <div class="sec-divider"></div>
+        </div>
+
+
+        <!-- === SECTION 4: SEE WHAT'S ON === -->
+        <section class="unified-events-section">
+            <div class="diff-header reveal" style="margin-bottom: 48px;">
+                <p class="label">UPCOMING EVENTS</p>
+                <h2 class="title">See What's On</h2>
+            </div>
+            <div class="events-list">
+                <div class="ue-row reveal">
+                    <div class="ue-date">
+                        <div class="ue-day">12</div>
+                        <div class="ue-month">APR</div>
+                    </div>
+                    <div class="ue-divider"></div>
+                    <div class="ue-info">
+                        <h3 class="ue-name">Open Admissions Day</h3>
+                        <p class="ue-loc">Main Auditorium</p>
+                    </div>
+                    <div class="ue-time">9:00 AM - 1:00 PM</div>
+                </div>
+                <div class="ue-row reveal" style="transition-delay: 0.1s;">
+                    <div class="ue-date">
+                        <div class="ue-day">18</div>
+                        <div class="ue-month">APR</div>
+                    </div>
+                    <div class="ue-divider"></div>
+                    <div class="ue-info">
+                        <h3 class="ue-name">Inter-School Arts Festival</h3>
+                        <p class="ue-loc">Creative Arts Wing</p>
+                    </div>
+                    <div class="ue-time">2:30 PM</div>
+                </div>
+                <div class="ue-row reveal" style="transition-delay: 0.2s;">
+                    <div class="ue-date">
+                        <div class="ue-day">25</div>
+                        <div class="ue-month">APR</div>
+                    </div>
+                    <div class="ue-divider"></div>
+                    <div class="ue-info">
+                        <h3 class="ue-name">Parent-Teacher Symposium</h3>
+                        <p class="ue-loc">Virtual & On-School</p>
+                    </div>
+                    <div class="ue-time">All Day</div>
+                </div>
+            </div>
+            <div class="ue-btn-wrap reveal"><a href="#" id="open-calendar-modal" class="ue-btn">View Full Calendar →</a>
+            </div>
+        </section>
+
+
+        <!-- === SECTION 5: MEET THE FAMILY === -->
+        <section class="unified-test-section">
+            <div class="ut-layout">
+                <div class="ut-left reveal">
+                    <div class="ut-sticky">
+                        <p class="label">OUR STUDENTS</p>
+                        <h2 class="title">Meet the Jack & Jill Family</h2>
+                        <div class="ut-stripe"></div>
+                        <div class="ut-nav">
+                            <button class="ut-nav-btn" id="students-prev"><i
+                                    class="fa-solid fa-chevron-left"></i></button>
+                            <button class="ut-nav-btn" id="students-next"><i
+                                    class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ut-right" id="students-track">
+                    <div class="ut-card reveal">
+                        <div class="ut-quote-mark">"</div>
+                        <p class="ut-quote">Jack & Jill didn't just prepare me for university, it prepared me for life.
+                            The community here is unlike anything I've experienced—supportive, challenging, and deeply
+                            inspiring.</p>
+                        <div class="ut-author">
+                            <img src="https://i.pravatar.cc/150?u=amara" class="ut-avatar" alt="Amara">
+                            <div class="ut-author-info">
+                                <p class="name">Amara Odhiambo</p>
+                                <p class="year">Class of 2024</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ut-card reveal" style="transition-delay: 0.1s;">
+                        <div class="ut-quote-mark">"</div>
+                        <p class="ut-quote">The dedication of the teachers here is unmatched. They go beyond academics
+                            to ensure our emotional and social well-being.</p>
+                        <div class="ut-author">
+                            <img src="https://i.pravatar.cc/150?u=liam" class="ut-avatar" alt="Liam">
+                            <div class="ut-author-info">
+                                <p class="name">Liam Smith</p>
+                                <p class="year">Class of 2025</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ut-card reveal" style="transition-delay: 0.2s;">
+                        <div class="ut-quote-mark">"</div>
+                        <p class="ut-quote">Every day is a new adventure. The world-class facilities allow us to deeply
+                            explore our passions, whether it's robotics or abstract drama.</p>
+                        <div class="ut-author">
+                            <img src="https://i.pravatar.cc/150?u=sarah" class="ut-avatar" alt="Sarah">
+                            <div class="ut-author-info">
+                                <p class="name">Sarah Ochieng</p>
+                                <p class="year">Class of 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div style="background: var(--jj-parchment); padding: 40px 0;">
+            <div class="sec-divider"></div>
+        </div>
+
+        <!-- === SECTION: PARENT TESTIMONIALS === -->
+        <section class="parent-testimonials">
+            <div class="pt-header reveal">
+                <p class="pt-label">Family Perspectives</p>
+                <h2 class="pt-title">What Our Parents Say</h2>
+            </div>
+
+            <div class="pt-marquee-wrapper">
+                <!-- Group 1 -->
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"The transformation we've seen in our daughter has been magnificent. The staff
+                        are invested in not just academic success, but moral character."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent1" class="pt-avatar"
+                                alt="Grace Njoroge"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Grace Njoroge</p>
+                            <p class="role">Parent of Year 4 Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"Jack & Jill provides an environment that is challenging yet incredibly
+                        nurturing. The facilities across the Kitale school are simply world-class."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent2" class="pt-avatar"
+                                alt="Dr. Samuel Ochieng"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Dr. Samuel Ochieng</p>
+                            <p class="role">Parent of Year 6 & 8 Students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"We drive past three other schools to bring our son here. The modern pedagogy
+                        combined with strong Christian values makes it irreplaceable."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent3" class="pt-avatar"
+                                alt="Aisha & Peter Kamau"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Aisha & Peter Kamau</p>
+                            <p class="role">Parents of Year 2 Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"The arts and sports programs are just as rigorous as the STEM curriculum. My
+                        children are developing into truly well-rounded global citizens."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent4" class="pt-avatar"
+                                alt="Margaret Wanjiru"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Margaret Wanjiru</p>
+                            <p class="role">Parent of Year 11 Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2 (Duplicate for Infinite CSS Scroll) -->
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"The transformation we've seen in our daughter has been magnificent. The staff
+                        are invested in not just academic success, but moral character."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent1" class="pt-avatar"
+                                alt="Grace Njoroge"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Grace Njoroge</p>
+                            <p class="role">Parent of Year 4 Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"Jack & Jill provides an environment that is challenging yet incredibly
+                        nurturing. The facilities across the Kitale school are simply world-class."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent2" class="pt-avatar"
+                                alt="Dr. Samuel Ochieng"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Dr. Samuel Ochieng</p>
+                            <p class="role">Parent of Year 6 & 8 Students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"We drive past three other schools to bring our son here. The modern pedagogy
+                        combined with strong Christian values makes it irreplaceable."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent3" class="pt-avatar"
+                                alt="Aisha & Peter Kamau"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Aisha & Peter Kamau</p>
+                            <p class="role">Parents of Year 2 Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-card">
+                    <div class="pt-stars">★★★★★</div>
+                    <p class="pt-quote">"The arts and sports programs are just as rigorous as the STEM curriculum. My
+                        children are developing into truly well-rounded global citizens."</p>
+                    <div class="pt-author">
+                        <div class="pt-avatar-wrapper"><img src="https://i.pravatar.cc/150?u=parent4" class="pt-avatar"
+                                alt="Margaret Wanjiru"></div>
+                        <div class="pt-author-info">
+                            <p class="name">Margaret Wanjiru</p>
+                            <p class="role">Parent of Year 11 Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 6: CTA BANNER === -->
+        <section class="unified-cta-section">
+            <div class="cta-texture"></div>
+            <div class="container reveal">
+                <h2 class="title">Reserve Your Place in History</h2>
+                <p class="sub">Applications for 2026 are now open. Secure your child's future today.</p>
+                <a href="./academics.html#apply" class="btn-gold-pill">Schedule a Private Tour →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CMS Calendar Modal Overlay -->
+    <div id="calendar-modal" class="jj-modal-overlay">
+        <div class="jj-modal-content">
+            <button id="close-calendar-modal" class="jj-modal-close" aria-label="Close modal">✕</button>
+            <div class="jj-modal-header">
+                <h2>School Calendar</h2>
+                <p>Stay updated with our upcoming events.</p>
+            </div>
+
+            <div class="calendar-display-area">
+                <!-- Mock CMS Events List -->
+                <ul class="cms-event-list" id="cms-mock-events">
+                    <!-- Events will be populated by JS -->
+                </ul>
+            </div>
+
+            <div class="jj-modal-footer">
+                <p class="cms-tag"><i>Events synced from Jack & Jill CMS</i></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- News Detail Modal -->
+    <div id="news-modal" class="jj-modal-overlay">
+        <div class="jj-modal-content news-modal-content">
+            <button id="close-news-modal" class="jj-modal-close" aria-label="Close modal">✕</button>
+            <div class="news-modal-scroll-area">
+                <div class="news-modal-header">
+                    <span id="news-modal-cat" class="c-news-cat">Category</span>
+                    <h2 id="news-modal-title">News Title</h2>
+                    <p id="news-modal-date" class="c-news-date">Date</p>
+                </div>
+                
+                <div id="news-modal-image-container" class="news-modal-image">
+                    <!-- Image will be injected here -->
+                </div>
+
+                <div id="news-modal-body" class="news-modal-rich-text">
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="main-footer" class="prestigious-footer">
+        <!-- Top Accent Bar (Striped) -->
+        <div class="footer-accent-top"></div>
+
+        <div class="container footer-content-grid">
+            <!-- Column 1: Brand & Identity -->
+            <div class="footer-col brand-col">
+                <a href="index.html" style="text-decoration: none; display: inline-block; margin-bottom: 20px;">
+                    <video class="ib-logo" src="./assets/logo.mp4" autoplay loop muted playsinline></video>
+                </a>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h3 class="footer-school-name">Jack & Jill School</h3>
+                </a>
+                <p class="footer-tagline">Excellence. Character. Community.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Academics -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Academics</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><span class="arrow-slide">→</span> Early Years</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> Primary</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> Junior Secondary</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> Senior Secondary</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> Co-Curricular</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Admissions -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Admissions</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><span class="arrow-slide">→</span> How to Apply</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> Fees & Scholarships</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> Visit the School</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> FAQs</a></li>
+                    <li><a href="#"><span class="arrow-slide">→</span> International Students</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Contact & CTA -->
+            <div class="footer-col contact-col">
+                <h4 class="footer-heading">Get in Touch</h4>
+                <div class="contact-block">
+                    <p><i class="fa-solid fa-location-dot"></i> 123 Prestige Ave, Riverside, Kitale</p>
+                    <p><i class="fa-solid fa-phone"></i> +254 703 305 656</p>
+                    <p><i class="fa-solid fa-envelope"></i> admissions@jj.ac.ke</p>
+                </div>
+                <a href="./academics.html#online" class="footer-apply-btn">Apply Now</a>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+                <div class="footer-bottom-bar">
+            <div class="container bottom-inner">
+                <p class="copyright">© 2026 Jack & Jill School. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <span class="footer-sep"></span>
+                    <a href="#">Sitemap</a>
+                                </div>
+            </div>
+        </div>
+
+        <!-- Final Bottom Accent -->
+        <div class="footer-accent-bottom"></div>
+    </footer>
+
+    <script type="module" src="./site.js"></script>
+</body>
+
+</html>
