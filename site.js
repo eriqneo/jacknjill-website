@@ -647,18 +647,35 @@ function handleIntroScreen() {
                 currentIndex++;
                 setTimeout(typeChar, 25); // Type speed
             } else {
-                // Finished typing, wait 1s then transition
-                setTimeout(() => {
-                    introScreen.classList.add('lift-curtain');
-                    document.body.style.overflow = ''; // Restore scroll
-                    try {
-                        sessionStorage.setItem('jj_intro_played', 'true');
-                    } catch (e) {}
-                    // Wait for transition to finish then hide completely
+                // Finished typing. Now act as a premium preloader for the heavy cinematic hero.
+                const liftCurtain = () => {
+                    // Add a tiny aesthetic pause after load
                     setTimeout(() => {
-                        introScreen.style.display = 'none';
-                    }, 1000);
-                }, 1000);
+                        introScreen.classList.add('lift-curtain');
+                        document.body.style.overflow = ''; // Restore scroll
+                        try {
+                            sessionStorage.setItem('jj_intro_played', 'true');
+                        } catch (e) {}
+                        
+                        setTimeout(() => {
+                            introScreen.style.display = 'none';
+                        }, 1000);
+                    }, 800);
+                };
+
+                // Preload the specific heavy asset.
+                const heroPreload = new Image();
+                heroPreload.onload = liftCurtain;
+                heroPreload.onerror = liftCurtain; // Fallback so it doesn't hang
+                heroPreload.src = 'assets/hero.jpg';
+
+                // If it happened to load instantly from cache
+                if (heroPreload.complete && heroPreload.naturalWidth !== 0) {
+                    liftCurtain();
+                } else {
+                    // Optional: show a subtle pulsing cursor while waiting for the heavy image
+                    document.querySelector('.cursor').classList.add('loading-pulse');
+                }
             }
         };
 

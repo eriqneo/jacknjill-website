@@ -4565,6 +4565,16 @@ a.ci-val:hover {
     50% { opacity: 0; }
 }
 
+.cursor.loading-pulse {
+    animation: loading-pulse-anim 1s ease-in-out infinite;
+}
+
+@keyframes loading-pulse-anim {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.3); opacity: 1; text-shadow: 0 0 15px var(--jj-gold); }
+    100% { transform: scale(1); opacity: 0.3; }
+}
+
 @media (max-width: 768px) {
     #typewriter-text, .cursor {
         font-size: 1.8rem;
