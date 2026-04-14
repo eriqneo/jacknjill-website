@@ -109,7 +109,7 @@ if (searchTrigger && searchPanel) {
     }
 }
 
-const currentLoc = window.location.pathname.split('/').pop() || 'index.html';
+const currentLoc = window.location.pathname.split('/').pop() || '/';
 document.querySelectorAll('.nav-main-link').forEach(link => {
     const linkPage = link.getAttribute('href');
     if (linkPage === currentLoc) {
@@ -461,14 +461,14 @@ if (contactForm) {
 }
 // --- Active Menu State Logic ---
 const syncNavigationState = () => {
-    let currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    let currentPath = window.location.pathname.split('/').pop() || '/';
     // Handle root / cases locally
-    if (currentPath === '') currentPath = 'index.html';
+    if (currentPath === '') currentPath = '/';
 
     const menuLinksDOM = document.querySelectorAll('.mega-link-list a');
     menuLinksDOM.forEach(link => {
         // Get the filename from the href
-        const hrefFilename = link.getAttribute('href').split('/').pop() || 'index.html';
+        const hrefFilename = link.getAttribute('href').split('/').pop() || '/';
         if (hrefFilename === currentPath) {
             link.classList.add('active-nav');
             link.setAttribute('aria-current', 'page');
