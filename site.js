@@ -109,14 +109,6 @@ if (searchTrigger && searchPanel) {
     }
 }
 
-const currentLoc = window.location.pathname.split('/').pop() || '/';
-document.querySelectorAll('.nav-main-link').forEach(link => {
-    const linkPage = link.getAttribute('href');
-    if (linkPage === currentLoc) {
-        link.classList.add('nav-active');
-    }
-});
-
 window.addEventListener('load', () => {
     if (window.location.hash) {
         const target = document.querySelector(window.location.hash);
@@ -461,16 +453,19 @@ if (contactForm) {
 }
 // --- Active Menu State Logic ---
 const syncNavigationState = () => {
-    let currentPath = window.location.pathname.split('/').pop() || '/';
-    // Handle root / cases locally
-    if (currentPath === '') currentPath = '/';
-
-    const menuLinksDOM = document.querySelectorAll('.mega-link-list a');
+    let currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+    
+    const menuLinksDOM = document.querySelectorAll('.mega-link-list a, .nav-main-link');
     menuLinksDOM.forEach(link => {
-        // Get the filename from the href
-        const hrefFilename = link.getAttribute('href').split('/').pop() || '/';
-        if (hrefFilename === currentPath) {
+        let href = link.getAttribute('href');
+        if (!href) return;
+        
+        let linkPath = href.split('#')[0].replace(/\/$/, '') || '/';
+        
+        // Match if paths are identical
+        if (linkPath === currentPath) {
             link.classList.add('active-nav');
+            link.classList.add('nav-active');
             link.setAttribute('aria-current', 'page');
         }
     });
