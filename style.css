@@ -5314,3 +5314,235 @@ a.ci-val:hover {
         display: none; /* Hide tooltip on mobile to save space */
     }
 }
+
+/* =========================================================
+   HIGH PREMIUM MOBILE RESPONSIVENESS OVERRIDES
+   ========================================================= */
+@media (max-width: 768px) {
+  /* 1. Contact Bar */
+  .top-contact-bar {
+    display: none; /* Hide top bar on mobile for a cleaner prestige look, or make very compact */
+  }
+
+  /* 2. Floating Identity & Brand */
+  .floating-left {
+    top: 20px !important;
+    left: 20px !important;
+    bottom: auto !important;
+    transform: none !important;
+    flex-direction: row !important;
+    align-items: center;
+    background: transparent !important;
+  }
+  
+  .site-logo {
+    display: block !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50%;
+  }
+
+  .school-wordmark {
+    transform: scale(0.7);
+    transform-origin: left center;
+  }
+
+  .fl-divider, .btn-tour {
+    display: none !important;
+  }
+  
+  .btn-apply {
+    padding: 8px 16px;
+    font-size: 10px;
+    margin-left: -20px;
+  }
+
+  /* 3. Hamburger Navigation */
+  .btn-hamburger {
+    top: 15px !important;
+    right: 15px !important;
+    width: 48px !important;
+    height: 48px !important;
+    box-shadow: 0 4px 15px rgba(249, 166, 2, 0.4);
+  }
+
+  .menu-label {
+    display: none !important; /* Hide label on small mobile for cleaner look */
+  }
+
+  /* 4. Cinematic Hero & Typography */
+  .hero-full {
+    height: 85vh !important;
+    padding-top: 120px;
+  }
+
+  .hero-header {
+    font-size: 44px !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px !important;
+    letter-spacing: 0.25em !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* 5. Signature Carousels */
+  .signature-carousel-container {
+    bottom: -80px !important;
+    height: 380px;
+  }
+  
+  .sig-card {
+    width: 180px !important;
+    height: 240px !important;
+    border-width: 3px !important;
+  }
+
+  /* 6. Latest News (Curved Section) */
+  .latest-news-curved {
+    padding-top: 160px; /* clear the overlapping carousel */
+  }
+  
+  .news-curved-content {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+  
+  .news-curved-left {
+    padding-right: 0 !important;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .massive-news-title {
+    font-size: 60px !important;
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    margin-bottom: 20px;
+  }
+  
+  .megaphone-bg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+
+  /* 7. Experience Section */
+  .jj-experience-section {
+    padding: 80px 0 !important;
+  }
+
+  .jj-exp-layout {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  
+  .jj-exp-left {
+    text-align: center;
+    padding: 0 20px !important;
+  }
+  
+  .jj-exp-headline {
+    font-size: 38px !important;
+    letter-spacing: 0.05em !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .jj-exp-body {
+    font-size: 15px !important;
+    max-width: 320px !important;
+    margin: 0 auto 2rem !important;
+  }
+  
+  .jj-exp-track-container {
+    padding-left: 20px !important; /* Align first card to container edge */
+    width: 100vw !important;
+    margin-left: -20px !important; /* Compensate for page padding */
+  }
+
+  .jj-exp-track {
+    gap: 16px !important;
+  }
+  
+  .jj-card {
+    width: 290px !important;
+    height: 420px !important;
+    border-radius: 16px !important;
+  }
+
+  .jj-card--offset {
+    margin-bottom: 0px !important; /* No offset on mobile for cleaner line */
+  }
+
+  .jj-card__title-block .jj-card__word {
+    font-size: 26px !important;
+  }
+
+  /* 8. Parent Testimonials */
+  .parent-testimonials {
+    padding: 80px 0 !important;
+  }
+
+  .pt-title {
+    font-size: 32px !important;
+  }
+
+  .pt-card {
+    width: 300px !important;
+    padding: 30px !important;
+  }
+
+  /* 9. CTA Section */
+  .unified-cta-section {
+    padding: 80px 20px !important;
+  }
+
+  .unified-cta-section .title {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* 10. Footer Premium Stack */
+  .footer-content-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3.5rem !important;
+    padding: 80px 24px !important;
+    text-align: center;
+  }
+
+  .footer-col {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-links li a {
+    justify-content: center;
+  }
+
+  .contact-block p {
+    justify-content: center;
+  }
+
+  .footer-heading {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .footer-apply-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* 11. Fix global horizontal scrolls */
+  body, html {
+    overflow-x: hidden !important;
+    width: 100%;
+    position: relative;
+  }
+}
+
+/* =========================================================
+   END OVERRIDES
+   ========================================================= */
