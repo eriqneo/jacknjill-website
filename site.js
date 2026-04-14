@@ -3,7 +3,7 @@ import 'aos/dist/aos.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupPencilCursor } from './src/cursor.js';
-import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, buildImageUrl } from './src/sanity.js';
+import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, buildImageUrl } from './src/sanity.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -398,11 +398,27 @@ if (document.querySelector('.gov-director-card')) {
         {
             y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power2.out",
             scrollTrigger: {
-                trigger: '.gov-faculty-grid',
+                trigger: '.gov-faculty-carousel-wrap',
                 start: "top 85%",
             }
         }
     );
+
+    // Faculty Carousel Navigation
+    const facTrackWrap = document.querySelector('.gov-faculty-carousel-wrap');
+    const facPrev = document.getElementById('fac-prev');
+    const facNext = document.getElementById('fac-next');
+
+    if (facTrackWrap && facPrev && facNext) {
+        facPrev.addEventListener('click', () => {
+            const scrollAmount = facTrackWrap.querySelector('.gov-faculty-card').offsetWidth + 32; // card + 2rem gap
+            facTrackWrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+        facNext.addEventListener('click', () => {
+            const scrollAmount = facTrackWrap.querySelector('.gov-faculty-card').offsetWidth + 32; // card + 2rem gap
+            facTrackWrap.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
 }
 
 // --- Contact Form Logic ---
@@ -1051,6 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCMSNews(),
         populateCMSTestimonials(),
         populateHomepageEvents(),
+        populateCMSFaculty(),
     ]).catch(err => console.warn('[CMS] Hydration error:', err));
 
     // Modal Close Listeners (Generic for all CMS modals)

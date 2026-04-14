@@ -185,10 +185,17 @@
                 </div>
             </div>
 
-            <!-- Faculty Grid -->
+            <!-- Faculty Carousel -->
             <div id="teachers" class="gov-faculty-section">
-                <h2 class="gov-faculty-title">Our Dedicated Faculty</h2>
-                <div class="gov-faculty-grid">
+                <div class="gov-faculty-header">
+                    <h2 class="gov-faculty-title">Our Dedicated Faculty</h2>
+                    <div class="gov-carousel-nav">
+                        <button class="gov-nav-btn prev" id="fac-prev" aria-label="Previous Faculty">❮</button>
+                        <button class="gov-nav-btn next" id="fac-next" aria-label="Next Faculty">❯</button>
+                    </div>
+                </div>
+                <div class="gov-faculty-carousel-wrap">
+                    <div class="gov-faculty-track" id="faculty-track">
                     
                     <div class="gov-faculty-card fac-anim">
                         <img src="https://i.pravatar.cc/150?u=a" alt="Teacher">
@@ -246,6 +253,7 @@
                         <p class="fac-quote">"Bridging cultures through communication."</p>
                     </div>
 
+                    </div>
                 </div>
             </div>
 

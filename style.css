@@ -1986,18 +1986,66 @@ a:hover .ib-logo {
   text-align: center;
 }
 
+.gov-faculty-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
 .gov-faculty-title {
   font-family: var(--font-heading);
   font-size: 40px;
   color: var(--jj-navy);
-  margin-bottom: 4rem;
+  margin-bottom: 0;
+  text-align: left;
 }
 
-.gov-faculty-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.gov-carousel-nav {
+  display: flex;
+  gap: 15px;
+}
+
+.gov-nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid var(--jj-navy);
+  color: var(--jj-navy);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gov-nav-btn:hover {
+  background: var(--jj-navy);
+  color: var(--jj-gold);
+  transform: scale(1.05);
+}
+
+.gov-faculty-carousel-wrap {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  padding-bottom: 2rem;
+}
+
+.gov-faculty-carousel-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.gov-faculty-track {
+  display: flex;
   gap: 2rem;
-  text-align: center;
+  width: max-content;
+  padding-right: 2rem; /* Add some padding at the end */
 }
 
 .gov-faculty-card {
@@ -2008,6 +2056,13 @@ a:hover .ib-logo {
   box-shadow: 0 4px 20px rgba(43,62,80,0.05);
   transition: all 0.3s ease;
   opacity: 0; /* For GSAP */
+  width: 280px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gov-faculty-card:hover {
@@ -2353,7 +2408,6 @@ a.ci-val:hover {
   .gov-director-card .gov-photo-wrap, .gov-director-card .gov-bio-wrap { width: 100%; }
   .gov-director-card .gov-photo-wrap img { aspect-ratio: 16/9; }
   .gov-leadership-row { flex-direction: column; }
-  .gov-faculty-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-page-layout { flex-direction: column; }
   .contact-left, .contact-right { width: 100%; }
 }
@@ -2363,7 +2417,6 @@ a.ci-val:hover {
   .lightbox-nav-btn { display: none; }
   .lightbox-close-btn { top: 20px; right: 20px; }
   .inner-title { font-size: 48px; }
-  .gov-faculty-grid { grid-template-columns: 1fr; }
   .form-row-2 { grid-template-columns: 1fr; }
   .contact-form-wrap { padding: 2rem; }
 }
