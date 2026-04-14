@@ -1055,6 +1055,76 @@ function injectWhatsAppButton() {
     }
 }
 
+// --- CMS Faculty API Integration (Live Sanity) ---
+async function populateCMSFaculty() {
+    const facultyTrack = document.getElementById('faculty-track');
+    if (!facultyTrack) return;
+
+    const staffMembers = await fetchStaff();
+    if (!staffMembers || staffMembers.length === 0) return;
+
+    facultyTrack.innerHTML = ''; // Replace static fallback
+
+    staffMembers.forEach(member => {
+        const card = document.createElement('div');
+        card.className = 'gov-faculty-card';
+
+        const photoUrl = buildImageUrl(member.photo, 300, 300);
+        
+        card.innerHTML = `
+            <img src="${photoUrl}" alt="${member.fullName}" loading="lazy">
+            <h4 class="fac-name">${member.fullName}</h4>
+            <span class="fac-subject">${member.department || 'Staff'}</span>
+            ${member.position ? `<p class="fac-quote">${member.position}</p>` : ''}
+        `;
+        
+        facultyTrack.appendChild(card);
+    });
+
+    if (typeof gsap !== 'undefined') {
+        gsap.fromTo('.gov-faculty-card',
+            { y: 30, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.gov-faculty-carousel-wrap',
+                    start: "top 85%",
+                }
+            }
+        );
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }
+}
+
+// --- CMS Leadership API Integration (Live Sanity) ---
+async function populateCMSLeadership() {
+    const directorCard = document.getElementById('director');
+    if (!directorCard) return;
+
+    const staffMembers = await fetchStaff();
+    if (!staffMembers || staffMembers.length === 0) return;
+
+    // We assume the director might be marked 'executive' or position contains 'Director'
+    const director = staffMembers.find(m => 
+        (m.department === 'executive' && m.position.toLowerCase().includes('director')) || 
+        m.fullName.toLowerCase().includes('atudo pin')
+    );
+
+    if (director && director.photo) {
+        const imgEl = directorCard.querySelector('img');
+        if (imgEl) {
+            imgEl.src = buildImageUrl(director.photo, 450, 600);
+            imgEl.alt = director.fullName;
+        }
+        
+        const nameEl = directorCard.querySelector('.gov-name');
+        if (nameEl) nameEl.textContent = director.fullName;
+        
+        const roleEl = directorCard.querySelector('.gov-role');
+        if (roleEl && director.position) roleEl.textContent = director.position;
+    }
+}
+
 // Global initialization — fire all CMS fetches in parallel
 document.addEventListener('DOMContentLoaded', () => {
     handleIntroScreen();
@@ -1068,6 +1138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCMSTestimonials(),
         populateHomepageEvents(),
         populateCMSFaculty(),
+        populateCMSLeadership(),
     ]).catch(err => console.warn('[CMS] Hydration error:', err));
 
     // Modal Close Listeners (Generic for all CMS modals)
