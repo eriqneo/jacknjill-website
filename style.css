@@ -5541,6 +5541,54 @@ a.ci-val:hover {
     width: 100%;
     position: relative;
   }
+
+  /* 12. Governance Overrides */
+  .gov-intro {
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+    padding: 0 10px !important;
+    margin-bottom: 3rem !important;
+  }
+  .gov-director-card {
+    flex-direction: column !important;
+    gap: 30px !important;
+    padding: 30px 20px !important;
+  }
+  .gov-photo-wrap, .gov-bio-wrap {
+    width: 100% !important;
+  }
+  .gov-photo-wrap img {
+    height: auto !important;
+    max-height: 400px !important;
+    object-position: top center !important;
+  }
+  .gov-name {
+    font-size: 32px !important;
+  }
+  .gov-leadership-row {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  .gov-leader-card {
+    padding: 30px 20px !important;
+  }
+  .gov-faculty-header {
+    flex-direction: column !important;
+    gap: 20px !important;
+    text-align: center !important;
+  }
+  .gov-faculty-title {
+    font-size: 32px !important;
+    text-align: center !important;
+  }
+  .gov-faculty-carousel-wrap {
+    padding-left: 20px !important;
+    width: 100vw !important;
+    margin-left: -20px !important;
+  }
+  .gov-faculty-card {
+    width: 270px !important;
+  }
 }
 
 /* =========================================================
