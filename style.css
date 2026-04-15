@@ -843,17 +843,36 @@ a {
   transition: opacity 0.4s ease;
 }
 
-/* Gold overlay — hidden by default, reveals on hover */
+/* Gold/Mustard cover — reveals on hover like Walnut Hill */
 .sig-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(249, 166, 2, 0.92);
+  background-color: var(--jj-gold);
+  /* Substrate-like luxury pattern (Texture) */
+  background-image: radial-gradient(rgba(143, 18, 32, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
   z-index: 3;
   opacity: 0;
-  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.65s cubic-bezier(0.19, 1, 0.22, 1); /* Liquid luxury curve */
   border-radius: inherit;
 }
+
+/* Secondary Inner Border purely for hover aesthetics */
+.sig-card::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1.5px solid var(--jj-navy);
+  border-radius: inherit;
+  z-index: 4;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) 0.1s;
+  pointer-events: none;
+}
+
+
 
 /* Title: absolute, sits at bottom by default */
 .sig-card-title {
@@ -898,47 +917,49 @@ a {
 
 /* ── Hover States ── */
 .sig-card:hover {
-  border-color: var(--jj-gold);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  z-index: 5;
+  border-color: var(--jj-navy) !important; /* Switch to navy border on the outer edge when flooded */
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 
-/* Gold overlay floods in */
 .sig-card:hover::before {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
-/* Bottom gradient hides so gold can read cleanly */
+/* Reveal the refined inner border with a subtle scale-in */
 .sig-card:hover::after {
-  opacity: 0;
+  opacity: 0.6 !important; 
+  transform: scale(1) !important;
 }
 
-/* Image: slight zoom + fade — felt but not crude */
-.sig-card:hover img {
-  transform: scale(1.08);
-  opacity: 0.22;
-}
-
-/* Title slides to vertical centre and enlarges */
+/* Title: Central Mustard Prestige Styling — High Serif Refinement */
 .sig-card:hover .sig-card-title {
-  bottom: 52%;
-  transform: translateY(50%);
-  font-size: 20px;
-  color: var(--jj-navy);
+  bottom: 55% !important;
+  transform: translateY(50%) !important;
+  color: var(--jj-navy) !important;
+  font-family: "Cinzel", serif !important; /* Premium Institutional Serif */
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  opacity: 1 !important;
 }
 
-/* EXPLORE button fades up */
+/* Center and style the EXPLORE pill button */
 .sig-card:hover .sig-card-title::after {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Preserve stagger + hover scale */
-.sig-card:nth-child(even):hover {
-  transform: translateY(-44px) scale(1.05);
-}
-.sig-card:nth-child(odd):hover {
-  transform: translateY(44px) scale(1.05);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  content: "EXPLORE \2192" !important;
+  display: inline-block !important;
+  margin-top: 25px !important;
+  padding: 12px 36px !important;
+  border: 2px solid var(--jj-navy) !important;
+  border-radius: 50px !important;
+  color: var(--jj-navy) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.2em !important;
+  background: transparent !important;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1) 0.2s !important;
 }
 
 .sig-card-active {
@@ -2989,8 +3010,14 @@ a.ci-val:hover {
   overflow: hidden;
 }
 
+.jj-exp-container {
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
 .jj-exp-label-wrap {
   margin-bottom: 60px;
+  text-align: center;
 }
 
 .jj-exp-label {
@@ -3007,6 +3034,7 @@ a.ci-val:hover {
   width: 40px;
   height: 3px;
   background: var(--jj-gold);
+  margin: 0 auto;
 }
 
 .jj-exp-layout {
@@ -3019,6 +3047,9 @@ a.ci-val:hover {
 .jj-exp-left {
   width: 32%;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .jj-exp-headline {
@@ -3031,12 +3062,17 @@ a.ci-val:hover {
   margin-bottom: 24px;
 }
 
+.jj-exp-headline span {
+  display: block;
+}
+
 .jj-exp-body {
   font-family: var(--font-body);
   font-size: 17px;
   color: rgba(43, 62, 80, 0.75);
   line-height: 1.6;
   margin-bottom: 40px;
+  max-width: 28ch;
 }
 
 .jj-exp-nav {
@@ -6343,34 +6379,104 @@ a.ci-val:hover {
     display: none !important; /* Hide label on small mobile for cleaner look */
   }
 
-  /* 4. Cinematic Hero & Typography */
+  /* 4. Cinematic Hero & Typography — Walnut Hill Inspired */
   .hero-full {
-    height: 85vh !important;
-    padding-top: 120px;
+    height: 96vh !important; /* Full immersive height */
+    padding-top: 180px !important; /* Restored breathing room for logo/menu */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   .hero-header {
-    font-size: 44px !important;
-    margin-bottom: 1.5rem !important;
+    font-size: 54px !important;
+    font-weight: 900 !important;
+    line-height: 0.85 !important;
+    margin-bottom: 2rem !important;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    padding: 0 24px;
+  }
+
+  .hero-header .hero-italic {
+    font-size: 48px !important;
+    display: block;
+    margin-top: 10px;
+    letter-spacing: 0;
+    color: var(--jj-gold);
+    font-style: italic;
+    text-transform: none; /* Keep fluid for italic contrast */
   }
 
   .hero-eyebrow {
-    font-size: 11px !important;
-    letter-spacing: 0.25em !important;
-    margin-bottom: 1rem !important;
+    font-size: 13px !important;
+    font-weight: 800;
+    letter-spacing: 0.4em !important;
+    margin-bottom: 0.75rem !important;
+    color: var(--jj-white);
+    opacity: 0.7;
+    padding: 0 24px;
   }
 
-  /* 5. Signature Carousels */
+  /* 5. Signature Carousels — Optimized Square Layout */
   .signature-carousel-container {
-    bottom: -80px !important;
-    height: 380px;
+    bottom: -20px !important;
+    height: 400px !important;
+    padding: 0 !important;
+    z-index: 10;
+    overflow-x: auto !important; /* Manual swipe only on mobile */
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .signature-carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .signature-carousel-track {
+    display: flex !important;
+    animation: infiniteScroll 40s linear infinite !important; /* Re-enabled movement on mobile for flagship consistency */
+    gap: 20px !important;
+    padding: 0 40px !important;
+    width: max-content;
+  }
+
+  /* Ensure the hover pause works on mobile taps as well */
+  .signature-carousel-track:hover,
+  .signature-carousel-track:active {
+    animation-play-state: paused !important;
   }
 
   .sig-card {
-    width: 180px !important;
-    height: 240px !important;
-    border-width: 3px !important;
+    scroll-snap-align: center;
+    width: 320px !important; /* Bold square width */
+    height: 320px !important; /* Fixed square aspect ratio */
+    border: 8px solid var(--jj-gold) !important; /* Thick institutional border */
+    border-radius: 20px !important; /* Slightly more structural corners */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6) !important;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    flex-shrink: 0;
   }
+
+  .sig-card:nth-child(even) {
+    transform: translateY(12px); /* Subtle stagger */
+  }
+
+  .sig-card img {
+    filter: brightness(0.65) contrast(1.1);
+  }
+
+  .sig-card-title {
+    font-size: 18px !important;
+    letter-spacing: 0.2em !important;
+    font-weight: 900 !important;
+    bottom: 28px !important;
+    left: 24px !important;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.7);
+  }
+
 
   /* 6. Latest News (Curved Section) */
   .latest-news-curved {
@@ -6412,8 +6518,16 @@ a.ci-val:hover {
   }
 
   .jj-exp-left {
+    width: 100% !important;
+    max-width: 100% !important;
     text-align: center;
     padding: 0 20px !important;
+    align-items: center;
+  }
+
+  .jj-exp-right {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .jj-exp-headline {
@@ -6628,10 +6742,45 @@ a.ci-val:hover {
   }
 
   .home-page .btn-apply {
-    padding: 10px 16px;
+    padding: 10px 17px;
     font-size: 10px;
-    letter-spacing: 0.18em;
-    margin-left: -18px;
+    letter-spacing: 0.17em;
+    margin-left: -12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: linear-gradient(135deg, #8f1220 0%, #be2a39 55%, #cc3d4b 100%);
+    color: var(--jj-white);
+    box-shadow:
+      0 8px 20px rgba(143, 18, 32, 0.35),
+      0 2px 0 rgba(255, 255, 255, 0.22) inset;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+  }
+
+  .home-page .btn-apply::after {
+    opacity: 0.5;
+    animation-duration: 2.6s;
+  }
+
+  .home-page .btn-apply .diamond {
+    width: 5px;
+    height: 5px;
+    background: #ffd978;
+  }
+
+  .home-page .btn-apply:hover,
+  .home-page .btn-apply:active {
+    transform: translateY(-1px) scale(1.01);
+    border-color: rgba(255, 255, 255, 0.44);
+    box-shadow:
+      0 12px 24px rgba(143, 18, 32, 0.42),
+      0 2px 0 rgba(255, 255, 255, 0.24) inset;
+  }
+
+  .home-page .btn-apply:focus-visible {
+    outline: 2px solid rgba(255, 217, 120, 0.95);
+    outline-offset: 2px;
   }
 
   .home-page .btn-hamburger {
@@ -6669,34 +6818,126 @@ a.ci-val:hover {
   }
 
   .home-page .signature-carousel-container {
-    bottom: -115px;
-    height: 280px;
+    bottom: -116px;
+    height: 262px;
     padding: 0;
     overflow: hidden;
   }
 
   .home-page .signature-carousel-track {
     animation-duration: 55s;
-    gap: 16px;
-    padding: 30px 0;
+    gap: 12px;
+    padding: 28px 0 30px;
   }
 
   .home-page .sig-card {
-    width: 180px;
-    height: 220px;
-    border-width: 3px;
-    border-radius: 14px;
+    width: 168px;
+    height: 168px;
+    border-width: 1.5px;
+    border-color: rgba(255, 255, 255, 0.38);
+    border-radius: 20px;
+    box-shadow:
+      0 14px 28px rgba(8, 14, 24, 0.32),
+      0 1px 0 rgba(255, 255, 255, 0.25) inset;
+    transform: none;
+    overflow: clip;
+  }
+
+  .home-page .sig-card:nth-child(even),
+  .home-page .sig-card:nth-child(odd) {
+    transform: none;
+  }
+
+  .home-page .sig-card::after {
+    background: linear-gradient(
+      180deg,
+      rgba(7, 16, 30, 0.06) 0%,
+      rgba(7, 16, 30, 0.32) 52%,
+      rgba(7, 16, 30, 0.88) 100%
+    );
+    opacity: 1;
+  }
+
+  .home-page .sig-card::before {
+    background: linear-gradient(
+      120deg,
+      rgba(249, 166, 2, 0.18) 0%,
+      rgba(249, 166, 2, 0.04) 46%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    opacity: 1;
+    mix-blend-mode: screen;
+  }
+
+  .home-page .sig-card img {
+    transform: scale(1.02);
   }
 
   .home-page .sig-card-title {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    bottom: 16px;
-    padding: 0 12px;
+    bottom: 12px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    font-size: 11px;
+    letter-spacing: 0.11em;
+    line-height: 1.25;
+    text-align: left;
+    border-radius: 999px;
+    padding: 9px 12px;
+    background: rgba(17, 30, 46, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.24);
+  }
+
+  .home-page .sig-card-title {
+    text-wrap: balance;
+  }
+
+  .home-page .sig-card-title::after {
+    display: none;
+  }
+
+  .home-page .sig-card-active {
+    border-color: rgba(249, 166, 2, 0.88);
+    box-shadow:
+      0 16px 30px rgba(8, 14, 24, 0.38),
+      0 0 0 1px rgba(249, 166, 2, 0.32) inset;
+  }
+
+  .home-page .sig-card-active::after {
+    background: linear-gradient(
+      to top,
+      rgba(16, 28, 42, 0.94) 0%,
+      rgba(16, 28, 42, 0.34) 60%
+    );
+  }
+
+  .home-page .sig-active-content .active-title {
+    color: var(--jj-white);
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.34);
+  }
+
+  .home-page .sig-active-content .active-btn {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #ffe3a0;
+    border: 1px solid rgba(255, 227, 160, 0.75);
+    background: rgba(255, 227, 160, 0.08);
+    padding: 8px 12px;
+  }
+
+  .home-page .sig-card:focus-visible {
+    outline: 2px solid rgba(255, 217, 120, 0.95);
+    outline-offset: 2px;
   }
 
   .home-page .latest-news-curved {
-    padding-top: 130px;
+    padding-top: 124px;
   }
 
   .home-page .news-curved-content {
@@ -6739,8 +6980,16 @@ a.ci-val:hover {
   }
 
   .home-page .jj-exp-left {
+    width: 100%;
+    max-width: 100%;
     text-align: center;
     padding: 0;
+    align-items: center;
+  }
+
+  .home-page .jj-exp-right {
+    width: 100%;
+    max-width: 100%;
   }
 
   .home-page .jj-exp-headline {
@@ -6906,8 +7155,18 @@ a.ci-val:hover {
   }
 
   .home-page .btn-apply {
-    padding: 8px 12px;
-    margin-left: -24px;
+    padding: 9px 12px;
+    margin-left: -16px;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    box-shadow:
+      0 7px 16px rgba(143, 18, 32, 0.32),
+      0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+
+  .home-page .btn-apply .diamond {
+    width: 4px;
+    height: 4px;
   }
 
   .home-page .btn-hamburger {
@@ -6933,8 +7192,9 @@ a.ci-val:hover {
   }
 
   .home-page .sig-card {
-    width: 154px;
-    height: 198px;
+    width: 156px;
+    height: 196px;
+    border-radius: 16px;
   }
 
   .home-page .sig-card:nth-child(even),
@@ -9819,7 +10079,7 @@ a.ci-val:hover {
     min-height: 100svh;
     align-items: center;
     padding-top: 126px;
-    padding-bottom: 176px;
+    padding-bottom: 192px;
   }
 
   .home-page .hero-content-left {
@@ -9827,6 +10087,7 @@ a.ci-val:hover {
     width: min(100%, 680px);
     padding: 16px 14px;
     border-radius: 16px;
+    margin-bottom: 20px;
     background: linear-gradient(
       180deg,
       rgba(8, 16, 26, 0.45),
@@ -9854,27 +10115,32 @@ a.ci-val:hover {
   }
 
   .home-page .signature-carousel-container {
-    bottom: -104px;
-    height: 238px;
+    bottom: -108px;
+    height: 246px;
+    padding-top: 16px;
+    padding-bottom: 20px;
   }
 
   .home-page .signature-carousel-track {
-    gap: 10px;
-    padding: 22px 0;
+    gap: 12px;
+    padding: 28px 0 32px;
   }
 
   .home-page .sig-card {
-    width: 152px;
-    height: 188px;
+    width: 158px;
+    height: 158px;
+    border-radius: 18px;
   }
 
   .home-page .sig-card-title {
-    font-size: 11px;
-    letter-spacing: 0.09em;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    padding: 7px 9px;
   }
 
   .home-page .latest-news-curved {
-    padding-top: 116px;
+    padding-top: 126px;
     padding-bottom: 96px;
   }
 
@@ -9963,11 +10229,13 @@ a.ci-val:hover {
   .home-page .jj-exp-headline {
     font-size: clamp(1.9rem, 9vw, 2.6rem);
     margin-bottom: 10px;
+    letter-spacing: 0.04em;
   }
 
   .home-page .jj-exp-body {
-    max-width: 34ch;
+    max-width: 30ch;
     margin-bottom: 1rem;
+    line-height: 1.7;
   }
 
   .home-page .jj-exp-nav {
@@ -10052,12 +10320,13 @@ a.ci-val:hover {
 @media (max-width: 560px) {
   .home-page .hero-full {
     padding-top: 118px;
-    padding-bottom: 154px;
+    padding-bottom: 172px;
   }
 
   .home-page .hero-content-left {
     padding: 12px 10px;
     border-radius: 12px;
+    margin-bottom: 14px;
   }
 
   .home-page .hero-scroll-indicator {
@@ -10065,17 +10334,45 @@ a.ci-val:hover {
   }
 
   .home-page .signature-carousel-container {
-    bottom: -92px;
+    bottom: -94px;
     height: 216px;
+    padding-top: 12px;
+    padding-bottom: 16px;
+  }
+
+  .home-page .signature-carousel-track {
+    gap: 10px;
+    padding: 20px 0 24px;
   }
 
   .home-page .sig-card {
-    width: 140px;
-    height: 176px;
+    width: 134px;
+    height: 134px;
+    border-radius: 14px;
+  }
+
+  .home-page .sig-card-title {
+    bottom: 10px;
+    left: 8px;
+    right: 8px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    line-height: 1.15;
+    padding: 6px 8px;
+  }
+
+  .home-page .sig-active-content .active-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .home-page .sig-active-content .active-btn {
+    font-size: 9px;
+    padding: 7px 10px;
   }
 
   .home-page .latest-news-curved {
-    padding-top: 106px;
+    padding-top: 114px;
     padding-bottom: 80px;
   }
 
@@ -10154,22 +10451,146 @@ a.ci-val:hover {
   }
 }
 
-/* Standardized Apply Button Mobile Refinement */
-@media (max-width: 1024px) {
-  .apply-pill-floating {
-    margin-left: 0 !important;
-    padding: 10px 20px;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-  }
-  
-  .floating-nav-container {
-    top: auto !important;
-    bottom: 24px !important;
-    left: 20px !important;
-    right: 20px !important;
+/* Mobile action cluster polish: keeps Apply + Menu distinct and non-overlapping */
+@media (max-width: 1100px) {
+  body.inner-page .floating-nav-container {
+    position: fixed !important;
+    top: max(12px, calc(env(safe-area-inset-top) + 8px)) !important;
+    left: clamp(12px, 4vw, 24px) !important;
+    right: clamp(12px, 4vw, 24px) !important;
     width: auto !important;
-    gap: 12px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: clamp(8px, 2vw, 12px) !important;
+    pointer-events: none !important;
+    z-index: 1100 !important;
   }
+
+  body.inner-page .floating-nav-container > * {
+    pointer-events: auto !important;
+  }
+
+  body.inner-page .apply-pill-floating {
+    position: static !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+    padding: 11px clamp(14px, 3.2vw, 22px) !important;
+    font-size: clamp(10px, 2.5vw, 11px) !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #8f1220 0%, #bf2938 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    color: var(--jj-white) !important;
+    box-shadow: 0 10px 20px rgba(155, 17, 30, 0.28) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 800 !important;
+  }
+
+  body.inner-page .circle-hamburger-anchor {
+    position: static !important;
+    width: clamp(46px, 11vw, 52px) !important;
+    height: clamp(46px, 11vw, 52px) !important;
+    flex: 0 0 auto !important;
+    z-index: 2 !important;
+  }
+
+  .circle-hamburger-anchor::after,
+  .btn-hamburger::after {
+    display: none !important;
+  }
+
+  /* --- Flagship Hero Premium Mustard Cover Mobile Overrides --- */
+  .home-page .sig-card:hover::before,
+  .home-page .sig-card:active::before {
+    opacity: 1 !important;
+    background: var(--jj-gold) !important; /* Solid Mustard Flood */
+    z-index: 3 !important;
+    /* Substrate Texture for luxury feel */
+    background-image: radial-gradient(rgba(143, 18, 32, 0.04) 1px, transparent 1px) !important;
+    background-size: 20px 20px !important;
+  }
+
+  /* Refined Inner Navy Frame for Mobile */
+  .home-page .sig-card:hover::after,
+  .home-page .sig-card:active::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 12px !important;
+    border: 1.5px solid var(--jj-navy) !important;
+    border-radius: inherit !important;
+    z-index: 4 !important;
+    opacity: 0.5 !important;
+    background: none !important;
+    display: block !important;
+    transform: scale(1) !important;
+  }
+
+  /* Title: Central Mustard Prestige Styling — High Serif Refinement */
+  .home-page .sig-card:hover .sig-card-title,
+  .home-page .sig-card:active .sig-card-title {
+    color: var(--jj-navy) !important;
+    bottom: 50% !important;
+    transform: translateY(50%) !important;
+    z-index: 10 !important;
+    font-family: "Cinzel", serif !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    display: flex !important; /* Force vertical stack via flex */
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    /* Clean up the 'muddy pill' styles from earlier rules */
+    background: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+
+  /* Explore Pill Button - Premium Mobile Edition */
+  .home-page .sig-card:hover .sig-card-title::after,
+  .home-page .sig-card:active .sig-card-title::after {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    content: "EXPLORE \2192" !important;
+    display: block !important; /* Changed to block within flex-column */
+    margin-top: 20px !important;
+    padding: 10px 30px !important;
+    border: 1.8px solid var(--jj-navy) !important;
+    border-radius: 50px !important;
+    color: var(--jj-navy) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    font-family: var(--jj-font-body) !important;
+    letter-spacing: 0.25em !important;
+    background: transparent !important;
+    width: auto !important;
+    min-width: 120px !important;
+  }
+
 }
 
+@media (max-width: 390px) {
+  body.inner-page .floating-nav-container {
+    left: 10px !important;
+    right: 10px !important;
+    gap: 8px !important;
+  }
+
+  body.inner-page .apply-pill-floating {
+    padding: 10px 14px !important;
+    letter-spacing: 0.1em !important;
+    font-size: 10px !important;
+  }
+}
