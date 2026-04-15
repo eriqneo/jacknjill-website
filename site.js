@@ -273,6 +273,7 @@ if (nextBtns.length > 0) {
 // --- Gallery Filter Logic ---
 const filterBtns = document.querySelectorAll('.filter-btn');
 const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryFilterContainer = document.querySelector('.filter-container');
 
 if (filterBtns.length > 0) {
     filterBtns.forEach(btn => {
@@ -291,6 +292,10 @@ if (filterBtns.length > 0) {
                     item.style.display = 'none';
                 }
             });
+
+            if (galleryFilterContainer && window.matchMedia('(max-width: 1024px)').matches) {
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
         });
     });
 }
@@ -306,6 +311,11 @@ const nextBtn = document.querySelector('.lightbox-nav-btn.next');
 
 let activeGallery = [];
 let currentIndex = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+
+const getVisibleGalleryItems = () =>
+    Array.from(galleryItems).filter(item => item.style.display !== 'none');
 
 const updateLightbox = () => {
     if (activeGallery.length > 0) {
@@ -317,8 +327,7 @@ const updateLightbox = () => {
 
 const openLightbox = (idx) => {
     // Collect currently visible items for navigation
-    activeGallery = Array.from(galleryItems)
-        .filter(item => item.style.display !== 'none')
+    activeGallery = getVisibleGalleryItems()
         .map(item => ({
             img: item.querySelector('img').src,
             caption: item.getAttribute('data-caption')
@@ -339,7 +348,7 @@ if (lightbox) {
     galleryItems.forEach((item, index) => {
         item.addEventListener('click', () => {
             // Find its index in the VISIBLE subset
-            const visibleItems = Array.from(galleryItems).filter(i => i.style.display !== 'none');
+            const visibleItems = getVisibleGalleryItems();
             const vIdx = visibleItems.indexOf(item);
             openLightbox(vIdx);
         });
@@ -366,6 +375,32 @@ if (lightbox) {
         if (e.key === 'ArrowRight') nextBtn.click();
         if (e.key === 'ArrowLeft') prevBtn.click();
     });
+
+    // Swipe gestures for mobile lightbox
+    lightbox.addEventListener('touchstart', (e) => {
+        const touch = e.changedTouches?.[0];
+        if (!touch) return;
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        const touch = e.changedTouches?.[0];
+        if (!touch) return;
+
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+
+        // Horizontal intentional swipe only.
+        if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy)) return;
+
+        if (dx < 0) {
+            nextBtn.click();
+        } else {
+            prevBtn.click();
+        }
+    }, { passive: true });
 }
 
 // --- Governance Scroll Animations ---
@@ -410,12 +445,19 @@ if (document.querySelector('.gov-director-card')) {
     const facNext = document.getElementById('fac-next');
 
     if (facTrackWrap && facPrev && facNext) {
+        const getScrollAmount = () => {
+            const card = facTrackWrap.querySelector('.gov-faculty-card');
+            if (!card) return Math.max(260, facTrackWrap.clientWidth * 0.85);
+            const cardWidth = card.getBoundingClientRect().width;
+            return cardWidth + 32;
+        };
+
         facPrev.addEventListener('click', () => {
-            const scrollAmount = facTrackWrap.querySelector('.gov-faculty-card').offsetWidth + 32; // card + 2rem gap
+            const scrollAmount = getScrollAmount();
             facTrackWrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
         facNext.addEventListener('click', () => {
-            const scrollAmount = facTrackWrap.querySelector('.gov-faculty-card').offsetWidth + 32; // card + 2rem gap
+            const scrollAmount = getScrollAmount();
             facTrackWrap.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
     }
@@ -634,11 +676,23 @@ function handleIntroScreen() {
 
     if (!introScreen || !typewriterTextElement) return;
 
+    const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     let hasPlayed = false;
     try {
         hasPlayed = sessionStorage.getItem('jj_intro_played');
     } catch (e) {
         console.warn("Storage access denied:", e);
+    }
+
+    if (isSmallScreen || prefersReducedMotion) {
+        introScreen.style.display = 'none';
+        document.body.style.overflow = '';
+        try {
+            sessionStorage.setItem('jj_intro_played', 'true');
+        } catch (e) {}
+        return;
     }
 
     if (hasPlayed) {
@@ -994,13 +1048,11 @@ async function populateCMSTestimonials() {
         // Double the array for infinite CSS loop
         const doubled = [...parents, ...parents];
         marquee.innerHTML = doubled.map(t => {
-            const avatarSrc = t.avatar ? buildImageUrl(t.avatar, 80, 80) : `https://i.pravatar.cc/80?u=${encodeURIComponent(t.authorName)}`;
             return `
             <div class="pt-card">
                 <div class="pt-stars">${stars(t.rating)}</div>
                 <p class="pt-quote">"${t.quote}"</p>
                 <div class="pt-author">
-                    <div class="pt-avatar-wrapper"><img src="${avatarSrc}" class="pt-avatar" alt="${t.authorName}"></div>
                     <div class="pt-author-info">
                         <p class="name">${t.authorName}</p>
                         <p class="role">${t.authorRole}</p>
@@ -1014,13 +1066,11 @@ async function populateCMSTestimonials() {
     const studentsEl = document.getElementById('students-track');
     if (studentsEl && students.length) {
         studentsEl.innerHTML = students.map((t, i) => {
-            const avatarSrc = t.avatar ? buildImageUrl(t.avatar, 80, 80) : `https://i.pravatar.cc/80?u=${encodeURIComponent(t.authorName)}`;
             return `
             <div class="ut-card reveal reveal-active" style="transition-delay: ${i * 0.1}s;">
                 <div class="ut-quote-mark">"</div>
                 <p class="ut-quote">${t.quote}</p>
                 <div class="ut-author">
-                    <img src="${avatarSrc}" class="ut-avatar" alt="${t.authorName}">
                     <div class="ut-author-info">
                         <p class="name">${t.authorName}</p>
                         <p class="year">${t.authorRole}</p>
@@ -1029,6 +1079,192 @@ async function populateCMSTestimonials() {
             </div>`;
         }).join('');
     }
+
+    // Re-init mobile behavior in case CMS data replaced testimonial cards.
+    initParentTestimonialsMobile();
+}
+
+let parentTestimonialsAutoplayTimer = null;
+let parentTestimonialsResumeTimer = null;
+
+function initParentTestimonialsMobile() {
+    const section = document.querySelector('.parent-testimonials');
+    const wrapper = document.querySelector('.pt-marquee-wrapper');
+    if (!section || !wrapper) return;
+
+    const isMobile = window.matchMedia('(max-width: 992px)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (parentTestimonialsAutoplayTimer) {
+        clearInterval(parentTestimonialsAutoplayTimer);
+        parentTestimonialsAutoplayTimer = null;
+    }
+    if (parentTestimonialsResumeTimer) {
+        clearTimeout(parentTestimonialsResumeTimer);
+        parentTestimonialsResumeTimer = null;
+    }
+
+    const existingControls = section.querySelector('.pt-mobile-controls');
+    if (existingControls) existingControls.remove();
+    section.classList.remove('pt-mobile-enhanced');
+
+    if (!isMobile) return;
+
+    const cards = Array.from(wrapper.querySelectorAll('.pt-card'));
+    if (cards.length === 0) return;
+
+    section.classList.add('pt-mobile-enhanced');
+
+    const controls = document.createElement('div');
+    controls.className = 'pt-mobile-controls';
+
+    const dots = cards.map((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'pt-mobile-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Go to parent testimonial ${index + 1}`);
+        controls.appendChild(dot);
+        return dot;
+    });
+
+    wrapper.insertAdjacentElement('afterend', controls);
+
+    let currentIndex = 0;
+
+    const setActiveDot = (index) => {
+        dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle('is-active', dotIndex === index);
+        });
+    };
+
+    const scrollToCard = (index, behavior = 'smooth') => {
+        if (!cards[index]) return;
+        currentIndex = index;
+        wrapper.scrollTo({ left: cards[index].offsetLeft, behavior });
+        setActiveDot(index);
+    };
+
+    const syncActiveFromScroll = () => {
+        let nearestIndex = 0;
+        let smallestDistance = Number.POSITIVE_INFINITY;
+
+        cards.forEach((card, index) => {
+            const distance = Math.abs(card.offsetLeft - wrapper.scrollLeft);
+            if (distance < smallestDistance) {
+                smallestDistance = distance;
+                nearestIndex = index;
+            }
+        });
+
+        if (nearestIndex !== currentIndex) {
+            currentIndex = nearestIndex;
+            setActiveDot(nearestIndex);
+        }
+    };
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => scrollToCard(index));
+    });
+
+    wrapper.addEventListener('scroll', syncActiveFromScroll, { passive: true });
+
+    const pauseAutoPlay = () => {
+        if (parentTestimonialsAutoplayTimer) {
+            clearInterval(parentTestimonialsAutoplayTimer);
+            parentTestimonialsAutoplayTimer = null;
+        }
+        if (parentTestimonialsResumeTimer) {
+            clearTimeout(parentTestimonialsResumeTimer);
+            parentTestimonialsResumeTimer = null;
+        }
+    };
+
+    const startAutoPlay = () => {
+        if (prefersReducedMotion || cards.length < 2) return;
+        pauseAutoPlay();
+        parentTestimonialsAutoplayTimer = setInterval(() => {
+            const nextIndex = currentIndex >= cards.length - 1 ? 0 : currentIndex + 1;
+            scrollToCard(nextIndex);
+        }, 4000);
+    };
+
+    const resumeAutoPlaySoon = () => {
+        if (prefersReducedMotion) return;
+        pauseAutoPlay();
+        parentTestimonialsResumeTimer = setTimeout(startAutoPlay, 3000);
+    };
+
+    wrapper.addEventListener('touchstart', pauseAutoPlay, { passive: true });
+    wrapper.addEventListener('pointerdown', pauseAutoPlay);
+    wrapper.addEventListener('mouseenter', pauseAutoPlay);
+    wrapper.addEventListener('touchend', resumeAutoPlaySoon, { passive: true });
+    wrapper.addEventListener('pointerup', resumeAutoPlaySoon);
+    wrapper.addEventListener('mouseleave', resumeAutoPlaySoon);
+
+    setActiveDot(0);
+    startAutoPlay();
+}
+
+let swipeHintResizeTimer = null;
+
+function initMobileSwipeHints() {
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+    const selectors = [
+        '.info-nav-inner',
+        '.tab-list',
+        '.filter-container',
+        '.transport-matrix',
+        '.activities-wrapper',
+        '.partners-grid',
+        '.payment-methods',
+        '.alumni-story-grid',
+        '.gov-faculty-carousel-wrap',
+        '.ut-right',
+        '.pt-marquee-wrapper'
+    ];
+
+    const targets = document.querySelectorAll(selectors.join(','));
+
+    targets.forEach(el => {
+        if (typeof el._swipeHintCleanup === 'function') {
+            el._swipeHintCleanup();
+            el._swipeHintCleanup = null;
+        }
+
+        el.classList.remove('has-swipe-hint', 'swipe-hint-dismissed');
+        if (!isMobile) return;
+
+        const canScrollHorizontally = (el.scrollWidth - el.clientWidth) > 28;
+        if (!canScrollHorizontally) return;
+
+        el.classList.add('has-swipe-hint');
+
+        const hint = document.createElement('span');
+        hint.className = 'swipe-more-hint';
+        hint.innerHTML = 'Swipe for more <span class="swipe-hint-arrow">→</span>';
+        el.appendChild(hint);
+
+        const dismiss = () => {
+            el.classList.add('swipe-hint-dismissed');
+            if (hint.isConnected) hint.remove();
+            el.removeEventListener('scroll', onScroll);
+            el.removeEventListener('touchstart', dismiss);
+            el.removeEventListener('pointerdown', dismiss);
+            if (dismissTimer) clearTimeout(dismissTimer);
+        };
+
+        const onScroll = () => {
+            if (el.scrollLeft > 12) dismiss();
+        };
+
+        const dismissTimer = setTimeout(dismiss, 9000);
+
+        el.addEventListener('scroll', onScroll, { passive: true });
+        el.addEventListener('touchstart', dismiss, { once: true, passive: true });
+        el.addEventListener('pointerdown', dismiss, { once: true });
+
+        el._swipeHintCleanup = dismiss;
+    });
 }
 
 
@@ -1133,8 +1369,18 @@ async function populateCMSLeadership() {
 // Global initialization — fire all CMS fetches in parallel
 document.addEventListener('DOMContentLoaded', () => {
     handleIntroScreen();
+    initScrollPolish();
     injectWhatsAppButton();
     setupPencilCursor();
+    initParentTestimonialsMobile();
+    initInfoStickyNav();
+    initMobileSwipeHints();
+
+    window.addEventListener('resize', initParentTestimonialsMobile);
+    window.addEventListener('resize', () => {
+        clearTimeout(swipeHintResizeTimer);
+        swipeHintResizeTimer = setTimeout(initMobileSwipeHints, 180);
+    });
 
     // CMS Data Hydration (all in parallel for speed)
     Promise.all([
@@ -1146,6 +1392,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCMSLeadership(),
     ]).then(() => {
         setupFAQ();
+        initMobileSwipeHints();
     }).catch(err => console.warn('[CMS] Hydration error:', err));
 
     // Modal Close Listeners (Generic for all CMS modals)
@@ -1223,5 +1470,96 @@ function setupFAQ() {
     });
 }
 
-console.log('Jack & Jill School Flagship Core Initialized');
+function initInfoStickyNav() {
+    const nav = document.querySelector('.info-sticky-nav');
+    if (!nav) return;
 
+    const links = Array.from(nav.querySelectorAll('.in-link[href^="#"]'));
+    if (!links.length) return;
+
+    const getSections = () =>
+        links
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+    let sections = getSections();
+
+    const setActive = (id) => {
+        links.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+    };
+
+    const scrollToSection = (target) => {
+        const navHeight = nav.offsetHeight || 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 18;
+        window.scrollTo({ top, behavior: 'smooth' });
+    };
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const hash = link.getAttribute('href');
+            if (!hash || !hash.startsWith('#')) return;
+            const target = document.querySelector(hash);
+            if (!target) return;
+            e.preventDefault();
+            scrollToSection(target);
+            history.replaceState(null, '', hash);
+        });
+    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (visible?.target?.id) setActive(visible.target.id);
+        },
+        {
+            root: null,
+            rootMargin: '-25% 0px -60% 0px',
+            threshold: [0.15, 0.35, 0.6],
+        }
+    );
+
+    sections.forEach(section => observer.observe(section));
+
+    window.addEventListener('resize', () => {
+        sections = getSections();
+    });
+}
+
+function initScrollPolish() {
+    if (document.getElementById('global-scroll-progress')) return;
+
+    const progressBar = document.createElement('div');
+    progressBar.id = 'global-scroll-progress';
+    progressBar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(progressBar);
+
+    let ticking = false;
+
+    const updateScrollState = () => {
+        const scrollTop = window.scrollY || window.pageYOffset || 0;
+        const doc = document.documentElement;
+        const scrollable = Math.max(1, doc.scrollHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, scrollTop / scrollable));
+        progressBar.style.transform = `scaleX(${progress})`;
+
+        document.body.classList.toggle('is-scrolled', scrollTop > 20);
+        document.body.classList.toggle('is-scrolled-deep', scrollTop > 260);
+        ticking = false;
+    };
+
+    const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateScrollState);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateScrollState();
+}
+
+console.log('Jack & Jill School Flagship Core Initialized');
