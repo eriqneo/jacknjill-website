@@ -1076,6 +1076,11 @@ async function populateCMSFaculty() {
             <h4 class="fac-name">${member.fullName}</h4>
             <span class="fac-subject">${member.department || 'Staff'}</span>
             ${member.position ? `<p class="fac-quote">${member.position}</p>` : ''}
+            ${member.biography ? `
+            <div class="fac-bio-overlay">
+                <p>${member.biography}</p>
+            </div>
+            ` : ''}
         `;
         
         facultyTrack.appendChild(card);
@@ -1139,7 +1144,9 @@ document.addEventListener('DOMContentLoaded', () => {
         populateHomepageEvents(),
         populateCMSFaculty(),
         populateCMSLeadership(),
-    ]).catch(err => console.warn('[CMS] Hydration error:', err));
+    ]).then(() => {
+        setupFAQ();
+    }).catch(err => console.warn('[CMS] Hydration error:', err));
 
     // Modal Close Listeners (Generic for all CMS modals)
     document.querySelectorAll('.jj-modal-close').forEach(btn => {
@@ -1163,4 +1170,58 @@ window.addEventListener('load', () => {
     if (typeof animateHero === 'function') animateHero();
 });
 
+
+// --- FAQ Interaction Logic ---
+function setupFAQ() {
+    const questions = document.querySelectorAll('.faq-question');
+    const navLinks = document.querySelectorAll('.faq-nav-link');
+    const sections = document.querySelectorAll('.faq-section');
+
+    if (!questions.length) return;
+
+    // Accordion Toggling
+    questions.forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const parentSection = q.closest('.faq-section');
+            
+            // Close other items in same section
+            parentSection.querySelectorAll('.faq-item').forEach(other => {
+                if (other !== item) other.classList.remove('active');
+            });
+            
+            item.classList.toggle('active');
+        });
+    });
+
+    // Category Switching (Sidebar)
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            
+            // Update nav state
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Show target section
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+                if (sec.id === targetId) {
+                    sec.classList.add('active');
+                    // Reset accordions when switching
+                    sec.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+                }
+            });
+
+            // Mobile: Scroll to content top
+            if (window.innerWidth <= 900) {
+                const contentArea = document.querySelector('.faq-content');
+                contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+}
+
 console.log('Jack & Jill School Flagship Core Initialized');
+

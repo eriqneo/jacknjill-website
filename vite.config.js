@@ -13,7 +13,8 @@ export default defineConfig({
         gallery: resolve(__dirname, 'gallery.html'),
         governance: resolve(__dirname, 'governance.html'),
         information: resolve(__dirname, 'information.html'),
-        partners: resolve(__dirname, 'partners.html')
+        partners: resolve(__dirname, 'partners.html'),
+        faqs: resolve(__dirname, 'faqs.html')
       }
     }
   }

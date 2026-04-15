@@ -138,7 +138,8 @@ export async function fetchStaff(department = null) {
         department,
         photo,
         qualifications,
-        email
+        email,
+        biography
     }`;
     return sanityFetch(groq);
 }
