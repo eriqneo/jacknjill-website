@@ -810,7 +810,6 @@ async function populateHomepageEvents() {
         const day   = d.getDate();
         const month = monthNames[d.getMonth()];
 
-        // Show "All Day" when time is midnight (UTC), otherwise show local time
         const hours   = d.getHours();
         const minutes = d.getMinutes();
         const timeStr = (hours === 0 && minutes === 0)
@@ -818,7 +817,6 @@ async function populateHomepageEvents() {
             : d.toLocaleTimeString('en-KE', { hour: '2-digit', minute: '2-digit' });
 
         const row = document.createElement('div');
-        // Add reveal-active immediately — IntersectionObserver already fired before async resolved
         row.className = 'ue-row reveal reveal-active';
         row.style.transitionDelay = `${i * 0.12}s`;
         row.innerHTML = `
@@ -828,12 +826,73 @@ async function populateHomepageEvents() {
             </div>
             <div class="ue-divider"></div>
             <div class="ue-info">
+                <div class="ue-meta">
+                    <span class="ue-cat">${evt.category?.toUpperCase() || 'EVENT'}</span>
+                    <span class="ue-dot">·</span>
+                    <span class="ue-time">${timeStr}</span>
+                </div>
                 <h3 class="ue-name">${evt.eventName}</h3>
-                <p class="ue-loc">${evt.location || ''}</p>
+                <p class="ue-loc"><i class="fa-solid fa-location-dot"></i> ${evt.location || 'Jack & Jill School'}</p>
             </div>
-            <div class="ue-time">${timeStr}</div>
+            <div class="ue-arrow-wrap"><i class="fa-solid fa-arrow-right-long"></i></div>
         `;
         eventsList.appendChild(row);
+    });
+}
+
+/** Render upcoming events in the Information Centre timeline */
+async function populateInformationEvents() {
+    const timelineEvents = document.getElementById('cms-timeline-events');
+    if (!timelineEvents) return;
+
+    const events = await fetchUpcomingEvents();
+    
+    // Remove loading state
+    const loader = timelineEvents.querySelector('.cms-loading-timeline');
+    if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 300);
+    }
+
+    if (!events.length) {
+        if (!timelineEvents.querySelector('.t-no-events')) {
+            const noEvents = document.createElement('div');
+            noEvents.className = 't-no-events';
+            noEvents.textContent = 'No upcoming events scheduled. Check back soon!';
+            timelineEvents.appendChild(noEvents);
+        }
+        return;
+    }
+
+    // Keep the line
+    const tLine = timelineEvents.querySelector('.t-line') || document.createElement('div');
+    if (!tLine.parentElement) {
+        tLine.className = 't-line';
+        timelineEvents.appendChild(tLine);
+    }
+
+    events.forEach((evt, i) => {
+        const d = new Date(evt.startDate);
+        const dateStr = d.toLocaleDateString('en-KE', { day: 'numeric', month: 'long', year: 'numeric' });
+        
+        const eventEl = document.createElement('div');
+        eventEl.className = 't-event reveal reveal-active';
+        eventEl.style.transitionDelay = `${i * 0.15 + 0.2}s`;
+        
+        eventEl.innerHTML = `
+            <div class="t-dot"></div>
+            <div class="t-date">${dateStr}</div>
+            <div class="t-content">
+                <span class="t-cat-tag">${evt.category || 'School Event'}</span>
+                <h3>${evt.eventName}</h3>
+                <p>${evt.description ? evt.description : 'Join us for this upcoming school activity. All students and guardians are welcome.'}</p>
+                <div class="t-meta">
+                    <span class="t-meta-item"><i class="fa-solid fa-clock"></i> ${d.toLocaleTimeString('en-KE', { hour: '2-digit', minute: '2-digit' })}</span>
+                    <span class="t-meta-item"><i class="fa-solid fa-location-dot"></i> ${evt.location || 'School Grounds'}</span>
+                </div>
+            </div>
+        `;
+        timelineEvents.appendChild(eventEl);
     });
 }
 
@@ -1388,6 +1447,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCMSNews(),
         populateCMSTestimonials(),
         populateHomepageEvents(),
+        populateInformationEvents(),
         populateCMSFaculty(),
         populateCMSLeadership(),
     ]).then(() => {
