@@ -6389,41 +6389,44 @@ a.ci-val:hover {
   }
 
   .hero-header {
-    font-size: 54px !important;
+    font-size: clamp(34px, 10vw, 42px) !important; /* Scaled down for mobile breathability */
     font-weight: 900 !important;
-    line-height: 0.85 !important;
-    margin-bottom: 2rem !important;
+    line-height: 0.9 !important;
+    margin-bottom: 1.5rem !important;
     text-transform: uppercase;
     letter-spacing: -0.04em;
     padding: 0 24px;
+    margin-top: -10px;
   }
 
   .hero-header .hero-italic {
-    font-size: 48px !important;
+    font-size: clamp(28px, 8vw, 36px) !important; /* Proportional reduction */
     display: block;
-    margin-top: 10px;
+    margin-top: 6px;
     letter-spacing: 0;
     color: var(--jj-gold);
     font-style: italic;
-    text-transform: none; /* Keep fluid for italic contrast */
+    text-transform: none;
   }
 
   .hero-eyebrow {
-    font-size: 13px !important;
+    font-size: 11px !important;
     font-weight: 800;
     letter-spacing: 0.4em !important;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
     color: var(--jj-white);
-    opacity: 0.7;
+    opacity: 0.8;
     padding: 0 24px;
   }
 
+
   /* 5. Signature Carousels — Optimized Square Layout */
   .signature-carousel-container {
-    bottom: -20px !important;
-    height: 400px !important;
+    bottom: -80px !important; /* Lowered further to allow cinematic text to breathe */
+    height: 380px !important;
     padding: 0 !important;
     z-index: 10;
+
     overflow-x: auto !important; /* Manual swipe only on mobile */
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -10078,16 +10081,17 @@ a.ci-val:hover {
   .home-page .hero-full {
     min-height: 100svh;
     align-items: center;
-    padding-top: 126px;
-    padding-bottom: 192px;
+    padding-top: 114px;
+    padding-bottom: 176px;
   }
 
   .home-page .hero-content-left {
     max-width: 100%;
-    width: min(100%, 680px);
-    padding: 16px 14px;
-    border-radius: 16px;
-    margin-bottom: 20px;
+    width: min(100%, 600px);
+    padding: 12px 11px;
+    border-radius: 14px;
+    margin-top: 8px;
+    margin-bottom: 14px;
     background: linear-gradient(
       180deg,
       rgba(8, 16, 26, 0.45),
@@ -10098,15 +10102,20 @@ a.ci-val:hover {
   }
 
   .home-page .hero-eyebrow {
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.16em;
+    font-size: clamp(8px, 1.7vw, 10px);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.11em;
   }
 
   .home-page .hero-header {
-    font-size: clamp(2rem, 10vw, 3.45rem);
-    line-height: 1.02;
-    margin-bottom: 0.5rem;
+    font-size: clamp(1.42rem, 6.9vw, 2.25rem);
+    line-height: 0.9;
+    margin-bottom: 0.12rem;
     text-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .home-page .hero-header .h1-line {
+    letter-spacing: 0.01em;
   }
 
   .home-page .hero-scroll-indicator {
@@ -10319,15 +10328,33 @@ a.ci-val:hover {
 
 @media (max-width: 560px) {
   .home-page .hero-full {
-    padding-top: 118px;
-    padding-bottom: 172px;
+    padding-top: 130px !important;
+    padding-bottom: 150px !important;
   }
 
   .home-page .hero-content-left {
-    padding: 12px 10px;
-    border-radius: 12px;
-    margin-bottom: 14px;
+    padding: 20px 16px !important;
+    border-radius: 16px;
+    margin-bottom: 20px !important;
+    max-width: 92% !important;
+    margin-left: auto;
+    margin-right: auto;
   }
+
+  .home-page .hero-eyebrow {
+    font-size: 10px !important;
+    letter-spacing: 0.18em !important;
+    margin-bottom: 0.7rem !important;
+    opacity: 0.8;
+  }
+
+  .home-page .hero-header {
+    font-size: 1.28rem !important;
+    line-height: 0.88 !important;
+    margin-bottom: 0.06rem !important;
+  }
+
+
 
   .home-page .hero-scroll-indicator {
     display: none;
