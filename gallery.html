@@ -28,10 +28,9 @@
             </div>
             <div class="contact-right-group">
                 <div class="mini-socials">
-                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://web.facebook.com/JackNJillSchool?rdid=2og0eskLoeO7ER7n&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1FgztuhNVF%2F%3F_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jnjschool026?igsh=MTQweXZyZW5xbnN4Yw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/@jacknjillsch?si=3JvGNAkwGQ8OGFNz" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -48,11 +47,13 @@
             </div>
         </a>
         <div class="fl-divider"></div>
-        <div class="floating-ctas">
-            <a class="btn-apply" href="./academics#online">
+                <div class="floating-ctas">
+            <a class="btn-apply" href="/academics">
                 <span class="diamond"></span>
                 APPLY NOW
             </a>
+            <button class="btn-tour" id="virtual-tour-btn"><span class="pulse-dot"></span> VIRTUAL TOUR</button>
+            <a class="btn-tour" href="./assets/yearbook-2025.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><i class="fa-solid fa-book" style="margin-right:6px; font-size:12px;"></i> YEARBOOK 2025</a>
         </div>
     </div>
 
@@ -70,52 +71,77 @@
     <!-- Explosive Institutional Menu Overlay -->
     <div id="institutional-overlay" class="institutional-mega-menu">
         <div class="overlay-inner-nav">
-        <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span></div>
+            <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span></div>
             <div class="overlay-top-bar">
-            <div class="overlay-top-header">
-                <a href="/" class="school-label-top" style="text-decoration: none; color: inherit;">Jack & Jill School</a>
-                <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                <div class="overlay-top-header">
+                    <a href="/" class="school-label-top" style="text-decoration: none; color: inherit;">HOME</a>
+                    <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                </div>
+                <div class="quick-links-row">
+                    <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
+                    <a href="/information#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
+                    <a href="/#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
+                    <a href="/gallery" class="ql-item">GALLERY</a><span class="v-sep">|</span>
+                    <a href="#" id="search-trigger" class="ql-item search-ql">
+                        <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        SEARCH
+                    </a>
+                </div>
             </div>
-                                <div class="quick-links-row">
-                <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
-                <a href="/information#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
-                <a href="/#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
-                <a href="/gallery" class="ql-item">GALLERY</a><span class="v-sep">|</span>
-                <a href="#" id="search-trigger" class="ql-item search-ql">
-                    <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    SEARCH
-                </a>
+            <div id="search-panel" class="search-panel">
+                <div class="search-panel-inner">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..." autocomplete="off">
+                    <button id="search-close" class="search-close" aria-label="Close search">✕</button>
+                </div>
+                <div class="search-suggestions">
+                    <a href="/academics#apply" class="sq-pill">Admissions</a>
+                    <a href="/about-us#values" class="sq-pill">Core Values</a>
+                    <a href="/information#events" class="sq-pill">School Calendar</a>
+                    <a href="/governance#teachers" class="sq-pill">Staff Directory</a>
+                    <a href="/gallery" class="sq-pill">Student Gallery</a>
+                </div>
             </div>
-        </div>
-
-        <!-- Premium Global Search UI -->
-        <div id="search-panel" class="search-panel">
-            <div class="search-panel-inner">
-                <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..." autocomplete="off">
-                <button id="search-close" class="search-close" aria-label="Close search">✕</button>
-            </div>
-            <div class="search-suggestions">
-                <a href="/academics#apply" class="sq-pill">Admissions</a>
-                <a href="/about-us#values" class="sq-pill">Core Values</a>
-                <a href="/information#events" class="sq-pill">School Calendar</a>
-                <a href="/governance#teachers" class="sq-pill">Staff Directory</a>
-                <a href="/academics#fees" class="sq-pill">Fee Structure</a>
-                <a href="/gallery" class="sq-pill">Student Gallery</a>
-            </div>
-        </div>
             <div class="main-overlay-columns">
                 <nav class="mega-main-nav">
                     <ul class="mega-link-list">
-                        <li class="mega-item" data-menu="about"><a href="/about-us">ABOUT</a></li>
-                        <li class="mega-item" data-menu="governance"><a href="/governance">GOVERNANCE</a></li>
-                        <li class="mega-item"><a href="/partners">OUR PARTNERS</a></li>
-                        <li class="mega-item"><a href="/alumni">THE ALUMNI</a></li>
-                        <li class="mega-item" data-menu="academics"><a href="/academics">ACADEMICS</a></li>
-                        <li class="mega-item" data-menu="info"><a href="/information">INFORMATION CENTRE</a></li>
-                        <li class="mega-item"><a href="/contact">CONTACT</a></li>
-                        <li class="mega-item"><a href="/gallery">GALLERY</a></li>
+                        <li class="mega-item" data-menu="about"><a href="/about-us" class="nav-main-link">ABOUT</a></li>
+                        <li class="mega-item" data-menu="governance"><a href="/governance" class="nav-main-link">GOVERNANCE</a></li>
+                        <li class="mega-item"><a href="/partners" class="nav-main-link">OUR PARTNERS</a></li>
+                        <li class="mega-item"><a href="/alumni" class="nav-main-link">THE ALUMNI</a></li>
+                        <li class="mega-item" data-menu="academics"><a href="/academics" class="nav-main-link">ACADEMICS</a></li>
+                        <li class="mega-item" data-menu="info"><a href="/information" class="nav-main-link">INFORMATION CENTRE</a></li>
+                        <li class="mega-item"><a href="/contact" class="nav-main-link">CONTACT</a></li>
+                        <li class="mega-item"><a href="/gallery" class="nav-main-link">GALLERY</a></li>
                     </ul>
                 </nav>
+                <div class="mega-submenu-panel">
+                    <div id="submenu-dynamic-content" class="submenu-inner">
+                        <div class="submenu-placeholder">Hover over a category to explore...</div>
+                        <div id="submenu-about" class="sub-list" style="display:none;">
+                            <a href="/about-us#about-us">About Us <span class="sub-arrow">→</span></a>
+                            <a href="/about-us#history">Our History <span class="sub-arrow">→</span></a>
+                            <a href="/about-us#vision">Vision, Mission &amp; Motto <span class="sub-arrow">→</span></a>
+                            <a href="/about-us#values">Core Values <span class="sub-arrow">→</span></a>
+                        </div>
+                        <div id="submenu-governance" class="sub-list" style="display:none;">
+                            <a href="/governance#director">Director <span class="sub-arrow">→</span></a>
+                            <a href="/governance#head-teacher">Head Teacher <span class="sub-arrow">→</span></a>
+                            <a href="/governance#deputy">Deputy Head Teacher <span class="sub-arrow">→</span></a>
+                            <a href="/governance#teachers">Our Teachers <span class="sub-arrow">→</span></a>
+                        </div>
+                        <div id="submenu-academics" class="sub-list" style="display:none;">
+                            <a href="/academics#apply">Apply for Admission <span class="sub-arrow">→</span></a>
+                            <a href="/academics#jobs">Jobs <span class="sub-arrow">→</span></a>
+                        </div>
+                        <div id="submenu-info" class="sub-list" style="display:none;">
+                            <a href="/information#transport">Transport Services <span class="sub-arrow">→</span></a>
+                            <a href="/information#boarding">Boarding Facilities <span class="sub-arrow">→</span></a>
+                            <a href="/information#activities">Beyond Curriculum <span class="sub-arrow">→</span></a>
+                            <a href="/information#catering">Catering <span class="sub-arrow">→</span></a>
+                            <a href="/information#events">Events <span class="sub-arrow">→</span></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -150,7 +176,7 @@
             <button class="filter-btn" data-filter="events">Events</button>
             <button class="filter-btn" data-filter="school">School</button>
             <button class="filter-btn" data-filter="tour">Tour</button>
-            <a href="./assets/JacknJill Year_Book 2025.pdf" class="btn-yearbook-download" download>
+            <a href="./assets/yearbook-2025.pdf" class="btn-yearbook-download" download>
                 <i class="fa-solid fa-file-pdf"></i> Year Book 2025
             </a>
         </div>
@@ -302,10 +328,9 @@
                 <a href="/" style="text-decoration: none; color: inherit;"><h3 class="footer-school-name">Jack & Jill School</h3></a>
                 <p class="footer-tagline">Excellence. Character. Community.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a> -->
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a> -->
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a> -->
+                    <a href="https://web.facebook.com/JackNJillSchool?rdid=2og0eskLoeO7ER7n&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1FgztuhNVF%2F%3F_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jnjschool026?igsh=MTQweXZyZW5xbnN4Yw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/@jacknjillsch?si=3JvGNAkwGQ8OGFNz" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
             <div class="footer-col">
@@ -313,7 +338,7 @@
                 <ul class="footer-links">
                     <li><a href="academics.html#apply"><span class="arrow-slide">→</span> How to Apply</a></li>
                     <li><a href="academics.html#fees"><span class="arrow-slide">→</span> Fees & Scholarships</a></li>
-                    <li><a href="./assets/JacknJill Year_Book 2025.pdf" download><span class="arrow-slide">→</span> Year Book 2025</a></li>
+                    <li><a href="./assets/yearbook-2025.pdf" download><span class="arrow-slide">→</span> Year Book 2025</a></li>
                     <li><a href="faqs.html"><span class="arrow-slide">→</span> FAQs</a></li>
                 </ul>
             </div>
@@ -327,7 +352,6 @@
             </div>
             <div class="footer-col cta-col">
                 <h4 class="footer-heading">Join Our Legacy</h4>
-                <a href="./academics#online" class="footer-apply-btn">Apply Now</a>
             </div>
         </div>
                 <div class="footer-bottom-bar">

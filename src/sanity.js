@@ -75,7 +75,8 @@ export async function fetchNews() {
  * Fetch upcoming events (from today onward), sorted soonest first.
  */
 export async function fetchUpcomingEvents() {
-    const today = new Date().toISOString();
+    // Extract just the YYYY-MM-DD part so events today still show.
+    const today = new Date().toISOString().split('T')[0];
     const groq = `*[_type == "event" && startDate >= "${today}"] | order(startDate asc)[0...6] {
         _id,
         eventName,

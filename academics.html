@@ -29,10 +29,9 @@
             
             <div class="contact-right-group">
                 <div class="mini-socials">
-                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://web.facebook.com/JackNJillSchool?rdid=2og0eskLoeO7ER7n&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1FgztuhNVF%2F%3F_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jnjschool026?igsh=MTQweXZyZW5xbnN4Yw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/@jacknjillsch?si=3JvGNAkwGQ8OGFNz" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -49,11 +48,13 @@
             </div>
         </a>
         <div class="fl-divider"></div>
-        <div class="floating-ctas">
-            <a class="btn-apply" href="./academics#online">
+                <div class="floating-ctas">
+            <a class="btn-apply" href="/academics">
                 <span class="diamond"></span>
                 APPLY NOW
             </a>
+            <button class="btn-tour" id="virtual-tour-btn"><span class="pulse-dot"></span> VIRTUAL TOUR</button>
+            <a class="btn-tour" href="./assets/yearbook-2025.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><i class="fa-solid fa-book" style="margin-right:6px; font-size:12px;"></i> YEARBOOK 2025</a>
         </div>
     </div>
 
@@ -71,60 +72,53 @@
     <!-- Explosive Institutional Menu Overlay -->
     <div id="institutional-overlay" class="institutional-mega-menu">
         <div class="overlay-inner-nav">
-        <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span></div>
+            <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span></div>
             <div class="overlay-top-bar">
-            <div class="overlay-top-header">
-                <a href="/" class="school-label-top" style="text-decoration: none; color: inherit;">Jack & Jill School</a>
-                <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                <div class="overlay-top-header">
+                    <a href="/" class="school-label-top" style="text-decoration: none; color: inherit;">HOME</a>
+                    <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                </div>
+                <div class="quick-links-row">
+                    <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
+                    <a href="/information#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
+                    <a href="/#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
+                    <a href="/gallery" class="ql-item">GALLERY</a><span class="v-sep">|</span>
+                    <a href="#" id="search-trigger" class="ql-item search-ql">
+                        <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        SEARCH
+                    </a>
+                </div>
             </div>
-
-                                <div class="quick-links-row">
-                <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
-                <a href="/information#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
-                <a href="/#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
-                <a href="/gallery" class="ql-item">GALLERY</a><span class="v-sep">|</span>
-                <a href="#" id="search-trigger" class="ql-item search-ql">
-                    <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    SEARCH
-                </a>
+            <div id="search-panel" class="search-panel">
+                <div class="search-panel-inner">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..." autocomplete="off">
+                    <button id="search-close" class="search-close" aria-label="Close search">✕</button>
+                </div>
+                <div class="search-suggestions">
+                    <a href="/academics#apply" class="sq-pill">Admissions</a>
+                    <a href="/about-us#values" class="sq-pill">Core Values</a>
+                    <a href="/information#events" class="sq-pill">School Calendar</a>
+                    <a href="/governance#teachers" class="sq-pill">Staff Directory</a>
+                    <a href="/gallery" class="sq-pill">Student Gallery</a>
+                </div>
             </div>
-        </div>
-
-        <!-- Premium Global Search UI -->
-        <div id="search-panel" class="search-panel">
-            <div class="search-panel-inner">
-                <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..." autocomplete="off">
-                <button id="search-close" class="search-close" aria-label="Close search">✕</button>
-            </div>
-            <div class="search-suggestions">
-                <a href="/academics#apply" class="sq-pill">Admissions</a>
-                <a href="/about-us#values" class="sq-pill">Core Values</a>
-                <a href="/information#events" class="sq-pill">School Calendar</a>
-                <a href="/governance#teachers" class="sq-pill">Staff Directory</a>
-                <a href="/academics#fees" class="sq-pill">Fee Structure</a>
-                <a href="/gallery" class="sq-pill">Student Gallery</a>
-            </div>
-        </div>
-
             <div class="main-overlay-columns">
                 <nav class="mega-main-nav">
                     <ul class="mega-link-list">
-                        <li class="mega-item" data-menu="about"><a href="/about-us">ABOUT</a></li>
-                        <li class="mega-item" data-menu="governance"><a href="/governance">GOVERNANCE</a></li>
-                        <li class="mega-item"><a href="/partners">OUR PARTNERS</a></li>
-                        <li class="mega-item"><a href="/alumni">THE ALUMNI</a></li>
-                        <li class="mega-item" data-menu="academics"><a href="/academics">ACADEMICS</a></li>
-                        <li class="mega-item" data-menu="info"><a href="/information">INFORMATION CENTRE</a></li>
-                        <li class="mega-item"><a href="/contact">CONTACT</a></li>
-                        <li class="mega-item"><a href="/gallery">GALLERY</a></li>
+                        <li class="mega-item" data-menu="about"><a href="/about-us" class="nav-main-link">ABOUT</a></li>
+                        <li class="mega-item" data-menu="governance"><a href="/governance" class="nav-main-link">GOVERNANCE</a></li>
+                        <li class="mega-item"><a href="/partners" class="nav-main-link">OUR PARTNERS</a></li>
+                        <li class="mega-item"><a href="/alumni" class="nav-main-link">THE ALUMNI</a></li>
+                        <li class="mega-item" data-menu="academics"><a href="/academics" class="nav-main-link">ACADEMICS</a></li>
+                        <li class="mega-item" data-menu="info"><a href="/information" class="nav-main-link">INFORMATION CENTRE</a></li>
+                        <li class="mega-item"><a href="/contact" class="nav-main-link">CONTACT</a></li>
+                        <li class="mega-item"><a href="/gallery" class="nav-main-link">GALLERY</a></li>
                     </ul>
                 </nav>
-
                 <div class="mega-submenu-panel">
                     <div id="submenu-dynamic-content" class="submenu-inner">
                         <div class="submenu-placeholder">Hover over a category to explore...</div>
-                        
-                                                <div id="submenu-about" class="sub-list" style="display:none;">
+                        <div id="submenu-about" class="sub-list" style="display:none;">
                             <a href="/about-us#about-us">About Us <span class="sub-arrow">→</span></a>
                             <a href="/about-us#history">Our History <span class="sub-arrow">→</span></a>
                             <a href="/about-us#vision">Vision, Mission &amp; Motto <span class="sub-arrow">→</span></a>
@@ -138,20 +132,20 @@
                         </div>
                         <div id="submenu-academics" class="sub-list" style="display:none;">
                             <a href="/academics#apply">Apply for Admission <span class="sub-arrow">→</span></a>
-                            <a href="/academics#online">Online Application <span class="sub-arrow">→</span></a>
-                            <a href="/academics#fees">How To Pay <span class="sub-arrow">→</span></a>
                             <a href="/academics#jobs">Jobs <span class="sub-arrow">→</span></a>
                         </div>
                         <div id="submenu-info" class="sub-list" style="display:none;">
                             <a href="/information#transport">Transport Services <span class="sub-arrow">→</span></a>
                             <a href="/information#boarding">Boarding Facilities <span class="sub-arrow">→</span></a>
                             <a href="/information#activities">Beyond Curriculum <span class="sub-arrow">→</span></a>
+                            <a href="/information#catering">Catering <span class="sub-arrow">→</span></a>
                             <a href="/information#events">Events <span class="sub-arrow">→</span></a>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
         </div>
     </div>
 
@@ -159,7 +153,7 @@
     <header class="inner-hero">
         <!-- Full-bleed photo -->
         <img class="inner-hero-photo"
-             src="./assets/Academics.png"
+             src="./assets/academics.png"
              alt="Academics at Jack &amp; Jill School">
 
         <!-- Warm editorial tint overlay -->
@@ -182,8 +176,6 @@
         <div class="container tab-container">
             <div class="tab-list">
                 <button class="tab-btn active" data-tab="apply">Apply for Admission</button>
-                <button class="tab-btn" data-tab="online">Online Application</button>
-                <button class="tab-btn" data-tab="fees">How To Pay</button>
                 <button class="tab-btn" data-tab="jobs">Jobs</button>
             </div>
         </div>
@@ -200,33 +192,50 @@
                         <h2 class="academic-h2">Begin Your Journey at Jack & Jill</h2>
                         <p class="academic-intro">Our admissions process is designed to identify students who will thrive in our environment of academic rigor and character-based leadership.</p>
                         
-                        <div class="process-steps">
-                            <div class="process-item">
-                                <div class="step-icon">1</div>
-                                <div class="step-content">
-                                    <h3 class="step-title">Download Form</h3>
-                                    <p class="step-desc">Pick up an application packet from our main office or download it below.</p>
+                        <div class="apply-inquiry-box reveal">
+                            <form id="quick-inquiry-form" class="inquiry-form">
+                                <div class="form-group-inquiry">
+                                    <label>Your Name</label>
+                                    <input type="text" name="parent_name" placeholder="Enter your full name" required>
                                 </div>
-                            </div>
-                            <div class="process-item">
-                                <div class="step-icon">2</div>
-                                <div class="step-content">
-                                    <h3 class="step-title">Submit Documents</h3>
-                                    <p class="step-desc">Provide birth certificate, previous school records, and recent report cards.</p>
+                                <div class="form-group-inquiry">
+                                    <label>Which grade are you looking to enroll your child in?</label>
+                                    <select name="target_grade" required>
+                                        <option value="" disabled selected>Select Grade</option>
+                                        <option value="PP1">Pre-Primary 1 (PP1)</option>
+                                        <option value="PP2">Pre-Primary 2 (PP2)</option>
+                                        <option value="Grade 1">Grade 1</option>
+                                        <option value="Grade 2">Grade 2</option>
+                                        <option value="Grade 3">Grade 3</option>
+                                        <option value="Grade 4">Grade 4</option>
+                                        <option value="Grade 5">Grade 5</option>
+                                        <option value="Grade 6">Grade 6</option>
+                                        <option value="Grade 7">Grade 7 (Junior Secondary)</option>
+                                        <option value="Grade 8">Grade 8 (Junior Secondary)</option>
+                                        <option value="Grade 9">Grade 9 (Junior Secondary)</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="process-item">
-                                <div class="step-icon">3</div>
-                                <div class="step-content">
-                                    <h3 class="step-title">Interview & Assessment</h3>
-                                    <p class="step-desc">Students undergo a personal interview and academic placement interview.</p>
+                                <div class="form-group-inquiry">
+                                    <label>Your Contacts</label>
+                                    <input type="text" name="parent_contact" placeholder="Phone number or Email" required>
                                 </div>
-                            </div>
+                                <button type="submit" class="inquiry-submit-btn">Proceed to Application Form <i class="fa-solid fa-arrow-right"></i></button>
+                            </form>
                         </div>
 
-                        <a href="assets/Application%20Form%20.pdf" download="Jack and Jill Admission Form.pdf" class="download-form-btn" target="_blank">
-                            <i class="fa-solid fa-file-pdf"></i> Download Admission Form
-                        </a>
+                        <!-- REVEALED DOWNLOAD SECTION -->
+                        <div id="download-reveal-area" class="download-reveal-area" style="display: none;">
+                            <div class="reveal-notification">
+                                <div class="rn-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="rn-text">
+                                    <h4>Thank you for your interest!</h4>
+                                    <p>You can now download the official admission form below. Please fill it out and bring it to our main office.</p>
+                                </div>
+                            </div>
+                            <a href="assets/application-form.pdf" download="Jack and Jill Admission Form.pdf" class="download-form-btn premium-download" target="_blank">
+                                <i class="fa-solid fa-file-pdf"></i> Download Admission Form
+                            </a>
+                        </div>
                     </div>
                     
                     <aside class="academic-sidebar">
@@ -242,138 +251,7 @@
                 </div>
             </section>
 
-            <!-- Tab Panel: Online Application -->
-            <section id="online" class="tab-panel">
-                <div class="multi-step-form-container">
-                    <div class="form-progress">
-                        <div class="progress-bar-fill" style="width: 20%;"></div>
-                        <div class="progress-steps-list">
-                            <span class="p-step active" data-step="1">1</span>
-                            <span class="p-step" data-step="2">2</span>
-                            <span class="p-step" data-step="3">3</span>
-                            <span class="p-step" data-step="4">4</span>
-                        </div>
-                    </div>
 
-                    <form id="online-application-form" class="application-form">
-                        <!-- Step 1: Student Details -->
-                        <div class="form-step active" data-step="1">
-                            <h3 class="form-h3">Student Details</h3>
-                            <div class="form-row">
-                                <input type="text" placeholder="Full Name" required>
-                                <input type="date" placeholder="Date of Birth" required>
-                            </div>
-                            <div class="form-row">
-                                <select required>
-                                    <option value="" disabled selected>Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                                <input type="text" placeholder="Nationality" required>
-                            </div>
-                            <button type="button" class="form-next-btn">Next Step →</button>
-                        </div>
-
-                        <!-- Step 2: Parent Details -->
-                        <div class="form-step" data-step="2">
-                            <h3 class="form-h3">Parent/Guardian Details</h3>
-                            <div class="form-row">
-                                <input type="text" placeholder="Primary Guardian Name" required>
-                                <input type="tel" placeholder="Phone Number" required>
-                            </div>
-                            <div class="form-row">
-                                <input type="email" placeholder="Email Address" required>
-                            </div>
-                            <div class="form-btns">
-                                <button type="button" class="form-prev-btn">← Back</button>
-                                <button type="button" class="form-next-btn">Next Step →</button>
-                            </div>
-                        </div>
-
-                        <!-- Step 3: Academic Records -->
-                        <div class="form-step" data-step="3">
-                            <h3 class="form-h3">Academic Records</h3>
-                            <div class="form-row">
-                                <input type="text" placeholder="Previous School" required>
-                                <input type="text" placeholder="Current Grade/Level" required>
-                            </div>
-                            <div class="form-btns">
-                                <button type="button" class="form-prev-btn">← Back</button>
-                                <button type="button" class="form-next-btn">Next Step →</button>
-                            </div>
-                        </div>
-
-                        <!-- Step 4: Review & Submit -->
-                        <div class="form-step" data-step="4">
-                            <h3 class="form-h3">Review & Submit</h3>
-                            <p class="form-p">Please ensure all details are accurate before submitting.</p>
-                            <label class="checkbox-label">
-                                <input type="checkbox" required> I confirm that the information provided is true to the best of my knowledge.
-                            </label>
-                            <div class="form-btns">
-                                <button type="button" class="form-prev-btn">← Back</button>
-                                <button type="submit" class="form-submit-btn">Submit Application</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Tab Panel: How To Pay -->
-            <section id="fees" class="tab-panel">
-                <div class="payment-container">
-                    <h2 class="academic-h2 text-center">Fee Structure & Payments</h2>
-                    
-                    <table class="fee-table">
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Tuition (Per Term)</th>
-                                <th>Activity Fee</th>
-                                <th>Transport (Est.)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-label="Category">Early Years</td>
-                                <td data-label="Tuition (Per Term)">KES 45,000</td>
-                                <td data-label="Activity Fee">KES 5,000</td>
-                                <td data-label="Transport (Est.)">KES 12,000</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Category">Primary</td>
-                                <td data-label="Tuition (Per Term)">KES 65,000</td>
-                                <td data-label="Activity Fee">KES 7,500</td>
-                                <td data-label="Transport (Est.)">KES 15,000</td>
-                            </tr>
-                            <tr>
-                                <td data-label="Category">Junior Secondary</td>
-                                <td data-label="Tuition (Per Term)">KES 85,000</td>
-                                <td data-label="Activity Fee">KES 10,000</td>
-                                <td data-label="Transport (Est.)">KES 18,000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="payment-methods">
-                        <div class="method-card">
-                            <i class="fa-solid fa-mobile-screen-button"></i>
-                            <h3>M-Pesa</h3>
-                            <p>Paybill: 123456<br>Account: Student Name</p>
-                        </div>
-                        <div class="method-card">
-                            <i class="fa-solid fa-building-columns"></i>
-                            <h3>Bank Transfer</h3>
-                            <p>Bank: Standard Chartered<br>Acc: 987654321</p>
-                        </div>
-                        <div class="method-card">
-                            <i class="fa-solid fa-money-bill-transfer"></i>
-                            <h3>Cash Payment</h3>
-                            <p>Accepted only at our<br>accounts office per term.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <!-- Tab Panel: Jobs -->
             <section id="jobs" class="tab-panel">
@@ -401,10 +279,9 @@
                 <a href="/" style="text-decoration: none; color: inherit;"><h3 class="footer-school-name">Jack & Jill School</h3></a>
                 <p class="footer-tagline">Excellence. Character. Community.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a> -->
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a> -->
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a> -->
+                    <a href="https://web.facebook.com/JackNJillSchool?rdid=2og0eskLoeO7ER7n&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1FgztuhNVF%2F%3F_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jnjschool026?igsh=MTQweXZyZW5xbnN4Yw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/@jacknjillsch?si=3JvGNAkwGQ8OGFNz" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
             <div class="footer-col">
@@ -412,7 +289,7 @@
                 <ul class="footer-links">
                     <li><a href="about-us.html"><span class="arrow-slide">→</span> Our Heritage</a></li>
                     <li><a href="academics.html#apply"><span class="arrow-slide">→</span> Admission Portal</a></li>
-                    <li><a href="./assets/JacknJill Year_Book 2025.pdf" download><span class="arrow-slide">→</span> Year Book 2025</a></li>
+                    <li><a href="./assets/yearbook-2025.pdf" download><span class="arrow-slide">→</span> Year Book 2025</a></li>
                     <li><a href="gallery.html"><span class="arrow-slide">→</span> Student Gallery</a></li>
                     <li><a href="faqs.html"><span class="arrow-slide">→</span> FAQs</a></li>
                 </ul>
@@ -427,7 +304,6 @@
             </div>
             <div class="footer-col cta-col">
                 <h4 class="footer-heading">Join Our Legacy</h4>
-                <a href="./academics#online" class="footer-apply-btn">Apply Now</a>
             </div>
         </div>
                 <div class="footer-bottom-bar">

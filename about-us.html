@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Jack & Jill School</title>
-    <meta name="description" content="Official website of Jack & Jill School, Kitale. Excellence, Character, and Community.">
+    <meta name="description"
+        content="Official website of Jack & Jill School, Kitale. Excellence, Character, and Community.">
     <link rel="stylesheet" href="./style.css">
     <!-- Font Awesome for prestigious icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="inner-page about-page">
     <!-- Precision Institutional Contact Bar -->
     <div class="slim-contact-bar">
@@ -26,13 +29,12 @@
                     <span class="hover-line"></span>
                 </a>
             </div>
-            
+
             <div class="contact-right-group">
                 <div class="mini-socials">
-                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://web.facebook.com/JackNJillSchool?rdid=2og0eskLoeO7ER7n&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1FgztuhNVF%2F%3F_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jnjschool026?igsh=MTQweXZyZW5xbnN4Yw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/@jacknjillsch?si=3JvGNAkwGQ8OGFNz" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
         </div>
@@ -49,11 +51,13 @@
             </div>
         </a>
         <div class="fl-divider"></div>
-        <div class="floating-ctas">
-            <a class="btn-apply" href="./academics#online">
+                <div class="floating-ctas">
+            <a class="btn-apply" href="/academics">
                 <span class="diamond"></span>
                 APPLY NOW
             </a>
+            <button class="btn-tour" id="virtual-tour-btn"><span class="pulse-dot"></span> VIRTUAL TOUR</button>
+            <a class="btn-tour" href="./assets/yearbook-2025.pdf" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><i class="fa-solid fa-book" style="margin-right:6px; font-size:12px;"></i> YEARBOOK 2025</a>
         </div>
     </div>
 
@@ -71,60 +75,53 @@
     <!-- Explosive Institutional Menu Overlay -->
     <div id="institutional-overlay" class="institutional-mega-menu">
         <div class="overlay-inner-nav">
-        <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span></div>
+            <div class="overlay-scroll-hint" id="overlay-scroll-hint"><span class="overlay-scroll-arrow">&#8595;</span></div>
             <div class="overlay-top-bar">
-            <div class="overlay-top-header">
-                <a href="/" class="school-label-top" style="text-decoration: none; color: inherit;">Jack & Jill School</a>
-                <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                <div class="overlay-top-header">
+                    <a href="/" class="school-label-top" style="text-decoration: none; color: inherit;">HOME</a>
+                    <button id="overlay-close-btn" class="circle-close-anchor">✕</button>
+                </div>
+                <div class="quick-links-row">
+                    <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
+                    <a href="/information#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
+                    <a href="/#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
+                    <a href="/gallery" class="ql-item">GALLERY</a><span class="v-sep">|</span>
+                    <a href="#" id="search-trigger" class="ql-item search-ql">
+                        <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        SEARCH
+                    </a>
+                </div>
             </div>
-
-                                <div class="quick-links-row">
-                <a href="#" class="ql-item">PORTAL</a><span class="v-sep">|</span>
-                <a href="/information#events" class="ql-item">CALENDAR</a><span class="v-sep">|</span>
-                <a href="/#news" class="ql-item">NEWS</a><span class="v-sep">|</span>
-                <a href="/gallery" class="ql-item">GALLERY</a><span class="v-sep">|</span>
-                <a href="#" id="search-trigger" class="ql-item search-ql">
-                    <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    SEARCH
-                </a>
+            <div id="search-panel" class="search-panel">
+                <div class="search-panel-inner">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..." autocomplete="off">
+                    <button id="search-close" class="search-close" aria-label="Close search">✕</button>
+                </div>
+                <div class="search-suggestions">
+                    <a href="/academics#apply" class="sq-pill">Admissions</a>
+                    <a href="/about-us#values" class="sq-pill">Core Values</a>
+                    <a href="/information#events" class="sq-pill">School Calendar</a>
+                    <a href="/governance#teachers" class="sq-pill">Staff Directory</a>
+                    <a href="/gallery" class="sq-pill">Student Gallery</a>
+                </div>
             </div>
-        </div>
-
-        <!-- Premium Global Search UI -->
-        <div id="search-panel" class="search-panel">
-            <div class="search-panel-inner">
-                <input type="text" id="search-input" class="search-input" placeholder="Search Jack &amp; Jill..." autocomplete="off">
-                <button id="search-close" class="search-close" aria-label="Close search">✕</button>
-            </div>
-            <div class="search-suggestions">
-                <a href="/academics#apply" class="sq-pill">Admissions</a>
-                <a href="/about-us#values" class="sq-pill">Core Values</a>
-                <a href="/information#events" class="sq-pill">School Calendar</a>
-                <a href="/governance#teachers" class="sq-pill">Staff Directory</a>
-                <a href="/academics#fees" class="sq-pill">Fee Structure</a>
-                <a href="/gallery" class="sq-pill">Student Gallery</a>
-            </div>
-        </div>
-
             <div class="main-overlay-columns">
                 <nav class="mega-main-nav">
                     <ul class="mega-link-list">
-                        <li class="mega-item" data-menu="about"><a href="/about-us">ABOUT</a></li>
-                        <li class="mega-item" data-menu="governance"><a href="/governance">GOVERNANCE</a></li>
-                        <li class="mega-item"><a href="/partners">OUR PARTNERS</a></li>
-                        <li class="mega-item"><a href="/alumni">THE ALUMNI</a></li>
-                        <li class="mega-item" data-menu="academics"><a href="/academics">ACADEMICS</a></li>
-                        <li class="mega-item" data-menu="info"><a href="/information">INFORMATION CENTRE</a></li>
-                        <li class="mega-item"><a href="/contact">CONTACT</a></li>
-                        <li class="mega-item"><a href="/gallery">GALLERY</a></li>
+                        <li class="mega-item" data-menu="about"><a href="/about-us" class="nav-main-link">ABOUT</a></li>
+                        <li class="mega-item" data-menu="governance"><a href="/governance" class="nav-main-link">GOVERNANCE</a></li>
+                        <li class="mega-item"><a href="/partners" class="nav-main-link">OUR PARTNERS</a></li>
+                        <li class="mega-item"><a href="/alumni" class="nav-main-link">THE ALUMNI</a></li>
+                        <li class="mega-item" data-menu="academics"><a href="/academics" class="nav-main-link">ACADEMICS</a></li>
+                        <li class="mega-item" data-menu="info"><a href="/information" class="nav-main-link">INFORMATION CENTRE</a></li>
+                        <li class="mega-item"><a href="/contact" class="nav-main-link">CONTACT</a></li>
+                        <li class="mega-item"><a href="/gallery" class="nav-main-link">GALLERY</a></li>
                     </ul>
                 </nav>
-
                 <div class="mega-submenu-panel">
                     <div id="submenu-dynamic-content" class="submenu-inner">
                         <div class="submenu-placeholder">Hover over a category to explore...</div>
-                        
-                                                <div id="submenu-about" class="sub-list" style="display:none;">
+                        <div id="submenu-about" class="sub-list" style="display:none;">
                             <a href="/about-us#about-us">About Us <span class="sub-arrow">→</span></a>
                             <a href="/about-us#history">Our History <span class="sub-arrow">→</span></a>
                             <a href="/about-us#vision">Vision, Mission &amp; Motto <span class="sub-arrow">→</span></a>
@@ -138,29 +135,27 @@
                         </div>
                         <div id="submenu-academics" class="sub-list" style="display:none;">
                             <a href="/academics#apply">Apply for Admission <span class="sub-arrow">→</span></a>
-                            <a href="/academics#online">Online Application <span class="sub-arrow">→</span></a>
-                            <a href="/academics#fees">How To Pay <span class="sub-arrow">→</span></a>
                             <a href="/academics#jobs">Jobs <span class="sub-arrow">→</span></a>
                         </div>
                         <div id="submenu-info" class="sub-list" style="display:none;">
                             <a href="/information#transport">Transport Services <span class="sub-arrow">→</span></a>
                             <a href="/information#boarding">Boarding Facilities <span class="sub-arrow">→</span></a>
                             <a href="/information#activities">Beyond Curriculum <span class="sub-arrow">→</span></a>
+                            <a href="/information#catering">Catering <span class="sub-arrow">→</span></a>
                             <a href="/information#events">Events <span class="sub-arrow">→</span></a>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
 
     <!-- Inner Page Hero — Walnut Hill Inspired -->
     <header class="inner-hero">
         <!-- Full-bleed photo -->
-        <img class="inner-hero-photo"
-             src="./assets/carousel/Aboutus.jpg"
-             alt="About Us at Jack &amp; Jill School">
+        <img class="inner-hero-photo" src="./assets/carousel/Aboutus.jpg" alt="About Us at Jack &amp; Jill School">
 
         <!-- Warm editorial tint overlay -->
         <div class="inner-hero-tint"></div>
@@ -189,20 +184,25 @@
 
     <!-- Main Content Area -->
     <main class="info-page-wrap">
-        
+
         <!-- SECTION 1: HERITAGE -->
         <section id="about-us" class="info-section">
             <div class="container">
                 <div class="boarding-split">
                     <div class="bs-text">
-                        <span class="is-label">01 // The Jack & Jill Legacy</span>
+                        <span class="is-label">01 // The Jack & Jill School Legacy</span>
                         <h2 class="is-title">A Tradition of Excellence</h2>
-                        <p class="is-desc">For decades, Jack & Jill School has stood as a beacon of academic rigor and moral fortitude in Kitale, Kenya. We do not just teach students; we mold future leaders, thinkers, and global citizens equipped to navigate an ever-changing world with integrity and grace.</p>
-                        <p class="is-desc" style="margin-top: 20px;">Our approach intertwines cutting-edge pedagogy with timeless Christian values, ensuring that every child who walks through our gates steps out into the world absolutely unparalleled.</p>
+                        <p class="is-desc">For decades, Jack & Jill School has stood as a beacon of academic rigor and
+                            moral fortitude in Kitale, Kenya. We do not just teach students; we mold future leaders,
+                            thinkers, and global citizens equipped to navigate an ever-changing world with integrity and
+                            grace.</p>
+                        <p class="is-desc" style="margin-top: 20px;">Our approach intertwines cutting-edge pedagogy with
+                            timeless Christian values, ensuring that every child who walks through our gates steps out
+                            into the world absolutely unparalleled.</p>
                     </div>
                     <div class="bs-visual">
                         <div class="bs-card">
-                            <img src="./assets/logo1.jpeg" alt="Jack & Jill Institutional Excellence">
+                            <img src="./assets/logo1.jpeg" alt="jack & Jill School Institutional Excellence">
                             <div class="bs-caption">Tradition of Academic Excellence</div>
                         </div>
                     </div>
@@ -224,25 +224,32 @@
                     <div class="t-event">
                         <div class="t-dot"></div>
                         <div class="t-date" style="color:var(--jj-burgundy)">The Foundation</div>
-                        <div class="t-content" style="background:#fff; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+                        <div class="t-content"
+                            style="background:#fff; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
                             <h3 style="color:var(--jj-navy)">A Vision Realized</h3>
-                            <p style="color:#555">Founded with a modest cohort of 20 students, the school was established to provide unparalleled quality education in the heart of Kitale.</p>
+                            <p style="color:#555">Founded with a modest cohort of 20 students, Jack & Jill school was
+                                established to provide unparalleled quality education in the heart of Kitale.</p>
                         </div>
                     </div>
                     <div class="t-event">
                         <div class="t-dot"></div>
                         <div class="t-date" style="color:var(--jj-burgundy)">Rapid Expansion</div>
-                        <div class="t-content" style="background:#fff; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+                        <div class="t-content"
+                            style="background:#fff; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
                             <h3 style="color:var(--jj-navy)">The New School</h3>
-                            <p style="color:#555">Responding to overwhelming demand from parents, Jack & Jill escalated its operations, unveiling a state-of-the-art school complete with advanced laboratories and sporting complexes.</p>
+                            <p style="color:#555">Responding to overwhelming demand from parents, jack & Jill School
+                                escalated its operations, unveiling a state-of-the-art school complete with advanced
+                                laboratories and sporting complexes.</p>
                         </div>
                     </div>
                     <div class="t-event">
                         <div class="t-dot"></div>
                         <div class="t-date" style="color:var(--jj-burgundy)">Modern Era</div>
-                        <div class="t-content" style="background:#fff; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+                        <div class="t-content"
+                            style="background:#fff; border:1px solid rgba(0,0,0,0.1); box-shadow:0 10px 30px rgba(0,0,0,0.05);">
                             <h3 style="color:var(--jj-navy)">National Excellence</h3>
-                            <p style="color:#555">Consistently ranking among the top institutions nationwide, producing alumni who conquer top-tier universities globally.</p>
+                            <p style="color:#555">Consistently ranking among the top institutions nationwide, producing
+                                alumni who conquer top-tier universities globally.</p>
                         </div>
                     </div>
                 </div>
@@ -260,9 +267,11 @@
                     <div class="vm-card mission-card reveal" style="transition-delay: 0.1s;">
                         <div class="vm-badge">OUR MISSION</div>
                         <p class="vm-body">
-                            Jack & Jill School's mission is to create a safe environment where all students are nurtured to achieve academic excellence and holistic development. 
+                            jack & Jill School's mission is to create a safe environment where all students are nurtured
+                            to achieve academic excellence and holistic development.
                             <br><br>
-                            Through a child-centered framework and grounded in best practices, every student will develop the confidence, knowledge, and skill set to succeed in high school and beyond.
+                            Through a child-centered framework and grounded in best practices, every student will
+                            develop the confidence, knowledge, and skill set to succeed in high school and beyond.
                         </p>
                     </div>
                 </div>
@@ -275,29 +284,34 @@
                 <div class="info-sec-header">
                     <span class="is-label">04 // Core Principles</span>
                     <h2 class="is-title">School Values</h2>
-                    <p class="is-desc" style="font-size: 20px; color: var(--jj-burgundy); font-weight: 600;">We PRIDE ourselves for the following Values:</p>
+                    <p class="is-desc" style="font-size: 20px; color: var(--jj-burgundy); font-weight: 600;">We PRIDE
+                        ourselves for the following Values:</p>
                 </div>
 
                 <div class="activities-grid">
                     <div class="activity-dial reveal">
                         <i class="fa-solid fa-users-rays" style="color:var(--jj-gold)"></i>
                         <h3>Leadership</h3>
-                        <div class="dial-hover" style="background:var(--jj-navy)">Leading one another to servant leadership in pursuit of raising God-fearing and true leaders of the future.</div>
+                        <div class="dial-hover" style="background:var(--jj-navy)">Leading one another to servant
+                            leadership in pursuit of raising God-fearing and true leaders of the future.</div>
                     </div>
                     <div class="activity-dial reveal" style="transition-delay: 0.1s;">
                         <i class="fa-solid fa-book-open-reader" style="color:var(--jj-gold)"></i>
                         <h3>Learning</h3>
-                        <div class="dial-hover" style="background:var(--jj-navy)">Treasuring intellectual growth by keenly noting different needs, creativity, and talent.</div>
+                        <div class="dial-hover" style="background:var(--jj-navy)">Treasuring intellectual growth by
+                            keenly noting different needs, creativity, and talent.</div>
                     </div>
                     <div class="activity-dial reveal" style="transition-delay: 0.2s;">
                         <i class="fa-solid fa-people-group" style="color:var(--jj-gold)"></i>
                         <h3>Diversity</h3>
-                        <div class="dial-hover" style="background:var(--jj-navy)">Enabling a wide range of activities to help in raising each learner's God-given talent and skills.</div>
+                        <div class="dial-hover" style="background:var(--jj-navy)">Enabling a wide range of activities to
+                            help in raising each learner's God-given talent and skills.</div>
                     </div>
                     <div class="activity-dial reveal" style="transition-delay: 0.3s;">
                         <i class="fa-solid fa-shield-halved" style="color:var(--jj-gold)"></i>
                         <h3>Integrity</h3>
-                        <div class="dial-hover" style="background:var(--jj-navy)">Honesty, respect, and courage guide our code of behaviour in attaining excellence.</div>
+                        <div class="dial-hover" style="background:var(--jj-navy)">Honesty, respect, and courage guide
+                            our code of behaviour in attaining excellence.</div>
                     </div>
                 </div>
             </div>
@@ -316,13 +330,14 @@
                 <a href="/" style="text-decoration: none; display: inline-block; margin-bottom: 20px;">
                     <video class="ib-logo" src="./assets/logo.mp4" autoplay loop muted playsinline></video>
                 </a>
-                <a href="/" style="text-decoration: none; color: inherit;"><h3 class="footer-school-name">Jack & Jill School</h3></a>
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <h3 class="footer-school-name">jack & Jill School</h3>
+                </a>
                 <p class="footer-tagline">Excellence. Character. Community.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a> -->
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a> -->
-                    <!-- <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a> -->
+                    <a href="https://web.facebook.com/JackNJillSchool?rdid=2og0eskLoeO7ER7n&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1FgztuhNVF%2F%3F_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/jnjschool026?igsh=MTQweXZyZW5xbnN4Yw%3D%3D" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com/@jacknjillsch?si=3JvGNAkwGQ8OGFNz" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
@@ -332,7 +347,8 @@
                 <ul class="footer-links">
                     <li><a href="about-us.html"><span class="arrow-slide">→</span> Our Heritage</a></li>
                     <li><a href="academics.html#apply"><span class="arrow-slide">→</span> Admission Portal</a></li>
-                    <li><a href="./assets/JacknJill Year_Book 2025.pdf" download><span class="arrow-slide">→</span> Year Book 2025</a></li>
+                    <li><a href="./assets/yearbook-2025.pdf" download><span class="arrow-slide">→</span> Year
+                            Book 2025</a></li>
                     <li><a href="gallery.html"><span class="arrow-slide">→</span> Student Gallery</a></li>
                     <li><a href="faqs.html"><span class="arrow-slide">→</span> FAQs</a></li>
                 </ul>
@@ -352,12 +368,11 @@
             <div class="footer-col cta-col">
                 <h4 class="footer-heading">Join Our Legacy</h4>
                 <p class="cta-desc">Admission is open for the 2026 academic year. Secure your child's future today.</p>
-                <a href="./academics#online" class="footer-apply-btn">Apply Now</a>
             </div>
         </div>
 
         <!-- Bottom Bar -->
-                <div class="footer-bottom-bar">
+        <div class="footer-bottom-bar">
             <div class="container bottom-inner">
                 <p class="copyright">© 2026 Jack & Jill School. All rights reserved.</p>
                 <div class="legal-links">
@@ -375,4 +390,5 @@
     <!-- Scripts -->
     <script type="module" src="./site.js"></script>
 </body>
+
 </html>

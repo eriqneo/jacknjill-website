@@ -461,6 +461,29 @@ if (document.querySelector('.gov-director-card')) {
             facTrackWrap.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
     }
+
+    // Support Team Carousel Navigation
+    const supTrackWrap = document.querySelector('#support .gov-faculty-carousel-wrap');
+    const supPrev = document.getElementById('sup-prev');
+    const supNext = document.getElementById('sup-next');
+
+    if (supTrackWrap && supPrev && supNext) {
+        const getSupScrollAmount = () => {
+            const card = supTrackWrap.querySelector('.gov-faculty-card');
+            if (!card) return Math.max(260, supTrackWrap.clientWidth * 0.85);
+            const cardWidth = card.getBoundingClientRect().width;
+            return cardWidth + 32;
+        };
+
+        supPrev.addEventListener('click', () => {
+            const scrollAmount = getSupScrollAmount();
+            supTrackWrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+        supNext.addEventListener('click', () => {
+            const scrollAmount = getSupScrollAmount();
+            supTrackWrap.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
 }
 
 // --- Contact Form Logic ---
@@ -483,7 +506,7 @@ if (contactForm) {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch('https://formspree.io/f/jacknjill593@gmail.com', {
+            const response = await fetch('https://formspree.io/jacknjill593@gmail.com', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -838,6 +861,55 @@ async function populateHomepageEvents() {
         `;
         eventsList.appendChild(row);
     });
+}
+
+/** Filter hardcoded static events if they have passed today's date */
+function filterStaticEvents() {
+    const staticRows = document.querySelectorAll('.events-list .ue-row');
+    if (!staticRows.length) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const currentYear = today.getFullYear();
+    const monthNames = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+    let visibleCount = 0;
+    staticRows.forEach(row => {
+        const dayEl = row.querySelector('.ue-day');
+        const monthEl = row.querySelector('.ue-month');
+        if (dayEl && monthEl) {
+            const day = parseInt(dayEl.textContent, 10);
+            const monthText = monthEl.textContent.trim().toUpperCase();
+            const monthIndex = monthNames.indexOf(monthText);
+            
+            if (monthIndex !== -1 && !isNaN(day)) {
+                let eventDate = new Date(currentYear, monthIndex, day);
+                // Set to end of the day to ensure it shows until the day is completely over
+                eventDate.setHours(23, 59, 59, 999);
+                
+                if (eventDate < today) {
+                    row.style.display = 'none';
+                } else {
+                    visibleCount++;
+                }
+            }
+        } else {
+            // Unrecognized row structure, keep visible just in case
+            visibleCount++;
+        }
+    });
+
+    if (visibleCount === 0) {
+        const eventsList = document.querySelector('.events-list');
+        // Check if there's already a message
+        if (!eventsList.querySelector('.no-events-msg')) {
+            const noEventsMsg = document.createElement('p');
+            noEventsMsg.className = 'no-events-msg';
+            noEventsMsg.style.cssText = 'text-align:center; padding: 20px; font-family: var(--font-body); color: var(--jj-navy);';
+            noEventsMsg.textContent = 'No upcoming events at this time. Please check back later.';
+            eventsList.appendChild(noEventsMsg);
+        }
+    }
 }
 
 /** Render upcoming events in the Information Centre timeline */
@@ -1353,12 +1425,16 @@ function injectWhatsAppButton() {
 // --- CMS Faculty API Integration (Live Sanity) ---
 async function populateCMSFaculty() {
     const facultyTrack = document.getElementById('faculty-track');
-    if (!facultyTrack) return;
+    const supportTrack = document.getElementById('support-track');
+    if (!facultyTrack && !supportTrack) return;
 
     const staffMembers = await fetchStaff();
     if (!staffMembers || staffMembers.length === 0) return;
 
-    facultyTrack.innerHTML = ''; // Replace static fallback
+    if (facultyTrack) facultyTrack.innerHTML = ''; // Replace static fallback
+    if (supportTrack) supportTrack.innerHTML = '';
+
+    const isSupport = (dept) => dept && dept.toUpperCase() === 'SUPPORT';
 
     staffMembers.forEach(member => {
         const card = document.createElement('div');
@@ -1378,7 +1454,11 @@ async function populateCMSFaculty() {
             ` : ''}
         `;
         
-        facultyTrack.appendChild(card);
+        if (isSupport(member.department)) {
+            if (supportTrack) supportTrack.appendChild(card);
+        } else {
+            if (facultyTrack) facultyTrack.appendChild(card);
+        }
     });
 
     if (typeof gsap !== 'undefined') {
@@ -1530,6 +1610,37 @@ function setupFAQ() {
     });
 }
 
+// --- School Menu Tab Logic ---
+function setupMenuTabs() {
+    const tabBtns = document.querySelectorAll('.menu-tab-btn');
+    const dayPanes = document.querySelectorAll('.menu-day-pane');
+    
+    if (!tabBtns.length) return;
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const day = btn.getAttribute('data-day');
+            
+            // Toggle buttons
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Toggle panes
+            dayPanes.forEach(pane => {
+                pane.classList.remove('active');
+                if (pane.id === `pane-${day}`) {
+                    pane.classList.add('active');
+                }
+            });
+
+            // Scroll tab into view on mobile
+            if (window.innerWidth < 768) {
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        });
+    });
+}
+
 function initInfoStickyNav() {
     const nav = document.querySelector('.info-sticky-nav');
     if (!nav) return;
@@ -1621,5 +1732,122 @@ function initScrollPolish() {
     window.addEventListener('resize', onScroll);
     updateScrollState();
 }
+
+// --- Academics Quick Inquiry Form Logic ---
+function setupInquiryForm() {
+    const inquiryForm = document.getElementById('quick-inquiry-form');
+    const downloadArea = document.getElementById('download-reveal-area');
+    
+    if (!inquiryForm) return;
+
+    inquiryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = inquiryForm.querySelector('.inquiry-submit-btn');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading State
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+        
+        const formData = new FormData(inquiryForm);
+        const data = Object.fromEntries(formData.entries());
+        
+        try {
+            const response = await fetch('https://formspree.io/jacknjill593@gmail.com', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Success: Reveal Download Area
+                inquiryForm.parentElement.style.display = 'none';
+                downloadArea.style.display = 'block';
+                
+                // Highlight download area
+                setTimeout(() => {
+                    downloadArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            alert("Oops! There was a problem submitting your inquiry. Please try again.");
+        }
+    });
+}
+
+
+initScrollPolish();
+setupFAQ();
+setupMenuTabs();
+initInfoStickyNav();
+
+setupInquiryForm();
+
+// --- Virtual Tour Modal Logic ---
+function setupVirtualTour() {
+    const virtualTourBtn = document.getElementById('virtual-tour-btn');
+    if (!virtualTourBtn) return;
+    
+    // Inject modal globally if it doesn't exist
+    if (!document.getElementById('virtual-tour-modal')) {
+        const modalHTML = `
+            <div id="virtual-tour-modal" class="video-modal">
+                <div class="video-modal-backdrop"></div>
+                <div class="video-modal-content">
+                    <button id="close-tour-btn" class="video-modal-close" aria-label="Close Video">✕</button>
+                    <div class="video-container">
+                        <iframe id="virtual-tour-iframe" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    const virtualTourModal = document.getElementById('virtual-tour-modal');
+    const closeTourBtn = document.getElementById('close-tour-btn');
+    const virtualTourIframe = document.getElementById('virtual-tour-iframe');
+
+    if (virtualTourModal && closeTourBtn && virtualTourIframe) {
+        // Embed URL with autoplay enabled
+        const videoUrl = "https://www.youtube.com/embed/oJE8epXscPc?si=TVzNlyI8BdPLmpos&autoplay=1";
+        
+        // Open Modal
+        virtualTourBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            virtualTourIframe.src = videoUrl;
+            virtualTourModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+
+        // Close Modal Functions
+        const closeModal = () => {
+            virtualTourModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            // Wait for CSS transition to finish before resetting src to stop audio
+            setTimeout(() => {
+                virtualTourIframe.src = "";
+            }, 400); 
+        };
+
+        closeTourBtn.addEventListener('click', closeModal);
+
+        // Close on backdrop click
+        const backdrop = virtualTourModal.querySelector('.video-modal-backdrop');
+        if (backdrop) {
+            backdrop.addEventListener('click', closeModal);
+        }
+    }
+}
+setupVirtualTour();
 
 console.log('Jack & Jill School Flagship Core Initialized');
