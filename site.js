@@ -755,7 +755,7 @@ function handleIntroScreen() {
                 const heroPreload = new Image();
                 heroPreload.onload = liftCurtain;
                 heroPreload.onerror = liftCurtain; // Fallback so it doesn't hang
-                heroPreload.src = 'assets/hero.jpg';
+                heroPreload.src = '/assets/hero.jpg';
 
                 // If it happened to load instantly from cache
                 if (heroPreload.complete && heroPreload.naturalWidth !== 0) {
