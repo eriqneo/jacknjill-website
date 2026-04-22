@@ -503,19 +503,19 @@ if (contactForm) {
         spinner.style.display = 'inline-block';
 
         const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData.entries());
+        formData.append("access_key", "WEB3FORMS_ACCESS_KEY");
+        formData.append("subject", "New Contact Message — Jack & Jill School Website");
+        formData.append("from_name", "Jack & Jill School Website");
 
         try {
-            const response = await fetch('https://formspree.io/jacknjill593@gmail.com', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+                body: formData
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (result.success) {
                 spinner.style.display = 'none';
                 btnText.textContent = 'Send Message';
                 submitBtn.style.display = 'none';
@@ -1751,19 +1751,19 @@ function setupInquiryForm() {
         submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
         
         const formData = new FormData(inquiryForm);
-        const data = Object.fromEntries(formData.entries());
+        formData.append("access_key", "WEB3FORMS_ACCESS_KEY");
+        formData.append("subject", "New Admission Inquiry — Jack & Jill School");
+        formData.append("from_name", "Jack & Jill Admissions");
         
         try {
-            const response = await fetch('https://formspree.io/jacknjill593@gmail.com', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+                body: formData
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (result.success) {
                 // Success: Reveal Download Area
                 inquiryForm.parentElement.style.display = 'none';
                 downloadArea.style.display = 'block';

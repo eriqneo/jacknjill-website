@@ -221,7 +221,11 @@
                 <div class="contact-right">
                     <div class="contact-form-wrap">
                         <h2 class="form-h2">Send Us a Message</h2>
-                        <form id="jj-contact-form" class="jj-form" action="https://formspree.io/jacknjill593@gmail.com" method="POST">
+                        <form id="jj-contact-form" class="jj-form">
+                            <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+                            <input type="hidden" name="subject" value="New Contact Message — Jack &amp; Jill School Website">
+                            <input type="hidden" name="from_name" value="Jack &amp; Jill School Website">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
                             <div class="form-row-2">
                                 <div class="form-group">
                                     <label class="form-lbl" for="fname">Full Name</label>
