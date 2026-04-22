@@ -503,7 +503,7 @@ if (contactForm) {
         spinner.style.display = 'inline-block';
 
         const formData = new FormData(contactForm);
-        formData.append("access_key", "WEB3FORMS_ACCESS_KEY");
+        formData.append("access_key", "f5c98c79-fada-452c-9190-4bc17c461859");
         formData.append("subject", "New Contact Message — Jack & Jill School Website");
         formData.append("from_name", "Jack & Jill School Website");
 
@@ -1751,7 +1751,7 @@ function setupInquiryForm() {
         submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
         
         const formData = new FormData(inquiryForm);
-        formData.append("access_key", "WEB3FORMS_ACCESS_KEY");
+        formData.append("access_key", "f5c98c79-fada-452c-9190-4bc17c461859");
         formData.append("subject", "New Admission Inquiry — Jack & Jill School");
         formData.append("from_name", "Jack & Jill Admissions");
         
