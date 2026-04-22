@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -6,18 +8,32 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*\\.pdf)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
         },
         {
           "key": "Content-Disposition",
-          "value": "inline"
+          "value": "attachment"
         }
       ]
     }
   ],
   "rewrites": [
-    {
-      "source": "/((?!assets/).*)",
-      "destination": "/$1"
-    }
+    { "source": "/about-us",    "destination": "/about-us.html" },
+    { "source": "/academics",   "destination": "/academics.html" },
+    { "source": "/alumni",      "destination": "/alumni.html" },
+    { "source": "/contact",     "destination": "/contact.html" },
+    { "source": "/faqs",        "destination": "/faqs.html" },
+    { "source": "/gallery",     "destination": "/gallery.html" },
+    { "source": "/governance",  "destination": "/governance.html" },
+    { "source": "/information", "destination": "/information.html" },
+    { "source": "/partners",    "destination": "/partners.html" }
   ]
 }
