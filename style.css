@@ -4385,34 +4385,70 @@ a.ci-val:hover {
   }
   .tcb-left {
     flex-direction: column;
-    gap: 8px;
-  }
-  .tcb-sep,
-  .tcb-right {
-    display: none;
   }
 }
 
 /* LAYER 2: FLOATING LEFT (LOGO, APPLY NOW, VIRTUAL TOUR) */
 .floating-left {
-  position: absolute;
-  left: 32px;
-  top: 56px;
+  position: fixed;
+  left: clamp(16px, 4vw, 32px);
+  top: clamp(16px, 6vh, 56px);
   z-index: 1000;
   display: flex;
-  flex-direction: row; /* Single horizontal bar */
+  flex-direction: row; 
   align-items: center;
   gap: 20px;
+  pointer-events: none;
+}
+
+.floating-left > * {
+  pointer-events: auto;
 }
 
 /* Identity cluster: logo + wordmark */
 .fl-identity {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
+  padding: 10px 24px 10px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Thin vertical gold separator between identity and CTAs */
+.fl-identity:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(249, 166, 2, 0.4);
+  transform: translateY(-2px);
+}
+
+.site-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+  box-shadow: 
+    0 4px 15px rgba(249, 166, 2, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.fl-identity:hover .site-logo {
+  transform: scale(1.05) rotate(5deg);
+  border-color: rgba(249, 166, 2, 0.6);
+}
+
+/* Vertical gold separator */
 .fl-divider {
   width: 1px;
   height: 36px;
@@ -4420,137 +4456,67 @@ a.ci-val:hover {
   flex-shrink: 0;
 }
 
-.site-logo {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  flex-shrink: 0;
-  /* Premium magical gold shadow */
-  box-shadow:
-    0 4px 15px rgba(249, 166, 2, 0.3),
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
-  animation: logoBreathe 4s ease-in-out infinite alternate;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  cursor: pointer;
-}
-
-.fl-identity:hover .site-logo {
-  transform: scale(1.1) rotate(3deg);
-  box-shadow:
-    0 8px 25px rgba(249, 166, 2, 0.6),
-    inset 0 0 15px rgba(255, 255, 255, 0.5);
-  border-color: rgba(249, 166, 2, 0.8);
-}
-
-@keyframes logoBreathe {
-  0% {
-    transform: translateY(0px);
-    filter: drop-shadow(0 2px 5px rgba(249, 166, 2, 0.2));
-  }
-  100% {
-    transform: translateY(-3px);
-    filter: drop-shadow(0 8px 20px rgba(249, 166, 2, 0.5));
-  }
-}
-
-/* School name wordmark — ONE LINE: JACK & JILL / School below */
+/* School name wordmark — Balanced & Prestigious */
 .school-wordmark {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: baseline;
-  column-gap: 8px;
-  row-gap: 1px;
+  column-gap: clamp(6px, 1.5vw, 12px);
+  row-gap: 2px;
   position: relative;
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.fl-identity:hover .school-wordmark {
-  transform: translateX(6px);
-}
-
-/* "JACK &" — featherweight italic qualifier on the same baseline */
+/* "JACK" — Platinum Shimmer */
 .wordmark-jack {
   font-family: "Cinzel", serif;
-  font-size: 15px;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.18em;
+  font-size: clamp(18px, 3.2vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  transition: color 0.4s ease;
-  /* Sits on same baseline row as JILL */
-  align-self: baseline;
-}
-
-.fl-identity:hover .wordmark-jack {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* "JILL" — the dominant power word, large + animated gold shimmer */
-.wordmark-jill {
-  font-family: "Cinzel", serif;
-  font-size: 34px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  line-height: 1;
-  background: linear-gradient(
-    110deg,
-    var(--jj-gold) 0%,
-    #fff5c0 35%,
-    var(--jj-gold) 50%,
-    #ffd060 70%,
-    var(--jj-gold) 100%
-  );
-  background-size: 250% auto;
+  background: linear-gradient(110deg, #ffffff 0%, #d1d1d1 35%, #ffffff 50%, #b8b8b8 70%, #ffffff 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(249, 166, 2, 0.5));
+  animation: wordmarkShimmer 6s ease-in-out infinite;
+  align-self: baseline;
+}
+
+/* "JILL" — Gold Shimmer */
+.wordmark-jill {
+  font-family: "Cinzel", serif;
+  font-size: clamp(18px, 3.2vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(110deg, var(--jj-gold) 0%, #fff5c0 35%, var(--jj-gold) 50%, #ffd060 70%, var(--jj-gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   animation: wordmarkShimmer 4s ease-in-out infinite;
-  transition: filter 0.4s ease;
 }
 
-@keyframes wordmarkShimmer {
-  0% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-  100% {
-    background-position: 0% center;
-  }
-}
-
-.fl-identity:hover .wordmark-jill {
-  filter: drop-shadow(0 4px 18px rgba(249, 166, 2, 0.8));
-  animation-play-state: paused;
-}
-
-/* "School" — forces a new row via flex-basis, ultra-tracked */
+/* "School" — Elegant Underline Label */
 .wordmark-school {
   flex-basis: 100%;
   font-family: "Cinzel", serif;
-  font-size: 9.5px;
-  font-weight: 400;
+  font-size: 9px;
+  font-weight: 500;
   letter-spacing: 0.65em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  padding-left: 2px;
-  /* Thin gold rule above */
-  border-top: 1px solid rgba(249, 166, 2, 0.35);
+  color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(249, 166, 2, 0.3);
   padding-top: 4px;
   margin-top: 2px;
-  transition:
-    color 0.4s ease,
-    border-color 0.4s ease;
+}
+
+@keyframes wordmarkShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
 }
 
 .fl-identity:hover .wordmark-school {
@@ -6644,30 +6610,69 @@ a.ci-val:hover {
     display: none; /* Hide top bar on mobile for a cleaner prestige look, or make very compact */
   }
 
-  /* 2. Floating Identity & Brand */
+  /* 2. Unified Executive Smart Bar (Logo + Apply) */
   .floating-left {
-    top: 20px !important;
-    left: 20px !important;
+    top: max(12px, env(safe-area-inset-top)) !important;
+    left: max(12px, env(safe-area-inset-left)) !important;
     bottom: auto !important;
     transform: none !important;
     flex-direction: row !important;
     align-items: center;
+    gap: 0 !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 100px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 4px 6px 4px 4px !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25) !important;
+    width: auto !important;
+    max-width: calc(100vw - 85px);
+    pointer-events: auto !important;
+  }
+
+  .fl-identity {
+    padding: 0 !important;
+    gap: 8px !important;
     background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .fl-divider {
+    display: block !important;
+    height: 20px !important;
+    width: 1px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    margin: 0 10px !important;
+    flex-shrink: 0 !important;
   }
 
   .site-logo {
     display: block !important;
-    width: 45px !important;
-    height: 45px !important;
+    width: clamp(38px, 11vw, 48px) !important;
+    height: clamp(38px, 11vw, 48px) !important;
     border-radius: 50%;
   }
 
   .school-wordmark {
-    transform: scale(0.7);
-    transform-origin: left center;
+    transform: none !important;
+    column-gap: 5px !important;
   }
 
-  .fl-divider,
+  .wordmark-jack, .wordmark-jill {
+    font-size: clamp(15px, 4.2vw, 19px) !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .wordmark-school {
+    font-size: 7.5px !important;
+    letter-spacing: 0.45em !important;
+    padding-top: 3px !important;
+    margin-top: 2px !important;
+  }
+
   .btn-tour {
     display: none !important;
   }
@@ -6675,7 +6680,14 @@ a.ci-val:hover {
   .btn-apply {
     padding: 8px 16px;
     font-size: 10px;
-    margin-left: -20px;
+    margin-left: 0;
+    flex-shrink: 0;
+    border-radius: 40px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(143, 18, 32, 0.3);
   }
 
   /* 3. Hamburger Navigation */
