@@ -1,146 +1,217 @@
 // ============================================================
-// Jack & Jill School — Sanity CMS Client
-// Project ID : zrijfacv
-// Dataset    : jj
-// API Version: 2024-01-01
+// Jack & Jill School — PocketBase CMS Client
+// PocketHost: https://jacknjill.pockethost.io
 // ============================================================
 
-const PROJECT_ID = 'zrijfacv';
-const DATASET    = 'jj';
-const API_VER    = '2024-01-01';
+const POCKETBASE_URL = 'https://jacknjill.pockethost.io';
+const PLACEHOLDER_IMAGE = 'https://placehold.co';
 
-/**
- * Build a Sanity CDN fetch URL from a raw GROQ query string.
- * Uses the read-only CDN endpoint (no auth token needed for public data).
- */
-function buildSanityUrl(groq) {
-    const encoded = encodeURIComponent(groq);
-    return `https://${PROJECT_ID}.apicdn.sanity.io/v${API_VER}/data/query/${DATASET}?query=${encoded}`;
-}
+async function pocketFetch(collection, params = {}) {
+    const url = new URL(`${POCKETBASE_URL}/api/collections/${collection}/records`);
 
-/**
- * Core fetch helper. Returns the `result` array from Sanity or [] on error.
- */
-async function sanityFetch(groq) {
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+            url.searchParams.set(key, value);
+        }
+    });
+
     try {
-        const res = await fetch(buildSanityUrl(groq));
-        if (!res.ok) throw new Error(`Sanity API error: ${res.status}`);
+        const res = await fetchWithRetry(url);
+        if (!res.ok) throw new Error(`PocketBase API error: ${res.status}`);
         const data = await res.json();
-        return data.result ?? [];
+        return data.items ?? [];
     } catch (err) {
-        console.warn('[Sanity] Fetch failed:', err.message);
+        console.warn('[PocketBase] Fetch failed:', err.message);
         return [];
     }
 }
 
-/**
- * Build a Sanity image URL from an image asset reference object.
- * Falls back to a placeholder if the reference is missing.
- * @param {object|null} imageRef  - The Sanity image field value
- * @param {number} w              - Desired width
- * @param {number} h              - Desired height
- */
-export function buildImageUrl(imageRef, w = 800, h = 600) {
-    if (!imageRef?.asset?._ref) {
-        return `https://placehold.co/${w}x${h}/1a1a2e/F9A602?text=Jack+%26+Jill`;
+async function fetchWithRetry(url, attempts = 3) {
+    let lastError;
+
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+        try {
+            return await fetch(url);
+        } catch (err) {
+            lastError = err;
+            if (attempt === attempts) break;
+            await delay(300 * attempt);
+        }
     }
-    // Sanity ref format: image-{id}-{dims}-{ext}
-    const ref = imageRef.asset._ref;
-    const [, id, dims, ext] = ref.split('-');
-    return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dims}.${ext}?w=${w}&h=${h}&fit=crop&auto=format`;
+
+    throw lastError;
 }
 
-// ==============================================================
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function buildImageUrl(imageRef, w = 800, h = 600) {
+    if (!imageRef) {
+        return `${PLACEHOLDER_IMAGE}/${w}x${h}/1a1a2e/F9A602?text=Jack+%26+Jill`;
+    }
+
+    if (typeof imageRef === 'string') return imageRef;
+    if (imageRef.url) return imageRef.url;
+
+    return `${PLACEHOLDER_IMAGE}/${w}x${h}/1a1a2e/F9A602?text=Jack+%26+Jill`;
+}
+
+function buildPocketFile(record, fieldName, thumb = '') {
+    const fileValue = record[fieldName];
+    const filename = Array.isArray(fileValue) ? fileValue[0] : fileValue;
+
+    if (!filename) return null;
+
+    const url = new URL(
+        `${POCKETBASE_URL}/api/files/${record.collectionId}/${record.id}/${encodeURIComponent(filename)}`
+    );
+
+    if (thumb) url.searchParams.set('thumb', thumb);
+
+    return {
+        filename,
+        url: url.toString(),
+    };
+}
+
+function dateFilterFromToday(fieldName) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return `${fieldName} >= "${today.toISOString().replace('T', ' ')}"`;
+}
+
+function portableTextToPlainText(value) {
+    if (!Array.isArray(value)) return '';
+
+    return value
+        .map((block) => {
+            if (!Array.isArray(block.children)) return '';
+            return block.children.map((child) => child.text || '').join('');
+        })
+        .filter(Boolean)
+        .join('\n\n');
+}
+
+function mapNews(record) {
+    return {
+        _id: record.id,
+        title: record.title,
+        slug: {current: record.slug},
+        excerpt: record.excerpt,
+        category: record.category,
+        publishedAt: record.published_at,
+        mainImage: buildPocketFile(record, 'main_image', '800x600'),
+        body: record.body,
+    };
+}
+
+function mapEvent(record) {
+    return {
+        _id: record.id,
+        eventName: record.event_name,
+        slug: {current: record.slug},
+        category: record.category,
+        location: record.location,
+        startDate: record.start_date,
+        endDate: record.end_date,
+        description: record.description,
+        isHighlighted: record.is_highlighted,
+        image: buildPocketFile(record, 'image', '800x600'),
+    };
+}
+
+function mapTestimonial(record) {
+    return {
+        _id: record.id,
+        quote: record.quote,
+        authorName: record.author_name,
+        authorRole: record.author_role,
+        type: record.type,
+        rating: record.rating,
+        avatar: buildPocketFile(record, 'avatar', '300x300'),
+    };
+}
+
+function mapPartner(record) {
+    return {
+        _id: record.id,
+        partnerName: record.partner_name,
+        slug: {current: record.slug},
+        partnerType: record.partner_type,
+        description: record.description,
+        logoImage: buildPocketFile(record, 'logo_image', '300x200'),
+        logoIcon: record.logo_icon,
+        website: record.website,
+    };
+}
+
+function mapStaff(record) {
+    const biography = portableTextToPlainText(record.bio);
+
+    return {
+        _id: record.id,
+        fullName: record.full_name,
+        slug: {current: record.slug},
+        position: record.position,
+        department: record.department,
+        photo: buildPocketFile(record, 'photo', '300x300'),
+        bio: record.bio,
+        biography,
+        qualifications: record.qualifications ?? [],
+        email: record.email,
+    };
+}
+
+// ============================================================
 // QUERY FUNCTIONS
-// ==============================================================
+// ============================================================
 
-/**
- * Fetch the latest news articles. Returns max 8, newest first.
- */
 export async function fetchNews() {
-    const groq = `*[_type == "news"] | order(publishedAt desc)[0...8] {
-        _id,
-        title,
-        slug,
-        excerpt,
-        category,
-        publishedAt,
-        mainImage,
-        body
-    }`;
-    return sanityFetch(groq);
+    const records = await pocketFetch('news', {
+        perPage: 8,
+        sort: '-published_at',
+    });
+
+    return records.map(mapNews);
 }
 
-/**
- * Fetch upcoming events (from today onward), sorted soonest first.
- */
 export async function fetchUpcomingEvents() {
-    // Extract just the YYYY-MM-DD part so events today still show.
-    const today = new Date().toISOString().split('T')[0];
-    const groq = `*[_type == "event" && startDate >= "${today}"] | order(startDate asc)[0...6] {
-        _id,
-        eventName,
-        category,
-        location,
-        startDate,
-        endDate,
-        description,
-        isHighlighted,
-        image
-    }`;
-    return sanityFetch(groq);
+    const records = await pocketFetch('events', {
+        perPage: 6,
+        sort: 'start_date',
+        filter: dateFilterFromToday('start_date'),
+    });
+
+    return records.map(mapEvent);
 }
 
-/**
- * Fetch all featured testimonials.
- */
 export async function fetchTestimonials() {
-    const groq = `*[_type == "testimonial" && isFeatured == true] | order(_createdAt desc) {
-        _id,
-        quote,
-        authorName,
-        authorRole,
-        type,
-        rating,
-        avatar
-    }`;
-    return sanityFetch(groq);
+    const records = await pocketFetch('testimonials', {
+        perPage: 50,
+        filter: 'is_featured = true',
+    });
+
+    return records.map(mapTestimonial);
 }
 
-/**
- * Fetch featured partners, sorted by display order.
- */
 export async function fetchPartners() {
-    const groq = `*[_type == "partner" && isFeatured == true] | order(order asc) {
-        _id,
-        partnerName,
-        partnerType,
-        description,
-        logoImage,
-        logoIcon,
-        website
-    }`;
-    return sanityFetch(groq);
+    const records = await pocketFetch('partners', {
+        perPage: 50,
+        sort: 'display_order',
+        filter: 'is_featured = true',
+    });
+
+    return records.map(mapPartner);
 }
 
-/**
- * Fetch active staff members, sorted by display order.
- * Optionally filter by department.
- * @param {string|null} department
- */
 export async function fetchStaff(department = null) {
-    const filter = department
-        ? `*[_type == "staff" && isActive == true && department == "${department}"]`
-        : `*[_type == "staff" && isActive == true]`;
-    const groq = `${filter} | order(order asc) {
-        _id,
-        fullName,
-        position,
-        department,
-        photo,
-        qualifications,
-        email,
-        biography
-    }`;
-    return sanityFetch(groq);
+    const filter = department ? `department = "${department}"` : '';
+    const records = await pocketFetch('staff', {
+        perPage: 100,
+        sort: 'display_order',
+        filter,
+    });
+
+    return records.map(mapStaff);
 }

@@ -775,13 +775,13 @@ function handleIntroScreen() {
     }
 }
 
-// --- CMS Calendar Modal Logic (Live Sanity Events) ---
+// --- CMS Calendar Modal Logic (Live PocketBase Events) ---
 const openCalBtn = document.getElementById('open-calendar-modal');
 const closeCalBtn = document.getElementById('close-calendar-modal');
 const calendarModal = document.getElementById('calendar-modal');
 const cmsEventsContainer = document.getElementById('cms-mock-events');
 
-/** Format a Sanity datetime string into a human-readable date */
+/** Format a CMS datetime string into a human-readable date */
 function formatEventDate(isoString) {
     if (!isoString) return 'TBC';
     return new Date(isoString).toLocaleDateString('en-KE', {
@@ -789,7 +789,7 @@ function formatEventDate(isoString) {
     });
 }
 
-/** Render events from Sanity into the calendar modal */
+/** Render events from PocketBase into the calendar modal */
 async function populateCMSEvents() {
     if (!cmsEventsContainer) return;
     cmsEventsContainer.innerHTML = '<li class="cms-event-item cms-loading"><p>Loading events...</p></li>';
@@ -1007,7 +1007,7 @@ if (openCalBtn && calendarModal && closeCalBtn) {
     });
 }
 
-// --- CMS Partners API Integration (Live Sanity) ---
+// --- CMS Partners API Integration (Live PocketBase) ---
 async function populateCMSPartners() {
     const partnersGrid = document.getElementById('cms-partners-grid');
     if (!partnersGrid) return;
@@ -1031,7 +1031,7 @@ async function populateCMSPartners() {
 
         // Prefer uploaded logo image; fall back to FontAwesome icon class
         const mediaHtml = partner.logoImage
-            ? `<div class="pc-icon pc-icon--img"><img src="${buildImageUrl(partner.logoImage, 120, 80)}" alt="${partner.partnerName} logo" loading="lazy"></div>`
+            ? `<div class="pc-icon pc-icon--img"><img src="${buildImageUrl(partner.logoImage, 120, 80)}" alt="${partner.partnerName} logo" loading="lazy" decoding="async"></div>`
             : `<div class="pc-icon"><i class="fa-solid ${partner.logoIcon || 'fa-handshake'}"></i></div>`;
 
         const websiteHtml = partner.website
@@ -1053,7 +1053,7 @@ async function populateCMSPartners() {
     });
 }
 
-// --- CMS News Cards (Live Sanity) ---
+// --- CMS News Cards (Live PocketBase) ---
 let newsArticles = []; // Global store for modal access
 
 /**
@@ -1066,7 +1066,7 @@ function portableTextToHtml(blocks) {
         if (block._type !== 'block' || !block.children) {
             // Handle inline images within body
             if (block._type === 'image') {
-                return `<div class="body-inline-image"><img src="${buildImageUrl(block, 1000, 600)}" alt="Article image" loading="lazy"></div>`;
+                return `<div class="body-inline-image"><img src="${buildImageUrl(block, 1000, 600)}" alt="Article image" loading="lazy" decoding="async"></div>`;
             }
             return '';
         }
@@ -1110,7 +1110,7 @@ function openNewsModal(id) {
         : '';
     
     imageContainer.innerHTML = article.mainImage 
-        ? `<img src="${buildImageUrl(article.mainImage, 1200, 700)}" alt="${article.title}">`
+        ? `<img src="${buildImageUrl(article.mainImage, 1200, 700)}" alt="${article.title}" decoding="async">`
         : '';
     
     bodyEl.innerHTML = portableTextToHtml(article.body);
@@ -1165,7 +1165,7 @@ async function populateCMSNews() {
     });
 }
 
-// --- CMS Testimonials — Marquee & Student Carousel (Live Sanity) ---
+// --- CMS Testimonials — Marquee & Student Carousel (Live PocketBase) ---
 async function populateCMSTestimonials() {
     const articles = await fetchTestimonials();
     if (!articles.length) return; // Preserve static HTML fallback
@@ -1425,7 +1425,7 @@ function injectWhatsAppButton() {
     }
 }
 
-// --- CMS Faculty API Integration (Live Sanity) ---
+// --- CMS Faculty API Integration (Live PocketBase) ---
 async function populateCMSFaculty() {
     const facultyTrack = document.getElementById('faculty-track');
     const supportTrack = document.getElementById('support-track');
@@ -1446,7 +1446,7 @@ async function populateCMSFaculty() {
         const photoUrl = buildImageUrl(member.photo, 300, 300);
         
         card.innerHTML = `
-            <img src="${photoUrl}" alt="${member.fullName}" loading="lazy">
+            <img src="${photoUrl}" alt="${member.fullName}" loading="lazy" decoding="async">
             <h4 class="fac-name">${member.fullName}</h4>
             <span class="fac-subject">${member.department || 'Staff'}</span>
             ${member.position ? `<p class="fac-quote">${member.position}</p>` : ''}
@@ -1479,7 +1479,7 @@ async function populateCMSFaculty() {
     }
 }
 
-// --- CMS Leadership API Integration (Live Sanity) ---
+// --- CMS Leadership API Integration (Live PocketBase) ---
 async function populateCMSLeadership() {
     const directorCard = document.getElementById('director');
     if (!directorCard) return;

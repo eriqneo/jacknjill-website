@@ -1,10 +1,8 @@
-const PROJECT_ID = 'zrijfacv';
-const DATASET    = 'jj';
-const API_VER    = '2024-01-01';
+const POCKETBASE_URL = 'https://jacknjill.pockethost.io';
+
 async function run() {
-    const groq = `*[_type == "staff"]`;
-    const res = await fetch(`https://${PROJECT_ID}.apicdn.sanity.io/v${API_VER}/data/query/${DATASET}?query=${encodeURIComponent(groq)}`);
+    const res = await fetch(`${POCKETBASE_URL}/api/collections/staff/records?perPage=100&sort=display_order`);
     const data = await res.json();
-    console.log(JSON.stringify(data.result, null, 2));
+    console.log(JSON.stringify(data.items, null, 2));
 }
 run();

@@ -7,6 +7,9 @@
     <title>Jack & Jill School | A Prestigious Academic Institution</title>
     <meta name="description"
         content="Excellence isn't a destination—it's a lifelong journey. From first steps into our classrooms to bold strides into the world, we ignite a passion for learning that burns eternally.">
+    <link rel="preload" as="image" href="/assets/hero.jpg" fetchpriority="high">
+    <link rel="preconnect" href="https://jacknjill.pockethost.io">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="./style.css">
     <!-- Font Awesome for prestigious icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -196,66 +199,66 @@
             <div class="signature-carousel-container">
                 <div class="signature-carousel-track">
                 <!-- Original 8 Cards -->
-                <a href="/about-us" class="sig-card"><img src="/assets/carousel/Aboutus.jpg" alt="About Us">
+                <a href="/about-us" class="sig-card"><img src="/assets/carousel/Aboutus.jpg" alt="About Us" loading="lazy" decoding="async">
                     <div class="sig-card-title">ABOUT US</div>
                 </a>
-                <a href="/academics" class="sig-card"><img src="/assets/carousel/academics.jpeg" alt="Academics">
+                <a href="/academics" class="sig-card"><img src="/assets/carousel/academics.jpeg" alt="Academics" loading="lazy" decoding="async">
                     <div class="sig-card-title">ACADEMICS</div>
                 </a>
-                <a href="/governance" class="sig-card"><img src="/assets/carousel/governance.jpg" alt="Governance">
+                <a href="/governance" class="sig-card"><img src="/assets/carousel/governance.jpg" alt="Governance" loading="lazy" decoding="async">
                     <div class="sig-card-title">GOVERNANCE</div>
                 </a>
-                <a href="/partners" class="sig-card"><img src="/assets/carousel/partners.jpg" alt="Our Partners">
+                <a href="/partners" class="sig-card"><img src="/assets/carousel/partners.jpg" alt="Our Partners" loading="lazy" decoding="async">
                     <div class="sig-card-title">OUR PARTNERS</div>
                 </a>
-                <a href="/alumni" class="sig-card"><img src="/assets/carousel/Alumni.jpg" alt="The Alumni">
+                <a href="/alumni" class="sig-card"><img src="/assets/carousel/Alumni.jpg" alt="The Alumni" loading="lazy" decoding="async">
                     <div class="sig-card-title">THE ALUMNI</div>
                 </a>
 
                 <a href="/gallery" class="sig-card sig-card-active">
-                    <img src="/assets/carousel/gallery.jpg" alt="Gallery">
+                    <img src="/assets/carousel/gallery.jpg" alt="Gallery" loading="lazy" decoding="async">
                     <div class="sig-active-content">
                         <span class="active-title">GALLERY</span>
                         <span class="active-btn">LEARN MORE →</span>
                     </div>
                 </a>
 
-                <a href="/information" class="sig-card"><img src="/assets/carousel/infocentre.jpg" alt="Information Centre">
+                <a href="/information" class="sig-card"><img src="/assets/carousel/infocentre.jpg" alt="Information Centre" loading="lazy" decoding="async">
                     <div class="sig-card-title">INFO CENTRE</div>
                 </a>
-                <a href="/contact" class="sig-card"><img src="/assets/carousel/contacts.png" alt="Contact">
+                <a href="/contact" class="sig-card"><img src="/assets/carousel/contacts.png" alt="Contact" loading="lazy" decoding="async">
                     <div class="sig-card-title">CONTACT</div>
                 </a>
 
                 <!-- Duplicated 8 Cards for Infinite Loop -->
-                <a href="/about-us" class="sig-card"><img src="/assets/carousel/Aboutus.jpg" alt="About Us">
+                <a href="/about-us" class="sig-card"><img src="/assets/carousel/Aboutus.jpg" alt="About Us" loading="lazy" decoding="async">
                     <div class="sig-card-title">ABOUT US</div>
                 </a>
-                <a href="/academics" class="sig-card"><img src="/assets/carousel/academics.jpeg" alt="Academics">
+                <a href="/academics" class="sig-card"><img src="/assets/carousel/academics.jpeg" alt="Academics" loading="lazy" decoding="async">
                     <div class="sig-card-title">ACADEMICS</div>
                 </a>
-                <a href="/governance" class="sig-card"><img src="/assets/carousel/governance.jpg" alt="Governance">
+                <a href="/governance" class="sig-card"><img src="/assets/carousel/governance.jpg" alt="Governance" loading="lazy" decoding="async">
                     <div class="sig-card-title">GOVERNANCE</div>
                 </a>
-                <a href="/partners" class="sig-card"><img src="/assets/carousel/partners.jpg" alt="Our Partners">
+                <a href="/partners" class="sig-card"><img src="/assets/carousel/partners.jpg" alt="Our Partners" loading="lazy" decoding="async">
                     <div class="sig-card-title">OUR PARTNERS</div>
                 </a>
-                <a href="/alumni" class="sig-card"><img src="/assets/carousel/Alumni.jpg" alt="The Alumni">
+                <a href="/alumni" class="sig-card"><img src="/assets/carousel/Alumni.jpg" alt="The Alumni" loading="lazy" decoding="async">
                     <div class="sig-card-title">THE ALUMNI</div>
                 </a>
 
                 <a href="/gallery" class="sig-card sig-card-active">
-                    <img src="/assets/carousel/gallery.jpg" alt="Gallery">
+                    <img src="/assets/carousel/gallery.jpg" alt="Gallery" loading="lazy" decoding="async">
                     <div class="sig-active-content">
                         <span class="active-title">GALLERY</span>
                         <span class="active-btn">LEARN MORE →</span>
                     </div>
                 </a>
 
-                <a href="/information" class="sig-card"><img src="/assets/carousel/infocentre.jpg" alt="Information Centre">
+                <a href="/information" class="sig-card"><img src="/assets/carousel/infocentre.jpg" alt="Information Centre" loading="lazy" decoding="async">
                     <div class="sig-card-title">INFO CENTRE</div>
                 </a>
-                <a href="/contact" class="sig-card"><img src="/assets/carousel/contacts.png" alt="Contact">
+                <a href="/contact" class="sig-card"><img src="/assets/carousel/contacts.png" alt="Contact" loading="lazy" decoding="async">
                     <div class="sig-card-title">CONTACT</div>
                 </a>
                 </div>
@@ -285,7 +288,7 @@
                     </div>
 
                     <div class="curved-news-grid" id="news-track">
-                        <!-- News cards dynamically loaded from Sanity -->
+                        <!-- News cards dynamically loaded from PocketBase -->
                     </div>
 
                     <div class="news-nav-buttons">
@@ -349,7 +352,7 @@
                                     </div>
                                     <span class="jj-card__explore">EXPLORE</span>
                                     <div class="jj-card__img-wrap">
-                                        <img src="/assets/carousel/Aboutus.jpg" alt="Mission" loading="lazy">
+                                        <img src="/assets/carousel/Aboutus.jpg" alt="Mission" loading="lazy" decoding="async">
                                     </div>
                                 </a>
 
@@ -373,7 +376,7 @@
                                     <span class="jj-card__explore">EXPLORE</span>
                                     <div class="jj-card__img-wrap">
                                         <img src="/assets/community.jpg" alt="Community"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                     </div>
                                 </a>
 
@@ -397,7 +400,7 @@
                                     <span class="jj-card__explore">EXPLORE</span>
                                     <div class="jj-card__img-wrap">
                                         <img src="/assets/carousel/academics.jpeg" alt="Academics"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                     </div>
                                 </a>
 
@@ -422,7 +425,7 @@
                                     <span class="jj-card__explore">EXPLORE</span>
                                     <div class="jj-card__img-wrap">
                                         <img src="/assets/carousel/gallery.jpg" alt="School Life"
-                                            loading="lazy">
+                                            loading="lazy" decoding="async">
                                     </div>
                                 </a>
 
@@ -548,7 +551,7 @@
                     </div>
                 </div>
                 <div class="ut-right" id="students-track">
-                    <!-- Testimonial cards dynamically loaded from Sanity -->
+                    <!-- Testimonial cards dynamically loaded from PocketBase -->
                 </div>
             </div>
         </section>
