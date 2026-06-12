@@ -3,7 +3,7 @@ import 'aos/dist/aos.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupPencilCursor } from './src/cursor.js';
-import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, buildImageUrl } from './src/sanity.js';
+import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, fetchSitePage, buildImageUrl } from './src/sanity.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -696,6 +696,22 @@ if (studentsTrack && studentsBtnPrev && studentsBtnNext) {
 }
 
 // --- Intro Screen Typewriter ---
+let homeHeroImageUrl = '/assets/hero.jpg';
+
+async function hydrateHomeHeroFromCMS() {
+    if (!document.body.classList.contains('home-page')) return homeHeroImageUrl;
+
+    const homePage = await fetchSitePage('home');
+    const cmsHeroUrl = buildImageUrl(homePage?.heroImage || homePage?.heroImagePath || null, 1920, 1080);
+
+    if (cmsHeroUrl && !cmsHeroUrl.includes('placehold.co')) {
+        homeHeroImageUrl = cmsHeroUrl;
+        document.documentElement.style.setProperty('--home-hero-image', `url("${cmsHeroUrl}")`);
+    }
+
+    return homeHeroImageUrl;
+}
+
 function handleIntroScreen() {
     const introScreen = document.getElementById('intro-screen');
     const typewriterTextElement = document.getElementById('typewriter-text');
@@ -758,7 +774,7 @@ function handleIntroScreen() {
                 const heroPreload = new Image();
                 heroPreload.onload = liftCurtain;
                 heroPreload.onerror = liftCurtain; // Fallback so it doesn't hang
-                heroPreload.src = '/assets/hero.jpg';
+                heroPreload.src = homeHeroImageUrl;
 
                 // If it happened to load instantly from cache
                 if (heroPreload.complete && heroPreload.naturalWidth !== 0) {
@@ -771,7 +787,9 @@ function handleIntroScreen() {
         };
 
         // Start typing after a short delay
-        setTimeout(typeChar, 500);
+        hydrateHomeHeroFromCMS().finally(() => {
+            setTimeout(typeChar, 500);
+        });
     }
 }
 

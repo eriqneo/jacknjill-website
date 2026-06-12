@@ -163,6 +163,19 @@ function mapStaff(record) {
     };
 }
 
+function mapSitePage(record) {
+    return {
+        _id: record.id,
+        slug: record.slug,
+        title: record.title,
+        summary: record.summary,
+        heroImagePath: record.hero_image_path,
+        heroImage: buildPocketFile(record, 'hero_image', '1600x0'),
+        navItems: record.nav_items ?? [],
+        sections: record.sections ?? [],
+    };
+}
+
 // ============================================================
 // QUERY FUNCTIONS
 // ============================================================
@@ -214,4 +227,13 @@ export async function fetchStaff(department = null) {
     });
 
     return records.map(mapStaff);
+}
+
+export async function fetchSitePage(slug) {
+    const records = await pocketFetch('site_pages', {
+        perPage: 1,
+        filter: `slug = "${slug}"`,
+    });
+
+    return records[0] ? mapSitePage(records[0]) : null;
 }
