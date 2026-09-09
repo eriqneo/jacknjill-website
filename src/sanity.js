@@ -176,6 +176,20 @@ function mapSitePage(record) {
     };
 }
 
+function mapGovernanceLeader(record) {
+    return {
+        _id: record.id,
+        roleKey: record.role_key,
+        roleLabel: record.role_label,
+        fullName: record.full_name,
+        titleLine: record.title_line,
+        bio: record.bio,
+        sourceStaffSlug: record.source_staff_slug,
+        photo: buildPocketFile(record, 'photo', '450x600'),
+        displayOrder: record.display_order,
+    };
+}
+
 // ============================================================
 // QUERY FUNCTIONS
 // ============================================================
@@ -236,4 +250,13 @@ export async function fetchSitePage(slug) {
     });
 
     return records[0] ? mapSitePage(records[0]) : null;
+}
+
+export async function fetchGovernanceLeaders() {
+    const records = await pocketFetch('governance', {
+        perPage: 3,
+        sort: 'display_order',
+    });
+
+    return records.map(mapGovernanceLeader);
 }

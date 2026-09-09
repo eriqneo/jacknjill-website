@@ -3,7 +3,7 @@ import 'aos/dist/aos.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupPencilCursor } from './src/cursor.js';
-import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, fetchSitePage, buildImageUrl } from './src/sanity.js';
+import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, fetchSitePage, fetchGovernanceLeaders, buildImageUrl } from './src/sanity.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1497,33 +1497,73 @@ async function populateCMSFaculty() {
     }
 }
 
+const governanceCardMap = {
+    director: 'director',
+    head_teacher: 'head-teacher',
+    deputy_head_teacher: 'deputy',
+};
+
+function escapeHtml(value = '') {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+    })[char]);
+}
+
+function renderGovernanceBio(leader) {
+    const blocks = [];
+
+    if (leader.titleLine) {
+        blocks.push(`<strong style="color: var(--jj-burgundy); font-style: italic; display: block; margin-bottom: 1rem;">${escapeHtml(leader.titleLine)}</strong>`);
+    }
+
+    if (leader.bio) {
+        blocks.push(...leader.bio
+            .split(/\n{2,}/)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean)
+            .map((paragraph) => `<span>${escapeHtml(paragraph)}</span>`)
+        );
+    }
+
+    return blocks.join('<br><br>');
+}
+
+function hydrateGovernanceCard(leader) {
+    const cardId = governanceCardMap[leader.roleKey];
+    const card = cardId ? document.getElementById(cardId) : null;
+    if (!card) return;
+
+    const imgEl = card.querySelector('img');
+    if (imgEl && leader.photo) {
+        imgEl.src = buildImageUrl(leader.photo, 450, 600);
+        imgEl.alt = `${leader.fullName} - ${leader.roleLabel}`;
+        imgEl.hidden = false;
+    }
+
+    const roleEl = card.querySelector('.gov-role');
+    if (roleEl) roleEl.textContent = leader.roleLabel || '';
+
+    const nameEl = card.querySelector('.gov-name, .gov-name-sub');
+    if (nameEl) nameEl.textContent = leader.fullName || '';
+
+    const bioEl = card.querySelector('.gov-bio');
+    if (bioEl) bioEl.innerHTML = renderGovernanceBio(leader);
+
+    card.removeAttribute('aria-busy');
+}
+
 // --- CMS Leadership API Integration (Live PocketBase) ---
 async function populateCMSLeadership() {
-    const directorCard = document.getElementById('director');
-    if (!directorCard) return;
+    if (!document.getElementById('director')) return;
 
-    const staffMembers = await fetchStaff();
-    if (!staffMembers || staffMembers.length === 0) return;
+    const leaders = await fetchGovernanceLeaders();
+    if (!leaders || leaders.length === 0) return;
 
-    // We assume the director might be marked 'executive' or position contains 'Director'
-    const director = staffMembers.find(m => 
-        (m.department === 'executive' && m.position.toLowerCase().includes('director')) || 
-        m.fullName.toLowerCase().includes('atudo pin')
-    );
-
-    if (director && director.photo) {
-        const imgEl = directorCard.querySelector('img');
-        if (imgEl) {
-            imgEl.src = buildImageUrl(director.photo, 450, 600);
-            imgEl.alt = director.fullName;
-        }
-        
-        const nameEl = directorCard.querySelector('.gov-name');
-        if (nameEl) nameEl.textContent = director.fullName;
-        
-        const roleEl = directorCard.querySelector('.gov-role');
-        if (roleEl && director.position) roleEl.textContent = director.position;
-    }
+    leaders.forEach(hydrateGovernanceCard);
 }
 
 // Global initialization — fire all CMS fetches in parallel
