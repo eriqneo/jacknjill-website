@@ -271,8 +271,11 @@ if (nextBtns.length > 0) {
 }
 
 // --- Gallery CMS, Filter, and Lightbox Logic ---
+const GALLERY_INITIAL_LIMIT = 12;
+const GALLERY_BATCH_SIZE = 12;
 const galleryGrid = document.getElementById('gallery-masonry');
 const galleryFilterContainer = document.querySelector('.filter-container');
+const gallerySeeMoreBtn = document.getElementById('gallery-see-more');
 const lightbox = document.getElementById('institutional-lightbox');
 const lightboxImg = document.getElementById('lightbox-main-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
@@ -285,6 +288,8 @@ let activeGallery = [];
 let currentIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
+let activeGalleryFilter = 'all';
+let galleryVisibleLimit = GALLERY_INITIAL_LIMIT;
 
 const getGalleryItems = () => Array.from(document.querySelectorAll('.gallery-item'));
 const getVisibleGalleryItems = () =>
@@ -348,26 +353,48 @@ function ensureGalleryFilterButtons(items) {
     });
 }
 
-function setGalleryFilter(filter, activeButton = null) {
+function updateGallerySeeMoreButton(totalMatching) {
+    if (!gallerySeeMoreBtn) return;
+
+    const remaining = Math.max(totalMatching - galleryVisibleLimit, 0);
+    gallerySeeMoreBtn.hidden = remaining === 0;
+    gallerySeeMoreBtn.textContent = remaining > 0
+        ? `See More Photos (${remaining})`
+        : 'See More Photos';
+}
+
+function setGalleryFilter(filter, activeButton = null, shouldResetLimit = false) {
     const buttons = document.querySelectorAll('.filter-btn');
     const items = getGalleryItems();
+
+    activeGalleryFilter = filter || 'all';
+    if (shouldResetLimit) galleryVisibleLimit = GALLERY_INITIAL_LIMIT;
 
     buttons.forEach(btn => btn.classList.remove('active'));
     if (activeButton) {
         activeButton.classList.add('active');
     } else {
-        document.querySelector(`.filter-btn[data-filter="${filter}"]`)?.classList.add('active');
+        document.querySelector(`.filter-btn[data-filter="${activeGalleryFilter}"]`)?.classList.add('active');
     }
+
+    let shown = 0;
+    let totalMatching = 0;
 
     items.forEach(item => {
         const cat = item.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
+        const matches = activeGalleryFilter === 'all' || cat === activeGalleryFilter;
+        if (matches) totalMatching += 1;
+
+        if (matches && shown < galleryVisibleLimit) {
             item.style.display = 'inline-block';
+            shown += 1;
             gsap.fromTo(item, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4 });
         } else {
             item.style.display = 'none';
         }
     });
+
+    updateGallerySeeMoreButton(totalMatching);
 }
 
 function setupGalleryFilters() {
@@ -380,12 +407,22 @@ function setupGalleryFilters() {
 
         btn.addEventListener('click', () => {
             const filter = btn.getAttribute('data-filter') || 'all';
-            setGalleryFilter(filter, btn);
+            setGalleryFilter(filter, btn, true);
 
             if (galleryFilterContainer && window.matchMedia('(max-width: 1024px)').matches) {
                 btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }
         });
+    });
+}
+
+function setupGallerySeeMore() {
+    if (!gallerySeeMoreBtn || gallerySeeMoreBtn.dataset.boundGallerySeeMore === 'true') return;
+    gallerySeeMoreBtn.dataset.boundGallerySeeMore = 'true';
+
+    gallerySeeMoreBtn.addEventListener('click', () => {
+        galleryVisibleLimit += GALLERY_BATCH_SIZE;
+        setGalleryFilter(activeGalleryFilter);
     });
 }
 
@@ -401,7 +438,8 @@ async function populateCMSGallery() {
     galleryGrid.innerHTML = visibleItems.map(createGalleryCard).join('');
     ensureGalleryFilterButtons(visibleItems);
     setupGalleryFilters();
-    setGalleryFilter(activeFilter);
+    setupGallerySeeMore();
+    setGalleryFilter(activeFilter, null, true);
 
     if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
 }
@@ -495,6 +533,8 @@ if (lightbox) {
 }
 
 setupGalleryFilters();
+setupGallerySeeMore();
+setGalleryFilter(document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all');
 
 // --- Governance Scroll Animations ---
 if (document.querySelector('.gov-director-card')) {
