@@ -190,6 +190,18 @@ function mapGovernanceLeader(record) {
     };
 }
 
+function mapGalleryItem(record) {
+    return {
+        _id: record.id,
+        category: record.category,
+        caption: record.caption,
+        altText: record.alt_text,
+        sourcePath: record.source_path,
+        image: buildPocketFile(record, 'image', '800x600'),
+        displayOrder: record.display_order,
+    };
+}
+
 // ============================================================
 // QUERY FUNCTIONS
 // ============================================================
@@ -259,4 +271,14 @@ export async function fetchGovernanceLeaders() {
     });
 
     return records.map(mapGovernanceLeader);
+}
+
+export async function fetchGalleryItems() {
+    const records = await pocketFetch('gallery_items', {
+        perPage: 100,
+        sort: 'display_order',
+        filter: 'is_published = true',
+    });
+
+    return records.map(mapGalleryItem);
 }

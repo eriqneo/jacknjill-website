@@ -3,7 +3,7 @@ import 'aos/dist/aos.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setupPencilCursor } from './src/cursor.js';
-import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, fetchSitePage, fetchGovernanceLeaders, buildImageUrl } from './src/sanity.js';
+import { fetchNews, fetchUpcomingEvents, fetchTestimonials, fetchPartners, fetchStaff, fetchSitePage, fetchGovernanceLeaders, fetchGalleryItems, buildImageUrl } from './src/sanity.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -270,37 +270,9 @@ if (nextBtns.length > 0) {
     });
 }
 
-// --- Gallery Filter Logic ---
-const filterBtns = document.querySelectorAll('.filter-btn');
-const galleryItems = document.querySelectorAll('.gallery-item');
+// --- Gallery CMS, Filter, and Lightbox Logic ---
+const galleryGrid = document.getElementById('gallery-masonry');
 const galleryFilterContainer = document.querySelector('.filter-container');
-
-if (filterBtns.length > 0) {
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            galleryItems.forEach(item => {
-                const cat = item.getAttribute('data-category');
-                if (filter === 'all' || cat === filter) {
-                    item.style.display = 'inline-block';
-                    gsap.fromTo(item, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4 });
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-
-            if (galleryFilterContainer && window.matchMedia('(max-width: 1024px)').matches) {
-                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
-        });
-    });
-}
-
-// --- Institutional Lightbox Logic ---
 const lightbox = document.getElementById('institutional-lightbox');
 const lightboxImg = document.getElementById('lightbox-main-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
@@ -314,8 +286,125 @@ let currentIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 
+const getGalleryItems = () => Array.from(document.querySelectorAll('.gallery-item'));
 const getVisibleGalleryItems = () =>
-    Array.from(galleryItems).filter(item => item.style.display !== 'none');
+    getGalleryItems().filter(item => item.style.display !== 'none');
+
+function normalizeGalleryCategory(value = '') {
+    return String(value || 'school')
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'school';
+}
+
+function formatGalleryCategoryLabel(value = '') {
+    const cleaned = String(value || 'School').trim();
+    if (!cleaned) return 'School';
+
+    return cleaned
+        .toLowerCase()
+        .split(/\s+/)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+function createGalleryCard(item) {
+    const imageUrl = buildImageUrl(item.image || item.sourcePath, 800, 600);
+    const categoryKey = normalizeGalleryCategory(item.category);
+    const caption = item.caption || formatGalleryCategoryLabel(item.category);
+    const altText = item.altText || caption || 'Jack & Jill School gallery photo';
+
+    return `
+        <div class="gallery-item" data-category="${escapeHtml(categoryKey)}" data-caption="${escapeHtml(caption)}">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(altText)}" loading="lazy" decoding="async">
+            <div class="gallery-overlay"><span class="plus-icon">⊕</span><span class="overlay-text">View Photo</span></div>
+        </div>
+    `;
+}
+
+function ensureGalleryFilterButtons(items) {
+    if (!galleryFilterContainer) return;
+
+    const knownFilters = new Set(
+        Array.from(galleryFilterContainer.querySelectorAll('.filter-btn'))
+            .map(btn => btn.getAttribute('data-filter'))
+    );
+    const yearbookLink = galleryFilterContainer.querySelector('.btn-yearbook-download');
+
+    items.forEach(item => {
+        const categoryKey = normalizeGalleryCategory(item.category);
+        if (!categoryKey || knownFilters.has(categoryKey)) return;
+
+        const button = document.createElement('button');
+        button.className = 'filter-btn';
+        button.type = 'button';
+        button.dataset.filter = categoryKey;
+        button.textContent = formatGalleryCategoryLabel(item.category);
+
+        galleryFilterContainer.insertBefore(button, yearbookLink || null);
+        knownFilters.add(categoryKey);
+    });
+}
+
+function setGalleryFilter(filter, activeButton = null) {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const items = getGalleryItems();
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    if (activeButton) {
+        activeButton.classList.add('active');
+    } else {
+        document.querySelector(`.filter-btn[data-filter="${filter}"]`)?.classList.add('active');
+    }
+
+    items.forEach(item => {
+        const cat = item.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+            item.style.display = 'inline-block';
+            gsap.fromTo(item, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4 });
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function setupGalleryFilters() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    if (!buttons.length) return;
+
+    buttons.forEach(btn => {
+        if (btn.dataset.boundGalleryFilter === 'true') return;
+        btn.dataset.boundGalleryFilter = 'true';
+
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter') || 'all';
+            setGalleryFilter(filter, btn);
+
+            if (galleryFilterContainer && window.matchMedia('(max-width: 1024px)').matches) {
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        });
+    });
+}
+
+async function populateCMSGallery() {
+    if (!galleryGrid) return;
+
+    const items = await fetchGalleryItems();
+    const visibleItems = items.filter(item => item.image || item.sourcePath);
+    if (!visibleItems.length) return;
+
+    const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+
+    galleryGrid.innerHTML = visibleItems.map(createGalleryCard).join('');
+    ensureGalleryFilterButtons(visibleItems);
+    setupGalleryFilters();
+    setGalleryFilter(activeFilter);
+
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+}
 
 const updateLightbox = () => {
     if (activeGallery.length > 0) {
@@ -345,26 +434,28 @@ const closeLB = () => {
 };
 
 if (lightbox) {
-    galleryItems.forEach((item, index) => {
-        item.addEventListener('click', () => {
-            // Find its index in the VISIBLE subset
-            const visibleItems = getVisibleGalleryItems();
-            const vIdx = visibleItems.indexOf(item);
-            openLightbox(vIdx);
-        });
+    galleryGrid?.addEventListener('click', (event) => {
+        const item = event.target.closest('.gallery-item');
+        if (!item) return;
+
+        const visibleItems = getVisibleGalleryItems();
+        const vIdx = visibleItems.indexOf(item);
+        openLightbox(vIdx);
     });
 
-    closeLightbox.addEventListener('click', closeLB);
-    lbOverlay.addEventListener('click', closeLB);
+    closeLightbox?.addEventListener('click', closeLB);
+    lbOverlay?.addEventListener('click', closeLB);
 
-    nextBtn.addEventListener('click', (e) => {
+    nextBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
+        if (!activeGallery.length) return;
         currentIndex = (currentIndex + 1) % activeGallery.length;
         updateLightbox();
     });
 
-    prevBtn.addEventListener('click', (e) => {
+    prevBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
+        if (!activeGallery.length) return;
         currentIndex = (currentIndex - 1 + activeGallery.length) % activeGallery.length;
         updateLightbox();
     });
@@ -402,6 +493,8 @@ if (lightbox) {
         }
     }, { passive: true });
 }
+
+setupGalleryFilters();
 
 // --- Governance Scroll Animations ---
 if (document.querySelector('.gov-director-card')) {
@@ -1589,6 +1682,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCMSTestimonials(),
         populateHomepageEvents(),
         populateInformationEvents(),
+        populateCMSGallery(),
         populateCMSFaculty(),
         populateCMSLeadership(),
     ]).then(() => {
